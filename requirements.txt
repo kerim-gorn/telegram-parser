@@ -1,0 +1,7 @@
+telethon==1.36.0
+celery==5.4.0
+redis==5.0.1
+SQLAlchemy==2.0.35
+asyncpg==0.29.0
+alembic==1.13.3
+python-dotenv==1.0.1
