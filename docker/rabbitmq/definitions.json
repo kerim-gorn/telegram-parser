@@ -1,0 +1,130 @@
+{
+  "vhosts": [
+    { "name": "/" }
+  ],
+  "exchanges": [
+    {
+      "name": "realtime_fanout",
+      "vhost": "/",
+      "type": "fanout",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "realtime_dlq",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "historical_fanout",
+      "vhost": "/",
+      "type": "fanout",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "historical_dlq",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "users": [
+    {
+      "name": "guest",
+      "password": "guest",
+      "tags": "administrator"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "guest",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "queues": [
+    {
+      "name": "realtime_raw",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "realtime_dlq",
+        "x-dead-letter-routing-key": "raw"
+      }
+    },
+    {
+      "name": "realtime_raw_dlq",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "historical_raw",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "historical_dlq",
+        "x-dead-letter-routing-key": "raw"
+      }
+    },
+    {
+      "name": "historical_raw_dlq",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "realtime_fanout",
+      "vhost": "/",
+      "destination": "realtime_raw",
+      "destination_type": "queue",
+      "routing_key": "",
+      "arguments": {}
+    },
+    {
+      "source": "realtime_dlq",
+      "vhost": "/",
+      "destination": "realtime_raw_dlq",
+      "destination_type": "queue",
+      "routing_key": "raw",
+      "arguments": {}
+    },
+    {
+      "source": "historical_fanout",
+      "vhost": "/",
+      "destination": "historical_raw",
+      "destination_type": "queue",
+      "routing_key": "",
+      "arguments": {}
+    },
+    {
+      "source": "historical_dlq",
+      "vhost": "/",
+      "destination": "historical_raw_dlq",
+      "destination_type": "queue",
+      "routing_key": "raw",
+      "arguments": {}
+    }
+  ]
+}
+
