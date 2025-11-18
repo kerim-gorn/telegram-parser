@@ -77,6 +77,9 @@ async def _persist_message(payload: dict[str, Any]) -> None:
                                 err["error"] = analysis_result.get("error")
                             if isinstance(analysis_result.get("message"), str):
                                 err["message"] = analysis_result.get("message")
+                            # Expose assistant raw content to help debug invalid JSON cases
+                            if isinstance(analysis_result.get("text"), str) and analysis_result.get("text"):
+                                err["assistant_text"] = analysis_result.get("text")
                             # Enrich with HTTP details when available
                             if isinstance(analysis_result.get("status_code"), int):
                                 err["status_code"] = analysis_result.get("status_code")
