@@ -24,6 +24,20 @@ class Settings(BaseSettings):
     realtime_exchange_name: str = Field("realtime_fanout", alias="REALTIME_EXCHANGE")
     historical_exchange_name: str = Field("historical_fanout", alias="HISTORICAL_EXCHANGE")
     backfill_via_rabbit: bool = Field(True, alias="BACKFILL_VIA_RABBIT")
+    # Realtime dynamic assignment
+    # Список аккаунтов (через запятую), которые участвуют в realtime-парсинге и между которыми мы распределяем каналы.
+    realtime_accounts_raw: str = Field("", alias="REALTIME_ACCOUNTS")
+    # Период перераспределения в секундах (более информативный параметр; фактический запуск делает Celery Beat — по умолчанию ежечасно).
+    realtime_assignment_tick_seconds: int = Field(3600, alias="REALTIME_ASSIGNMENT_TICK_SECONDS")
+    # Префикс ключей в Redis для хранения назначения: rt:assign:{account_id} -> set(channel_ids).
+    realtime_assignment_redis_prefix: str = Field("rt:assign:", alias="REALTIME_ASSIGNMENT_REDIS_PREFIX")
+    # Базовая емкость аккаунта (в условных единицах нагрузки сообщений/мин). None — без жесткого лимита, балансируем только по весам.
+    realtime_account_capacity_default: float | None = Field(None, alias="REALTIME_ACCOUNT_CAPACITY_DEFAULT")
+    # Weight model
+    # Доля краткосрочной активности (последние 15 минут) в итоговом весе: w = α*r15 + (1-α)*r24.
+    weight_alpha: float = Field(0.7, alias="WEIGHT_ALPHA")
+    # Минимальный вес канала (чтобы совсем неактивные каналы не «обнулялись» и участвовали в распределении).
+    weight_min: float = Field(0.05, alias="WEIGHT_MIN")
 
     # Database
     postgres_host: str = Field("postgres", alias="POSTGRES_HOST")

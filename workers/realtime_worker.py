@@ -1,6 +1,6 @@
 import asyncio
 import json
-from typing import Any, Iterable, Union
+from typing import Any, Iterable, Union, Set
 
 import aio_pika
 from aio_pika import ExchangeType, Message, DeliveryMode
@@ -12,6 +12,8 @@ from telethon.utils import get_peer_id
 from core.config import settings
 from core.session_manager import SessionManager
 from core.telethon_client import create_client_from_session
+from redis.asyncio import Redis
+from app.assignment_store import AssignmentStore
 
 
 def _parse_chats(raw: str) -> list[Union[int, str]]:
@@ -68,6 +70,9 @@ async def run_realtime_worker(account_id: str | None = None) -> None:
         settings.telegram_session_prefix,
         settings.session_crypto_key,
     )
+    redis = Redis.from_url(settings.redis_url, decode_responses=True)
+    store = AssignmentStore(redis, key_prefix=settings.realtime_assignment_redis_prefix)
+    allowed_ids: Set[int] = set()
 
     while True:
         client = None
@@ -110,92 +115,78 @@ async def run_realtime_worker(account_id: str | None = None) -> None:
                             # Do not spam on stats errors; continue
                             pass
 
-                stats_task = asyncio.create_task(_stats_reporter())
-                # Pre-resolve chat filters to ignore invalid entries
-                effective_chats: list[Any] = []
-                if chats_filter:
-                    for ch in chats_filter:
-                        try:
-                            ent = await client.get_input_entity(ch)
-                            effective_chats.append(ent)
-                        except Exception as e:  # noqa: BLE001
-                            print(f"[Realtime] Ignoring invalid chat filter entry '{ch}': {e}")
-
-                # Register handler with resolved chats or without filter
-                if effective_chats:
-                    # Compute how many target chats are present in user's dialogs (joined/subscribed)
-                    dialog_ids: set[int] = set()
+                async def _refresh_allowed() -> None:
+                    nonlocal allowed_ids
                     try:
-                        async for d in client.iter_dialogs():
+                        new_allowed = await store.get_allowed_for_account(acct_id)
+                        if new_allowed != allowed_ids:
+                            old_count = len(allowed_ids)
+                            allowed_ids = new_allowed
+                            print(
+                                f"[Realtime] Assignment updated: {old_count} -> {len(allowed_ids)} channels "
+                                f"for account {acct_id}"
+                            )
+                    except Exception as e:  # noqa: BLE001
+                        print(f"[Realtime] Failed to refresh assignment: {e}")
+
+                async def _assignment_listener() -> None:
+                    """
+                    Subscribe to Redis pub/sub notification to refresh assignment immediately on changes.
+                    """
+                    await _refresh_allowed()
+                    channel = f"{settings.realtime_assignment_redis_prefix}notify"
+                    pubsub = redis.pubsub()
+                    try:
+                        await pubsub.subscribe(channel)
+                        while True:
                             try:
-                                dialog_ids.add(get_peer_id(d.entity))
+                                message = await pubsub.get_message(ignore_subscribe_messages=True, timeout=30.0)
+                                if message:
+                                    await _refresh_allowed()
+                            except asyncio.CancelledError:
+                                raise
                             except Exception:
-                                pass
-                        target_ids = {get_peer_id(ent) for ent in effective_chats}
-                        intersection_ids = target_ids & dialog_ids
-                        # Keep only targets that are actually joined to avoid listening on non-joined channels
-                        listening_chats = [ent for ent in effective_chats if get_peer_id(ent) in intersection_ids]
-                        print(
-                            f"[Realtime] Dialogs overlap: {len(intersection_ids)} of {len(effective_chats)} targets are in dialogs"
-                        )
-                    except Exception:
-                        # Non-critical diagnostics
-                        listening_chats = effective_chats
-                    if listening_chats:
-                        @client.on(events.NewMessage(chats=listening_chats))
-                        async def _handler(event: Any) -> None:
-                            try:
-                                stats["received"] = int(stats.get("received", 0)) + 1
-                                stats["last_event"] = {
-                                    "chat_id": int(event.chat_id) if event.chat_id is not None else None,
-                                    "message_id": int(event.message.id),
-                                }
-                                payload = {
-                                    "event": "NewMessage",
-                                    "chat_id": int(event.chat_id) if event.chat_id is not None else None,
-                                    "message_id": int(event.message.id),
-                                    "message": event.message.to_dict(),
-                                }
-                                await _publish_message(exchange, payload)
-                                stats["published"] = int(stats.get("published", 0)) + 1
-                            except Exception as e:  # noqa: BLE001
-                                stats["failed"] = int(stats.get("failed", 0)) + 1
-                                print(f"[Handler] Failed to publish message: {e}")
-                        print(
-                            f"[Realtime] Starting client. Listening on {len(listening_chats)} joined targets "
-                            f"of {len(effective_chats)} configured."
-                        )
-                    else:
-                        # No joined targets yet; do not register a broad catch-all handler.
-                        print(
-                            f"[Realtime] Starting client. Listening on 0 joined targets of {len(effective_chats)} configured."
-                        )
-                else:
-                    @client.on(events.NewMessage())
-                    async def _handler(event: Any) -> None:
+                                # swallow and continue listening
+                                await asyncio.sleep(1)
+                    finally:
                         try:
-                            stats["received"] = int(stats.get("received", 0)) + 1
-                            stats["last_event"] = {
-                                "chat_id": int(event.chat_id) if event.chat_id is not None else None,
-                                "message_id": int(event.message.id),
-                            }
-                            payload = {
-                                "event": "NewMessage",
-                                "chat_id": int(event.chat_id) if event.chat_id is not None else None,
-                                "message_id": int(event.message.id),
-                                "message": event.message.to_dict(),
-                            }
-                            await _publish_message(exchange, payload)
-                            stats["published"] = int(stats.get("published", 0)) + 1
-                        except Exception as e:  # noqa: BLE001
-                            stats["failed"] = int(stats.get("failed", 0)) + 1
-                            print(f"[Handler] Failed to publish message: {e}")
+                            await pubsub.aclose()
+                        except Exception:
+                            pass
+
+                stats_task = asyncio.create_task(_stats_reporter())
+                listener_task = asyncio.create_task(_assignment_listener())
+
+                @client.on(events.NewMessage())
+                async def _handler(event: Any) -> None:
+                    try:
+                        cid = int(event.chat_id) if event.chat_id is not None else None
+                        if allowed_ids:
+                            if cid is None or cid not in allowed_ids:
+                                return
+                        stats["received"] = int(stats.get("received", 0)) + 1
+                        stats["last_event"] = {
+                            "chat_id": int(event.chat_id) if event.chat_id is not None else None,
+                            "message_id": int(event.message.id),
+                        }
+                        payload = {
+                            "event": "NewMessage",
+                            "chat_id": int(event.chat_id) if event.chat_id is not None else None,
+                            "message_id": int(event.message.id),
+                            "message": event.message.to_dict(),
+                        }
+                        await _publish_message(exchange, payload)
+                        stats["published"] = int(stats.get("published", 0)) + 1
+                    except Exception as e:  # noqa: BLE001
+                        stats["failed"] = int(stats.get("failed", 0)) + 1
+                        print(f"[Handler] Failed to publish message: {e}")
 
                 try:
                     await client.run_until_disconnected()
                 finally:
                     try:
                         stats_task.cancel()
+                        listener_task.cancel()
                     except Exception:
                         pass
             print("[Realtime] Client disconnected gracefully. Restarting in 10s.")
@@ -221,6 +212,10 @@ async def run_realtime_worker(account_id: str | None = None) -> None:
                     await amqp_connection.close()
                 except Exception:
                     pass
+            try:
+                await redis.aclose()
+            except Exception:
+                pass
 
 
 if __name__ == "__main__":

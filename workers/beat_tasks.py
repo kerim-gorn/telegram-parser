@@ -14,6 +14,11 @@ from core.session_manager import SessionManager
 from core.telethon_client import create_client_from_session
 from telethon.utils import get_peer_id
 from core.anti_ban import handle_flood_wait
+from redis.asyncio import Redis
+from typing import Dict, Set, Iterable, Any as _Any
+from app.assignment import assign_channels_balanced, format_assignment_summary
+from app.assignment_store import AssignmentStore
+from app.weights import compute_channel_weights
 
 
 def _parse_list(raw: str) -> list[str]:
@@ -244,3 +249,94 @@ def bootstrap_new_channels(self) -> dict[str, Any]:
         "enqueued_task_ids": enqueued,
         "days": days,
     }
+
+
+async def _collect_dialog_chat_ids(account_id: str) -> Set[int]:
+    """
+    Connects to Telegram with given account_id and returns the set of numeric chat ids from dialogs.
+    """
+    session_manager = SessionManager(
+        redis_url=settings.redis_url,
+        key_prefix=settings.telegram_session_prefix,
+        encryption_key=settings.session_crypto_key,
+    )
+    string_session = await session_manager.get_string_session(account_id)
+    if not string_session:
+        await session_manager.close()
+        return set()
+    client = create_client_from_session(string_session)
+    chat_ids: Set[int] = set()
+    try:
+        async with client:
+            async for d in client.iter_dialogs():
+                try:
+                    chat_ids.add(int(get_peer_id(d.entity)))
+                except Exception:
+                    continue
+    finally:
+        await session_manager.close()
+    return chat_ids
+
+
+async def _reassign_realtime_async() -> dict[str, _Any]:
+    # accounts to consider
+    accounts = _parse_list(settings.realtime_accounts_raw) or _parse_list(settings.scheduled_accounts_raw)
+    # targets (tokens may be ints or strings)
+    targets_tokens = _parse_chats(settings.realtime_chats_raw)
+    token_to_id = await _resolve_token_id_map(accounts, targets_tokens)
+    target_ids: List[int] = list({int(v) for v in token_to_id.values()})
+
+    # compute eligible mapping: channel_id -> list[account_id]
+    eligible: Dict[int, list[str]] = {cid: [] for cid in target_ids}
+    for acct in accounts:
+        dialog_ids = await _collect_dialog_chat_ids(acct)
+        for cid in target_ids:
+            if cid in dialog_ids:
+                eligible[cid].append(acct)
+
+    # weights
+    weights = await compute_channel_weights(alpha=float(settings.weight_alpha), min_weight=float(settings.weight_min))
+
+    # capacity per account
+    if settings.realtime_account_capacity_default is None:
+        capacities: Dict[str, float] = {a: float("inf") for a in accounts}
+    else:
+        capacities = {a: float(settings.realtime_account_capacity_default) for a in accounts}
+
+    # run assignment
+    assignment = assign_channels_balanced(
+        channels=target_ids,
+        eligible=eligible,
+        channel_weight=weights,
+        accounts=accounts,
+        account_capacity=capacities,
+    )
+
+    # store in Redis with summary
+    redis = Redis.from_url(settings.redis_url, decode_responses=True)
+    store = AssignmentStore(redis, key_prefix=settings.realtime_assignment_redis_prefix)
+    prev = await store.read_all(accounts)
+    summary = format_assignment_summary(prev, assignment, weights, capacities, target_ids)
+    print(summary)
+    await store.write_all(assignment, summary=summary)
+    await redis.aclose()
+
+    # return compact dict for task result
+    coverage = sum(1 for _ in set().union(*assignment.values()) if True)
+    return {
+        "accounts_considered": len(accounts),
+        "targets": len(target_ids),
+        "covered": coverage,
+    }
+
+
+@celery_app.task(name="workers.beat_tasks.reassign_realtime", bind=True)
+def reassign_realtime(self) -> dict[str, Any]:
+    """
+    Periodic task to:
+      - compute channel activity weights,
+      - discover account eligibility (joined dialogs),
+      - assign channels to accounts with balancing,
+      - store assignments in Redis, and log a compact summary.
+    """
+    return asyncio.run(_reassign_realtime_async())
