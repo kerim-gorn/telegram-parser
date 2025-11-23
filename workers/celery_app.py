@@ -30,6 +30,10 @@ celery_app.conf.beat_schedule = {
         "task": "workers.beat_tasks.bootstrap_new_channels",
         "schedule": crontab(minute="*/15"),
     },
+    "reassign-realtime-hourly": {
+        "task": "workers.beat_tasks.reassign_realtime",
+        "schedule": crontab(minute=0),
+    },
 }
 
 
