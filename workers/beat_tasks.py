@@ -15,10 +15,12 @@ from core.telethon_client import create_client_from_session
 from telethon.utils import get_peer_id
 from core.anti_ban import handle_flood_wait
 from redis.asyncio import Redis
+from redis.asyncio import Redis
 from typing import Dict, Set, Iterable, Any as _Any
 from app.assignment import assign_channels_balanced, format_assignment_summary
 from app.assignment_store import AssignmentStore
 from app.weights import compute_channel_weights
+from app.config_loader import get_account_ids_from_config, get_numeric_chat_ids_from_config
 
 
 def _parse_list(raw: str) -> list[str]:
@@ -58,6 +60,8 @@ def schedule_parsing(self) -> dict[str, Any]:
       - Pairs accounts to chats (1-to-1; if one account is provided, uses it for all chats)
       - Enqueues workers.historical_worker.parse_history tasks
     """
+    if not bool(settings.backfill_enabled):
+        return {"backfill_enabled": False, "reason": "BACKFILL_ENABLED=false"}
     chats = _parse_chats(settings.scheduled_chats_raw)
     accounts = _parse_list(settings.scheduled_accounts_raw)
     days = int(settings.scheduled_history_days)
@@ -79,103 +83,6 @@ def schedule_parsing(self) -> dict[str, Any]:
         "enqueued_task_ids": enqueued,
         "days": days,
     }
-
-
-async def _resolve_numeric_ids_if_needed(
-    accounts: List[str], chats: List[Union[int, str]]
-) -> List[int]:
-    """
-    Try to resolve string identifiers to numeric chat ids using the first account.
-    If no accounts are provided, only numeric chats are returned.
-    """
-    numeric: list[int] = []
-    primary_account: Optional[str] = accounts[0] if accounts else None
-    # Fast-path for numeric inputs
-    for c in chats:
-        if isinstance(c, int):
-            numeric.append(int(c))
-    # Resolve string identifiers if we have an account to use
-    to_resolve = [c for c in chats if not isinstance(c, int)]
-    if primary_account and to_resolve:
-        try:
-            from scripts.resolve_chat_id import resolve_chat_id  # lazy import to avoid startup cost
-        except Exception:
-            to_resolve = []  # cannot resolve without helper
-        else:
-            for s in to_resolve:
-                try:
-                    cid, _ = await resolve_chat_id(account_phone=primary_account, identifier=str(s), accept_invite=False)
-                    numeric.append(int(cid))
-                except Exception:
-                    # skip non-resolvable identifiers
-                    continue
-    # Deduplicate while preserving order
-    seen: set[int] = set()
-    unique_numeric: list[int] = []
-    for cid in numeric:
-        if cid not in seen:
-            seen.add(cid)
-            unique_numeric.append(cid)
-    return unique_numeric
-
-
-async def _resolve_token_id_map(
-    accounts: List[str], chats: List[Union[int, str]]
-) -> Dict[Union[int, str], int]:
-    """
-    Resolve each provided chat token to its numeric chat_id, preserving a mapping
-    from the original token (int or str) to the resolved numeric id.
-    """
-    mapping: Dict[Union[int, str], int] = {}
-    primary_account: Optional[str] = accounts[0] if accounts else None
-    if not chats:
-        return mapping
-    # Int tokens map to themselves
-    for c in chats:
-        if isinstance(c, int):
-            mapping[c] = int(c)
-    # Resolve string identifiers if we have an account to use
-    to_resolve = [c for c in chats if not isinstance(c, int)]
-    if primary_account and to_resolve:
-        try:
-            from scripts.resolve_chat_id import resolve_chat_id  # lazy import
-        except Exception:
-            # Fallback: resolve via minimal inline logic with Telethon
-            session_manager = SessionManager(
-                redis_url=settings.redis_url,
-                key_prefix=settings.telegram_session_prefix,
-                encryption_key=settings.session_crypto_key,
-            )
-
-            @handle_flood_wait(max_retries=5)
-            async def _safe_get_entity(client, arg):
-                return await client.get_entity(arg)
-
-            try:
-                string_session = await session_manager.get_string_session(primary_account)
-                if not string_session:
-                    return mapping
-                client = create_client_from_session(string_session)
-                async with client:
-                    for s in to_resolve:
-                        try:
-                            entity = await _safe_get_entity(client, str(s))
-                            mapping[s] = int(get_peer_id(entity))
-                        except Exception:
-                            continue
-            finally:
-                await session_manager.close()
-        else:
-            for s in to_resolve:
-                try:
-                    cid, _ = await resolve_chat_id(
-                        account_phone=primary_account, identifier=str(s), accept_invite=False
-                    )
-                    mapping[s] = int(cid)
-                except Exception:
-                    # skip non-resolvable identifiers
-                    continue
-    return mapping
 
 
 async def _find_new_channel_ids(engine: AsyncEngine, candidate_chat_ids: List[int]) -> List[int]:
@@ -204,17 +111,38 @@ def bootstrap_new_channels(self) -> dict[str, Any]:
       - Determine which configured channels have zero rows in DB
       - Enqueue backfill tasks only for those channels
     """
+    if not bool(settings.backfill_enabled):
+        return {"backfill_enabled": False, "reason": "BACKFILL_ENABLED=false"}
     chats = _parse_chats(settings.scheduled_chats_raw)
     accounts = _parse_list(settings.scheduled_accounts_raw)
+    if not accounts:
+        # discover accounts from Redis when not provided
+        try:
+            redis = Redis.from_url(settings.redis_url, decode_responses=True)
+            pattern = f"{settings.telegram_session_prefix}*"
+            cursor = 0
+            discovered: list[str] = []
+            while True:
+                cursor, keys = asyncio.run(redis.scan(cursor=cursor, match=pattern, count=500))
+                for k in keys:
+                    account_id = k.replace(settings.telegram_session_prefix, "", 1)
+                    if account_id:
+                        discovered.append(account_id)
+                if cursor == 0:
+                    break
+            asyncio.run(redis.aclose())
+            seen: set[str] = set()
+            accounts = [a for a in discovered if not (a in seen or seen.add(a))]
+        except Exception:
+            accounts = []
     days = int(settings.scheduled_history_days)
 
-    # Resolve identifiers to numeric ids and keep mapping to original tokens
+    # Consider only numeric chat ids (no resolves)
     new_ids: list[int] = []
     loop_engine, _ = create_loop_bound_session_factory()
     try:
-        token_to_id = asyncio.run(_resolve_token_id_map(accounts, chats))
-        numeric_ids = list({int(v) for v in token_to_id.values()})
-        # Determine which ids are new in DB
+        numeric_ids = [int(c) for c in chats if isinstance(c, int)]
+        # Determine which numeric ids are new in DB
         new_ids = asyncio.run(_find_new_channel_ids(loop_engine, numeric_ids))
     finally:
         # Dispose engine we created in this task
@@ -223,13 +151,8 @@ def bootstrap_new_channels(self) -> dict[str, Any]:
         except Exception:
             pass
 
-    # Prepare only those original tokens that correspond to "new" numeric ids
-    new_tokens: list[Union[int, str]] = []
-    if new_ids:
-        new_ids_set = set(int(x) for x in new_ids)
-        for token, cid in token_to_id.items():
-            if int(cid) in new_ids_set:
-                new_tokens.append(token)
+    # Use numeric ids directly for scheduling (no string tokens)
+    new_tokens: list[Union[int, str]] = [int(x) for x in new_ids]
 
     # Pair accounts with only new channel tokens (keep original identifiers for Telethon resolution)
     pairs = _pair_accounts_with_chats(accounts, new_tokens)
@@ -279,12 +202,37 @@ async def _collect_dialog_chat_ids(account_id: str) -> Set[int]:
 
 
 async def _reassign_realtime_async() -> dict[str, _Any]:
-    # accounts to consider
-    accounts = _parse_list(settings.realtime_accounts_raw) or _parse_list(settings.scheduled_accounts_raw)
-    # targets (tokens may be ints or strings)
-    targets_tokens = _parse_chats(settings.realtime_chats_raw)
-    token_to_id = await _resolve_token_id_map(accounts, targets_tokens)
-    target_ids: List[int] = list({int(v) for v in token_to_id.values()})
+    # accounts to consider (prefer config JSON over env for consistency)
+    accounts = get_account_ids_from_config() or _parse_list(settings.realtime_accounts_raw) or _parse_list(settings.scheduled_accounts_raw)
+    # If not explicitly configured, discover from Redis sessions prefix
+    if not accounts:
+        try:
+            redis = Redis.from_url(settings.redis_url, decode_responses=True)
+            pattern = f"{settings.telegram_session_prefix}*"
+            cursor = 0
+            discovered: list[str] = []
+            while True:
+                cursor, keys = await redis.scan(cursor=cursor, match=pattern, count=500)
+                for k in keys:
+                    # key format: prefix + account_id
+                    account_id = k.replace(settings.telegram_session_prefix, "", 1)
+                    if account_id:
+                        discovered.append(account_id)
+                if cursor == 0:
+                    break
+            await redis.aclose()
+            # keep order stable and unique
+            seen: set[str] = set()
+            accounts = [a for a in discovered if not (a in seen or seen.add(a))]
+        except Exception:
+            accounts = []
+    # targets: use only numeric chat_ids from config; fallback to env ints
+    target_ids_from_cfg: List[int] = get_numeric_chat_ids_from_config()
+    if target_ids_from_cfg:
+        target_ids: List[int] = list({int(v) for v in target_ids_from_cfg})
+    else:
+        parsed = _parse_chats(settings.realtime_chats_raw)
+        target_ids = [int(c) for c in parsed if isinstance(c, int)]
 
     # compute eligible mapping: channel_id -> list[account_id]
     eligible: Dict[int, list[str]] = {cid: [] for cid in target_ids}

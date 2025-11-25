@@ -1,7 +1,9 @@
 import asyncio
+import json
 import os
 from getpass import getpass
-from typing import Tuple, Optional
+from pathlib import Path
+from typing import Tuple, Optional, List, Dict, Any
 
 from cryptography.fernet import Fernet
 from dotenv import load_dotenv
@@ -84,6 +86,46 @@ async def _login_and_get_session(
     finally:
         await client.disconnect()
 
+async def _login_many_and_store(
+    api_id: int,
+    api_hash: str,
+    accounts: List[Dict[str, Any]],
+    fernet: Fernet,
+    redis_url: str,
+    prefix: str,
+) -> None:
+    """
+    Iterate over accounts list, perform interactive login for each and store encrypted sessions.
+    JSON account fields:
+      - account_id: optional id to store under (defaults to phone)
+      - phone: required phone number in international format
+      - twofa: optional 2FA password (if not provided, will prompt if needed)
+    """
+    # Open Redis once
+    redis = Redis.from_url(redis_url, decode_responses=True)
+    try:
+        await redis.ping()
+    except Exception:
+        await _maybe_close_redis(redis)
+        raise RuntimeError(f"Не удалось подключиться к Redis по URL={redis_url}")
+
+    try:
+        for idx, acc in enumerate(accounts, start=1):
+            phone = str(acc.get("phone", "")).strip()
+            if not phone:
+                print(f"[{idx}] Пропуск: отсутствует 'phone' в записи: {acc}")
+                continue
+            account_id = str(acc.get("account_id") or phone).strip()
+            twofa = acc.get("twofa")
+            print(f"[{idx}] Логин для {phone} (account_id={account_id})")
+            ph, session_string = await _login_and_get_session(api_id, api_hash, phone, twofa)
+            encrypted_session = fernet.encrypt(session_string.encode("utf-8")).decode("utf-8")
+            key = f"{prefix}{account_id}"
+            await redis.set(key, encrypted_session)
+            print(f"[{idx}] OK: Сессия сохранена. KEY={key}")
+    finally:
+        await _maybe_close_redis(redis)
+
 async def _maybe_close_redis(redis: Redis) -> None:
     close = getattr(redis, "aclose", None) or getattr(redis, "close", None)
     if callable(close):
@@ -118,15 +160,40 @@ async def _open_redis_with_fallback(
 
 async def main() -> None:
     """
-    Онбординг аккаунта:
+    Онбординг аккаунтов:
       1) Читает API_ID/API_HASH из .env или спрашивает у пользователя
-      2) Интерактивный логин (номер телефона, код, 2FA)
-      3) Получает session_string, шифрует с помощью Fernet
-      4) Сохраняет в Redis по ключу {PREFIX}{phone}
+      2) Если найден realtime_config.json (или путь в realtime_config), обрабатывает все аккаунты из файла
+         иначе работает в режиме одиночного аккаунта через переменные окружения/ввод
+      3) Получает session_string, шифрует (Fernet) и сохраняет в Redis по ключу {PREFIX}{account_id}
     """
     api_id, api_hash = _read_api_credentials()
     fernet, redis_url, prefix, env_has_redis_url = _read_crypto_and_storage()
 
+    load_dotenv()
+    # Prefer unified realtime config
+    rt_path = os.getenv("REALTIME_CONFIG_JSON", "realtime_config.json")
+    json_file = Path(rt_path) if Path(rt_path).exists() else None
+    if json_file.exists():
+        print(f"Найден файл конфигурации: {json_file}")
+        try:
+            data = json.loads(json_file.read_text(encoding="utf-8"))
+            if isinstance(data, dict) and "accounts" in data:
+                accounts = data.get("accounts") or []
+            elif isinstance(data, list):
+                accounts = data
+            else:
+                raise ValueError("Некорректный формат JSON: ожидается объект с ключом 'accounts' или список")
+            if not isinstance(accounts, list):
+                raise ValueError("Поле 'accounts' должно быть списком")
+        except Exception as e:
+            raise RuntimeError(f"Не удалось прочитать {json_file}: {e}")
+        await _login_many_and_store(api_id, api_hash, accounts, fernet, redis_url, prefix)
+        print("Готово. Все доступные аккаунты обработаны.")
+        return
+    else:
+        print(f"Файлы realtime_config.json / accounts.json не найдены. Работаю в режиме одиночного аккаунта.")
+
+    # Single-account fallback
     phone_input, twofa_input = _read_phone_and_2fa()
     phone, session_string = await _login_and_get_session(api_id, api_hash, phone_input, twofa_input)
     encrypted_session = fernet.encrypt(session_string.encode("utf-8")).decode("utf-8")

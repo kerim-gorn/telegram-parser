@@ -67,7 +67,7 @@ services:
     env_file: .env
     environment:
       # Force in-cluster endpoints for containers
-      CELERY_BROKER_URL: amqp://${RABBITMQ_DEFAULT_USER:-guest}:${RABBITMQ_DEFAULT_PASS:-guest}@rabbitmq:5672/%2F
+      CELERY_BROKER_URL: amqp://guest:guest@rabbitmq:5672/%2F
       CELERY_RESULT_BACKEND: redis://redis:6379/1
       REDIS_URL: redis://redis:6379/0
       DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
@@ -88,7 +88,7 @@ services:
     env_file: .env
     environment:
       # Force in-cluster endpoints for containers
-      CELERY_BROKER_URL: amqp://${RABBITMQ_DEFAULT_USER:-guest}:${RABBITMQ_DEFAULT_PASS:-guest}@rabbitmq:5672/%2F
+      CELERY_BROKER_URL: amqp://guest:guest@rabbitmq:5672/%2F
       CELERY_RESULT_BACKEND: redis://redis:6379/1
       REDIS_URL: redis://redis:6379/0
       DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
@@ -100,6 +100,8 @@ services:
       redis:
         condition: service_healthy
     command: celery -A workers.celery_app.celery_app worker -l info
+    volumes:
+      - ./realtime_config.json:/app/realtime_config.json:ro
     networks:
       - telegram_parser_net
 
@@ -110,13 +112,15 @@ services:
     env_file: .env
     environment:
       # Force in-cluster endpoints for containers
-      CELERY_BROKER_URL: amqp://${RABBITMQ_DEFAULT_USER:-guest}:${RABBITMQ_DEFAULT_PASS:-guest}@rabbitmq:5672/%2F
+      CELERY_BROKER_URL: amqp://guest:guest@rabbitmq:5672/%2F
       CELERY_RESULT_BACKEND: redis://redis:6379/1
       REDIS_URL: redis://redis:6379/0
       DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
     depends_on:
       - rabbitmq
     command: celery -A workers.celery_app.celery_app beat -l info
+    volumes:
+      - ./realtime_config.json:/app/realtime_config.json:ro
     networks:
       - telegram_parser_net
 
@@ -124,6 +128,8 @@ services:
     build: .
     container_name: telegram_parser_realtime
     restart: unless-stopped
+    profiles:
+      - manual
     env_file: .env
     environment:
       # Force in-cluster endpoints for containers
@@ -136,6 +142,8 @@ services:
       redis:
         condition: service_healthy
     command: python -m workers.realtime_worker
+    volumes:
+      - ./realtime_config.json:/app/realtime_config.json:ro
     networks:
       - telegram_parser_net
 
@@ -145,7 +153,7 @@ services:
     restart: unless-stopped
     env_file: .env
     environment:
-      CELERY_BROKER_URL: amqp://${RABBITMQ_DEFAULT_USER:-guest}:${RABBITMQ_DEFAULT_PASS:-guest}@rabbitmq:5672/%2F
+      CELERY_BROKER_URL: amqp://guest:guest@rabbitmq:5672/%2F
       REDIS_URL: redis://redis:6379/0
       DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
     depends_on:

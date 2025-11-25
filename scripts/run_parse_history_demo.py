@@ -75,7 +75,7 @@ async def main() -> None:
     resolved_chat_id: Optional[int] = None
     if chat_identifier:
         try:
-            cid, title = await resolve_chat_id(account_phone=phone, identifier=chat_identifier, accept_invite=False)
+            cid, title = await resolve_chat_id(account_phone=phone, identifier=chat_identifier)
             resolved_chat_id = cid
             if title:
                 print(f"Определено название чата: {title}")

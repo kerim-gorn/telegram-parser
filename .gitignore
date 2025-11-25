@@ -30,9 +30,11 @@ build/
 .env
 .env.*
 !.env.example
+realtime_config.json
 
 # Docker
 docker-compose.override.yml
+docker-compose.realtime.generated.yml
 
 # Telethon sessions (we do not use file sessions, but ignore just in case)
 *.session
