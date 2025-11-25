@@ -2,91 +2,74 @@ from __future__ import annotations
 
 import asyncio
 import html
+from datetime import datetime, timezone
 from typing import Optional, Union
+
+from aiogram import Bot
+from aiogram.enums import ParseMode
 
 from core.anti_ban import handle_flood_wait
 from core.config import settings
-from core.session_manager import SessionManager
-from core.telethon_client import create_client_from_session
+
+
+def _normalize_username(value: Optional[str]) -> Optional[str]:
+    if not isinstance(value, str):
+        return None
+    s = value.strip()
+    if not s:
+        return None
+    return s if s.startswith("@") else f"@{s}"
+
+
+def _format_dt_utc(dt: Optional[datetime]) -> Optional[str]:
+    if dt is None:
+        return None
+    try:
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        else:
+            dt = dt.astimezone(timezone.utc)
+        return dt.strftime("%Y-%m-%d %H:%M:%S UTC")
+    except Exception:
+        return None
+
+
+def _build_link(chat_username: Optional[str], message_id: Optional[int]) -> str:
+    try:
+        if isinstance(chat_username, str) and chat_username.startswith("@") and message_id:
+            return f'\n<a href="https://t.me/{chat_username[1:]}/{int(message_id)}">Открыть оригинал</a>'
+    except Exception:
+        return ""
+    return ""
 
 
 class SignalNotifier:
     """
-    Minimal async notifier that posts detected signals to a configured Telegram channel.
-    - Uses Redis-backed StringSession (no file sessions).
-    - Lazily establishes one Telethon client per process and reuses it.
-    - Wraps Telegram I/O with flood-wait handling.
+    Async notifier that posts detected signals via Telegram Bot (aiogram).
+    - Lazily creates one Bot instance per process and reuses it.
+    - Wraps Bot API calls with anti-ban flood wait handling.
     """
 
     def __init__(self) -> None:
-        self._client = None  # type: ignore[assignment]
+        self._bot: Optional[Bot] = None
         self._lock = asyncio.Lock()
-        self._session_manager = SessionManager(
-            settings.redis_url,
-            settings.telegram_session_prefix,
-            settings.session_crypto_key,
-        )
-        self._account_id = (settings.signals_account_id or settings.telegram_account_id).strip()
-        self._target = (settings.signals_channel or "").strip()
+        # Fail fast if misconfigured
+        self._token: str = settings.telegram_bot_token
+        self._target_chat_id: int = settings.signals_bot_chat_id
 
-    async def _ensure_client(self):
-        if self._client is not None and self._client.is_connected():
-            return self._client
+    async def _ensure_bot(self) -> Bot:
+        if self._bot is not None:
+            return self._bot
         async with self._lock:
-            if self._client is not None and self._client.is_connected():
-                return self._client
-            session_string = await self._session_manager.get_string_session(self._account_id)
-            if not session_string:
-                raise RuntimeError(
-                    f"No StringSession found for notifier account '{self._account_id}'. "
-                    "Ensure onboarding for this account is completed."
-                )
-            client = create_client_from_session(session_string)
-            await client.connect()
-            self._client = client
-            return client
+            if self._bot is not None:
+                return self._bot
+            self._bot = Bot(token=self._token, parse_mode=ParseMode.HTML)
+            return self._bot
 
     @handle_flood_wait(max_retries=5)
-    async def _resolve_username(
-        self, client, entity_id: Optional[int]
-    ) -> Optional[str]:
-        if entity_id is None:
-            return None
-        try:
-            ent = await client.get_entity(entity_id)
-            username = getattr(ent, "username", None)
-            if isinstance(username, str) and username:
-                return f"@{username}"
-            # Fallback to human-readable name
-            first = getattr(ent, "first_name", None)
-            last = getattr(ent, "last_name", None)
-            parts = [p for p in (first, last) if isinstance(p, str) and p]
-            display = " ".join(parts)
-            return display or None
-        except Exception:
-            return None
-
-    @handle_flood_wait(max_retries=5)
-    async def _resolve_chatname(
-        self, client, chat: Union[int, str, None]
-    ) -> Optional[str]:
-        if chat is None:
-            return None
-        try:
-            ent = await client.get_entity(chat)
-            username = getattr(ent, "username", None)
-            if isinstance(username, str) and username:
-                return f"@{username}"
-            title = getattr(ent, "title", None)
-            if isinstance(title, str) and title:
-                return title
-        except Exception:
-            return None
-        return None
-
-    @handle_flood_wait(max_retries=5)
-    async def _send_html(self, client, target: Union[str, int], html_text: str) -> None:
-        await client.send_message(target, html_text, parse_mode="html")
+    async def _send_html(self, chat_id: Union[int, str], html_text: str) -> None:
+        bot = await self._ensure_bot()
+        await bot.send_message(chat_id, html_text, disable_web_page_preview=True)
 
     async def send_signal(
         self,
@@ -94,45 +77,42 @@ class SignalNotifier:
         source_chat_id: Optional[int],
         sender_id: Optional[int],
         source_message_id: Optional[int] = None,
+        *,
+        sender_username: Optional[str] = None,
+        chat_username: Optional[str] = None,
+        message_date: Optional[datetime] = None,
     ) -> None:
         """
-        Send a formatted notification with the original text, author and source chat.
+        Send a formatted notification with original text, author, source chat and timestamp.
+        All username/time fields are optional; when absent, placeholders are used.
         """
-        if not self._target:
-            return
         safe_text = (text or "").strip()
         if not safe_text:
             return
 
-        client = await self._ensure_client()
-        author = await self._resolve_username(client, sender_id)
-        chat_name = await self._resolve_chatname(client, source_chat_id)
+        author = _normalize_username(sender_username) or "неизвестно"
+        channel = _normalize_username(chat_username) or "неизвестно"
+        when = _format_dt_utc(message_date) or "неизвестно"
         escaped = html.escape(safe_text)
-        author_part = author or "неизвестно"
-        chat_part = chat_name or "неизвестно"
-
-        link_line = ""
-        try:
-            if chat_name and chat_name.startswith("@") and source_message_id:
-                link = f"https://t.me/{chat_name[1:]}/{int(source_message_id)}"
-                link_line = f'\n<a href="{link}">Открыть оригинал</a>'
-        except Exception:
-            link_line = ""
+        link_line = _build_link(_normalize_username(chat_username), source_message_id)
 
         body = (
             f"<b>📣 Сигнал обнаружен</b>\n"
+            f"<b>Канал:</b> {channel}\n"
+            f"<b>Автор:</b> {author}\n"
+            f"<b>Время:</b> {when}\n"
             f"<b>Текст:</b>\n"
-            f"<pre>{escaped}</pre>\n"
-            f"<b>Автор:</b> {author_part}\n"
-            f"<b>Источник:</b> {chat_part}"
+            f"<pre>{escaped}</pre>"
             f"{link_line}"
         )
-        await self._send_html(client, self._target, body)
+        await self._send_html(self._target_chat_id, body)
 
     async def close(self) -> None:
-        if self._client is not None and self._client.is_connected():
-            await self._client.disconnect()
-        await self._session_manager.close()
+        if self._bot is not None:
+            try:
+                await self._bot.session.close()
+            finally:
+                self._bot = None
 
 
 notifier = SignalNotifier()

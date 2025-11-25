@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     # Notifier (signals)
     signals_channel: str = Field("", alias="SIGNALS_CHANNEL")
     signals_account_id: str | None = Field(default=None, alias="SIGNALS_ACCOUNT_ID")
+    # Bot-based signals (aiogram)
+    telegram_bot_token: str = Field(..., alias="TELEGRAM_BOT_TOKEN")
+    signals_bot_chat_id: int = Field(..., alias="SIGNALS_BOT_CHAT_ID")
     # Realtime worker configuration
     realtime_chats_raw: str = Field("", alias="CHATS_TO_LISTEN")
     realtime_exchange_name: str = Field("realtime_fanout", alias="REALTIME_EXCHANGE")

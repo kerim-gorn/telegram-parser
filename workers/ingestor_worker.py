@@ -39,6 +39,17 @@ async def _persist_message(payload: dict[str, Any]) -> None:
     message_id = int(payload.get("message_id") or message.get("id"))
     text = message.get("message")
     sender_id = None
+    # Optional usernames from payload (already best-effort in realtime/historical workers)
+    sender_username = payload.get("sender_username")
+    if isinstance(sender_username, str) and sender_username.strip():
+        sender_username = sender_username if sender_username.startswith("@") else f"@{sender_username}"
+    else:
+        sender_username = None
+    chat_username = payload.get("chat_username")
+    if isinstance(chat_username, str) and chat_username.strip():
+        chat_username = chat_username if chat_username.startswith("@") else f"@{chat_username}"
+    else:
+        chat_username = None
     from_id = message.get("from_id")
     if isinstance(from_id, dict):
         # Telethon to_dict for Peer may look like {'_': 'PeerUser', 'user_id': 123}
@@ -111,6 +122,8 @@ async def _persist_message(payload: dict[str, Any]) -> None:
                 "chat_id": chat_id,
                 "message_id": message_id,
                 "sender_id": int(sender_id) if sender_id is not None else None,
+                "sender_username": sender_username,
+                "chat_username": chat_username,
                 "text": text,
                 "is_signal": is_signal,
                 "llm_analysis": analysis_json if analysis_json is not None else llm_data,
@@ -135,6 +148,9 @@ async def _persist_message(payload: dict[str, Any]) -> None:
                     source_chat_id=chat_id,
                     sender_id=int(sender_id) if sender_id is not None else None,
                     source_message_id=message_id,
+                    sender_username=payload.get("sender_username"),
+                    chat_username=payload.get("chat_username"),
+                    message_date=message_date,
                 )
             )
         except Exception:

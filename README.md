@@ -19,6 +19,9 @@ API_PORT=8000
 
 TELEGRAM_API_ID=123456
 TELEGRAM_API_HASH=your_api_hash_here
+# Bot-based signals (aiogram)
+TELEGRAM_BOT_TOKEN=your_bot_token_here
+SIGNALS_BOT_CHAT_ID=-1001234567890
 
 TELEGRAM_ACCOUNT_ID=default
 TELEGRAM_SESSION_PREFIX=telegram:sessions:
@@ -57,6 +60,22 @@ Notes:
 
 - `REALTIME_CONFIG_JSON` points to a unified JSON config for accounts and chats.
 - Realtime assignment uses Redis pub/sub, so redistribution applies instantly without restarts.
+
+## Signal Notifications (via Telegram Bot)
+
+- Signals are sent using a Telegram Bot (aiogram), not a user session.
+- Required env variables:
+  - `TELEGRAM_BOT_TOKEN` — Bot API token from BotFather
+  - `SIGNALS_BOT_CHAT_ID` — chat id (e.g. `-100...`) or user id where the bot will post
+- The message includes:
+  - channel username, author username, message timestamp (UTC), and the original text
+  - a deep link to the original post when channel username and message id are available
+
+Quick smoke test (after setting env and installing requirements):
+
+```bash
+python scripts/notify_smoke_test.py --text "Test signal ✅"
+```
 
 ## Realtime Config (accounts + chats)
 

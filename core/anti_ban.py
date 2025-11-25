@@ -4,6 +4,11 @@ from functools import wraps
 from typing import Any, Awaitable, Callable, Optional, TypeVar
 
 from telethon import errors
+try:
+    # aiogram v3
+    from aiogram.exceptions import TelegramRetryAfter as _AiogramRetryAfter  # type: ignore[attr-defined]
+except Exception:  # pragma: no cover - optional dependency
+    _AiogramRetryAfter = None  # type: ignore[assignment]
 
 from typing_extensions import ParamSpec
 
@@ -42,6 +47,21 @@ def handle_flood_wait(
                     await asyncio.sleep(total_sleep)
                     retries += 1
                 except Exception as e:  # noqa: BLE001
+                    # Handle aiogram rate limiting dynamically, if aiogram is installed
+                    if _AiogramRetryAfter is not None and isinstance(e, _AiogramRetryAfter):
+                        wait_time = getattr(e, "retry_after", 5)
+                        jitter = random.uniform(
+                            initial_jitter_min * (retries + 1),
+                            initial_jitter_max * (retries + 1),
+                        )
+                        total_sleep = wait_time + jitter
+                        print(
+                            f"AiogramRetryAfter: waiting {total_sleep:.2f}s "
+                            f"(attempt {retries + 1}/{max_retries})..."
+                        )
+                        await asyncio.sleep(total_sleep)
+                        retries += 1
+                        continue
                     print(f"Unhandled error in {func.__name__}: {e}")
                     raise
             print(f"Reached max retries ({max_retries}) for {func.__name__}. Cancelling.")
