@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from dotenv import load_dotenv
 from aiogram import Bot
 from aiogram.enums import ParseMode
+from aiogram.client.default import DefaultBotProperties
 
 
 async def main() -> None:
@@ -37,7 +38,7 @@ async def main() -> None:
         f"<pre>{args.text}</pre>"
     )
 
-    bot = Bot(token=token, parse_mode=ParseMode.HTML)
+    bot = Bot(token=token, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     try:
         await bot.send_message(chat_id, body, disable_web_page_preview=True)
         print("OK: sent")

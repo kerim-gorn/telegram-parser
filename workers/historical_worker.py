@@ -33,8 +33,17 @@ async def _safe_get_messages(client, chat, limit: int, offset_id: int):
     return await client.get_messages(chat, limit=limit, offset_id=offset_id)
 
 
-async def _save_messages_batch(engine: AsyncEngine, messages: Sequence[TGMessage]) -> int:
+async def _save_messages_batch(
+    engine: AsyncEngine,
+    messages: Sequence[TGMessage],
+    chat_username: Optional[str] = None,
+) -> int:
     rows: list[dict] = []
+    # Normalize chat_username once
+    if isinstance(chat_username, str) and chat_username.strip():
+        norm_chat_username = chat_username if chat_username.startswith("@") else f"@{chat_username}"
+    else:
+        norm_chat_username = None
     for m in messages:
         if not isinstance(m, TGMessage):
             continue
@@ -46,6 +55,8 @@ async def _save_messages_batch(engine: AsyncEngine, messages: Sequence[TGMessage
                 "chat_id": int(m.chat_id),
                 "message_id": int(m.id),
                 "sender_id": int(m.sender_id) if m.sender_id is not None else None,
+                "sender_username": None,  # avoid extra per-message lookups
+                "chat_username": norm_chat_username,
                 "text": m.message,
                 "message_date": msg_dt,
             }
@@ -102,6 +113,11 @@ async def _async_backfill_chat(
                 raise RuntimeError(f"Failed to resolve chat entity: {chat_entity}")
 
             chat_id_numeric = int(get_peer_id(target))
+            target_username = getattr(target, "username", None)
+            if isinstance(target_username, str) and target_username:
+                norm_target_username = target_username if target_username.startswith("@") else f"@{target_username}"
+            else:
+                norm_target_username = None
 
             # Create engine/session factory bound to THIS event loop
             loop_engine, loop_session_factory = create_loop_bound_session_factory()
@@ -132,6 +148,7 @@ async def _async_backfill_chat(
                             "chat_id": chat_id_numeric,
                             "message_id": int(m.id),
                             "message": m.to_dict(),
+                            "chat_username": norm_target_username,
                         }
                         assert exchange is not None
                         body = json.dumps(payload, ensure_ascii=False, default=str).encode("utf-8")
@@ -141,11 +158,11 @@ async def _async_backfill_chat(
                     else:
                         buffer.append(m)
                         if len(buffer) >= batch_size:
-                            saved += await _save_messages_batch(loop_engine, buffer)  # type: ignore[arg-type]
+                            saved += await _save_messages_batch(loop_engine, buffer, norm_target_username)  # type: ignore[arg-type]
                             buffer.clear()
                 # Flush remainder
                 if not settings.backfill_via_rabbit and buffer:
-                    saved += await _save_messages_batch(loop_engine, buffer)  # type: ignore[arg-type]
+                    saved += await _save_messages_batch(loop_engine, buffer, norm_target_username)  # type: ignore[arg-type]
             finally:
                 await loop_engine.dispose()
                 if settings.backfill_via_rabbit and amqp_conn is not None:

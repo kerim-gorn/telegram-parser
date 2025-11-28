@@ -13,6 +13,7 @@ from db.models import Message as DBMessage
 from db.session import create_loop_bound_session_factory
 from app.llm_analyzer import analyze_message_for_signal
 from app.signal_notifier import notifier as signal_notifier
+from app.prefilter import get_prefilter
 
 
 def _parse_datetime(value: Any) -> datetime:
@@ -65,42 +66,48 @@ async def _persist_message(payload: dict[str, Any]) -> None:
     analysis_json: dict[str, Any] | None = None
     is_signal: bool = False
     if isinstance(text, str) and text.strip():
+        # Prefilter (skip/force) before LLM
         try:
-            analysis_result = await analyze_message_for_signal(text)
-            if isinstance(analysis_result, dict):
-                data = analysis_result.get("data")
-                if isinstance(data, dict):
-                    llm_data = data
-                    is_signal = bool(data.get("is_signal", False))
-                    # Persist unified JSON with top-level ok flag
-                    analysis_json = {"ok": True, **data}
-                else:
-                    # Fallback: if analyzer returned the JSON directly (unlikely), try to use it
-                    if isinstance(analysis_result, dict) and "is_signal" in analysis_result:
-                        llm_data = analysis_result  # type: ignore[assignment]
-                        is_signal = bool(analysis_result.get("is_signal", False))
-                        analysis_json = {"ok": True, **analysis_result}  # type: ignore[arg-type]
-                    else:
-                        # Analyzer returned envelope with failure — capture minimal error info
-                        if analysis_result.get("ok") is False:
-                            err: dict[str, Any] = {"ok": False}
-                            if isinstance(analysis_result.get("error"), str):
-                                err["error"] = analysis_result.get("error")
-                            if isinstance(analysis_result.get("message"), str):
-                                err["message"] = analysis_result.get("message")
-                            # Expose assistant raw content to help debug invalid JSON cases
-                            if isinstance(analysis_result.get("text"), str) and analysis_result.get("text"):
-                                err["assistant_text"] = analysis_result.get("text")
-                            # Enrich with HTTP details when available
-                            if isinstance(analysis_result.get("status_code"), int):
-                                err["status_code"] = analysis_result.get("status_code")
-                            if isinstance(analysis_result.get("body"), str):
-                                err["body"] = analysis_result.get("body")
-                            analysis_json = err
+            decision, matched = await get_prefilter().match(text)
         except Exception:
-            # Keep analysis_result empty on failure; we still persist the message
-            analysis_result = {"ok": False, "error": "analysis_failed"}
-            analysis_json = {"ok": False, "error": "analysis_failed"}
+            decision, matched = (None, [])
+        if decision == "force":
+            is_signal = True
+            analysis_json = {"ok": True, "is_signal": True, "forced": True, "matched": matched}
+        elif decision == "skip":
+            is_signal = False
+            analysis_json = {"ok": True, "is_signal": False, "filtered": True, "matched": matched}
+        else:
+            try:
+                analysis_result = await analyze_message_for_signal(text)
+                if isinstance(analysis_result, dict):
+                    data = analysis_result.get("data")
+                    if isinstance(data, dict):
+                        llm_data = data
+                        is_signal = bool(data.get("is_signal", False))
+                        analysis_json = {"ok": True, **data}
+                    else:
+                        if isinstance(analysis_result, dict) and "is_signal" in analysis_result:
+                            llm_data = analysis_result  # type: ignore[assignment]
+                            is_signal = bool(analysis_result.get("is_signal", False))
+                            analysis_json = {"ok": True, **analysis_result}  # type: ignore[arg-type]
+                        else:
+                            if analysis_result.get("ok") is False:
+                                err: dict[str, Any] = {"ok": False}
+                                if isinstance(analysis_result.get("error"), str):
+                                    err["error"] = analysis_result.get("error")
+                                if isinstance(analysis_result.get("message"), str):
+                                    err["message"] = analysis_result.get("message")
+                                if isinstance(analysis_result.get("text"), str) and analysis_result.get("text"):
+                                    err["assistant_text"] = analysis_result.get("text")
+                                if isinstance(analysis_result.get("status_code"), int):
+                                    err["status_code"] = analysis_result.get("status_code")
+                                if isinstance(analysis_result.get("body"), str):
+                                    err["body"] = analysis_result.get("body")
+                                analysis_json = err
+            except Exception:
+                analysis_result = {"ok": False, "error": "analysis_failed"}
+                analysis_json = {"ok": False, "error": "analysis_failed"}
 
     if chat_id is None:
         # If chat_id missing, attempt to infer from peer_id

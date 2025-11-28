@@ -162,6 +162,8 @@ services:
       rabbitmq:
         condition: service_healthy
     command: python -m workers.ingestor_worker
+    volumes:
+      - ./prefilter_rules.json:/prefilter_rules.json:ro
     networks:
       - telegram_parser_net
 

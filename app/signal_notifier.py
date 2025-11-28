@@ -7,6 +7,7 @@ from typing import Optional, Union
 
 from aiogram import Bot
 from aiogram.enums import ParseMode
+from aiogram.client.default import DefaultBotProperties
 
 from core.anti_ban import handle_flood_wait
 from core.config import settings
@@ -63,7 +64,7 @@ class SignalNotifier:
         async with self._lock:
             if self._bot is not None:
                 return self._bot
-            self._bot = Bot(token=self._token, parse_mode=ParseMode.HTML)
+            self._bot = Bot(token=self._token, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
             return self._bot
 
     @handle_flood_wait(max_retries=5)

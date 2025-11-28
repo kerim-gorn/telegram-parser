@@ -212,11 +212,29 @@ async def run_realtime_worker(account_id: str | None = None) -> None:
                                 "chat_id": int(event.chat_id) if event.chat_id is not None else None,
                                 "message_id": int(event.message.id),
                             }
+                            # Best-effort usernames without extra network calls:
+                            # Telethon sets .sender/.chat when available in the update; we do NOT call get_*()
+                            sender_username = None
+                            chat_username = None
+                            try:
+                                su = getattr(getattr(event.message, "sender", None), "username", None)
+                                if isinstance(su, str) and su:
+                                    sender_username = su if su.startswith("@") else f"@{su}"
+                            except Exception:
+                                sender_username = None
+                            try:
+                                cu = getattr(getattr(event.message, "chat", None), "username", None)
+                                if isinstance(cu, str) and cu:
+                                    chat_username = cu if cu.startswith("@") else f"@{cu}"
+                            except Exception:
+                                chat_username = None
                             payload = {
                                 "event": "NewMessage",
                                 "chat_id": int(event.chat_id) if event.chat_id is not None else None,
                                 "message_id": int(event.message.id),
                                 "message": event.message.to_dict(),
+                                "sender_username": sender_username,
+                                "chat_username": chat_username,
                             }
                             await _publish_message(exchange, payload)
                             stats["published"] = int(stats.get("published", 0)) + 1

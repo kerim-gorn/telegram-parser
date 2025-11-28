@@ -49,6 +49,10 @@ RABBITMQ_PORT=5672
 CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
 CELERY_RESULT_BACKEND=redis://redis:6379/1
 
+# Ingestor prefilter (optional)
+PREFILTER_CONFIG_JSON=/prefilter_rules.json
+PREFILTER_RELOAD_SECONDS=60
+
 SCHEDULED_CHATS=
 SCHEDULED_ACCOUNTS=
 SCHEDULED_HISTORY_DAYS=7
@@ -60,6 +64,38 @@ Notes:
 
 - `REALTIME_CONFIG_JSON` points to a unified JSON config for accounts and chats.
 - Realtime assignment uses Redis pub/sub, so redistribution applies instantly without restarts.
+
+## Ingestor Prefilter (skip/force before LLM)
+
+- You can prefilter messages by substrings and regexes to:
+  - force a message as signal (skip LLM): `is_signal=true`
+  - skip a message as non-signal (skip LLM): `is_signal=false`
+- Configure with `PREFILTER_CONFIG_JSON` pointing to a JSON file. The file is hot-reloaded every `PREFILTER_RELOAD_SECONDS` seconds.
+
+Example `prefilter_rules.json`:
+
+```json
+{
+  "substrings": [
+    { "pattern": "продам", "ignore_case": true, "action": "skip" },
+    { "pattern": "срочно нужен электрик", "ignore_case": true, "action": "force" }
+  ],
+  "regexes": [
+    { "pattern": "(?i)\\bищу мастера\\b", "action": "force" },
+    { "pattern": "(?i)\\bакция\\b",          "action": "skip" }
+  ]
+}
+```
+
+Behavior on match:
+
+- action `force`: `is_signal=true`, `llm_analysis={"ok": true, "is_signal": true, "forced": true, "matched":[...] }`
+- action `skip`:  `is_signal=false`, `llm_analysis={"ok": true, "is_signal": false, "filtered": true, "matched":[...] }`
+- Precedence: if both force and skip rules match, force wins.
+
+Notes:
+
+- `matched` contains the patterns that triggered a decision.
 
 ## Signal Notifications (via Telegram Bot)
 

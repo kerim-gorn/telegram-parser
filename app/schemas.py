@@ -25,6 +25,8 @@ class ParsedMessage(BaseModel):
     """
     message_id: int
     chat_id: int
+    sender_username: Optional[str] = None
+    chat_username: Optional[str] = None
     text: Optional[str] = None
     sender_id: Optional[int] = None
     message_date: datetime

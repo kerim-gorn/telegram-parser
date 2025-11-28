@@ -71,6 +71,12 @@ class Settings(BaseSettings):
     # Encryption
     session_crypto_key: str | None = Field(default=None, alias="SESSION_CRYPTO_KEY")
 
+    # Prefilter (ingestor) configuration
+    # Path to JSON file with skip/force rules. If unset or file missing — prefilter disabled.
+    prefilter_config_json: str | None = Field(default=None, alias="PREFILTER_CONFIG_JSON")
+    # Hot-reload interval for the prefilter rules (seconds)
+    prefilter_reload_seconds: int = Field(180, alias="PREFILTER_RELOAD_SECONDS")
+
     # Demo / testing
     test_public_chat_id: int | None = Field(default=None, alias="TEST_PUBLIC_CHAT_ID")
 

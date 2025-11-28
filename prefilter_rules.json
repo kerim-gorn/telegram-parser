@@ -1,0 +1,22 @@
+{
+  "substrings": [
+    { "pattern": "заменить пару лампочек", "ignore_case": true, "action": "skip" },
+    { "pattern": "вкрутить лампочки", "ignore_case": true, "action": "skip" },
+    { "pattern": "денюжкой не обижу", "ignore_case": true, "action": "skip" },
+    { "pattern": "Кто сможет заменить люстру", "ignore_case": true, "action": "skip" },
+    { "pattern": "Работа на полдня", "ignore_case": true, "action": "skip" },
+    { "pattern": "переставить мебель", "ignore_case": true, "action": "skip" },
+    { "pattern": "муж на час", "ignore_case": true, "action": "skip" },
+    { "pattern": "мужа на час", "ignore_case": true, "action": "skip" },
+    { "pattern": "накормлю вкусным обедом", "ignore_case": true, "action": "skip" },
+    { "pattern": "заменить люстру", "ignore_case": true, "action": "skip" },
+    { "pattern": "Нужен подручный", "ignore_case": true, "action": "skip" },
+    { "pattern": "Нужны на сегодня пару людей", "ignore_case": true, "action": "skip" },
+    { "pattern": "ищу помощника", "ignore_case": true, "action": "skip" },
+    { "pattern": "Сама уже не справлюсь", "ignore_case": true, "action": "skip" },
+    { "pattern": "ищу людей для помощи", "ignore_case": true, "action": "skip" }
+  ],
+  "regexes": [
+  ]
+}
+ 
