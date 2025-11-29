@@ -53,6 +53,10 @@ class Settings(BaseSettings):
     postgres_password: str = Field("postgres", alias="POSTGRES_PASSWORD")
     database_url: str = Field(..., alias="DATABASE_URL")
 
+    # Bot filtering
+    exclude_bot_senders: bool = Field(True, alias="EXCLUDE_BOT_SENDERS")
+    exclude_via_bots: bool = Field(True, alias="EXCLUDE_VIA_BOTS")
+
     # RabbitMQ / Celery
     rabbitmq_host: str = Field("rabbitmq", alias="RABBITMQ_HOST")
     rabbitmq_port: int = Field(5672, alias="RABBITMQ_PORT")

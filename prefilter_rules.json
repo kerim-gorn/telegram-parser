@@ -1,22 +1,33 @@
 {
   "substrings": [
-    { "pattern": "заменить пару лампочек", "ignore_case": true, "action": "skip" },
-    { "pattern": "вкрутить лампочки", "ignore_case": true, "action": "skip" },
-    { "pattern": "денюжкой не обижу", "ignore_case": true, "action": "skip" },
-    { "pattern": "Кто сможет заменить люстру", "ignore_case": true, "action": "skip" },
-    { "pattern": "Работа на полдня", "ignore_case": true, "action": "skip" },
-    { "pattern": "переставить мебель", "ignore_case": true, "action": "skip" },
-    { "pattern": "муж на час", "ignore_case": true, "action": "skip" },
-    { "pattern": "мужа на час", "ignore_case": true, "action": "skip" },
-    { "pattern": "накормлю вкусным обедом", "ignore_case": true, "action": "skip" },
-    { "pattern": "заменить люстру", "ignore_case": true, "action": "skip" },
-    { "pattern": "Нужен подручный", "ignore_case": true, "action": "skip" },
-    { "pattern": "Нужны на сегодня пару людей", "ignore_case": true, "action": "skip" },
-    { "pattern": "ищу помощника", "ignore_case": true, "action": "skip" },
-    { "pattern": "Сама уже не справлюсь", "ignore_case": true, "action": "skip" },
-    { "pattern": "ищу людей для помощи", "ignore_case": true, "action": "skip" }
+    { "pattern": "Комнатка маленькая надо двоих", "ignore_case": true, "action": "skip" }
   ],
   "regexes": [
+    { "pattern": "(по\\s+времени|работа)\\s+около\\s+\\d{1,2}\\s+часов", "action": "skip" },
+    { "pattern": "(закрутить|вкрутить|заменить)\\s+(лампочки|лампочку|пару\\s+лампочек)", "ignore_case": true, "action": "skip" },
+    { "pattern": "денюжкой\\s+не\\s+обижу", "ignore_case": true, "action": "skip" },
+    { "pattern": "Кто\\s+сможет\\s+заменить\\s+люстру", "ignore_case": true, "action": "skip" },
+    { "pattern": "Работа\\s+на\\s+полдня", "ignore_case": true, "action": "skip" },
+    { "pattern": "переставить\\s+мебель", "ignore_case": true, "action": "skip" },
+    { "pattern": "муж(ья|у|ем|и|ом|ем)?\\s+на\\s+час", "ignore_case": true, "action": "skip" },
+    { "pattern": "накормлю", "ignore_case": true, "action": "skip" },
+    { "pattern": "заменить\\s+люстру", "ignore_case": true, "action": "skip" },
+    { "pattern": "Нужен\\s+подручный", "ignore_case": true, "action": "skip" },
+    { "pattern": "Нужны\\s+на\\s+сегодня\\s+пару\\s+людей", "ignore_case": true, "action": "skip" },
+    { "pattern": "ищу\\s+помощника", "ignore_case": true, "action": "skip" },
+    { "pattern": "Сама\\s+(уже\\s+)?не\\s+(справлюсь|справляюсь|осилю)", "ignore_case": true, "action": "skip" },
+    { "pattern": "ищу\\s+людей\\s+для\\s+помощи", "ignore_case": true, "action": "skip" },
+    { "pattern": "после\\s+банкета", "ignore_case": true, "action": "skip" },
+    { "pattern": "Сама\\s+не\\s+осилю", "ignore_case": true, "action": "skip" },
+    { "pattern": "ищу\\s+пару\\s+людей", "ignore_case": true, "action": "skip" },
+    { "pattern": "моей\\s+бабули", "ignore_case": true, "action": "skip" },
+    { "pattern": "покрасить\\s+ворота", "ignore_case": true, "action": "skip" },
+    { "pattern": "занести\\s+шкаф", "ignore_case": true, "action": "skip" },
+    { "pattern": "промыть\\s+пластиковые\\s+панели", "ignore_case": true, "action": "skip" },
+    { "pattern": "чай\\s+(выпьем|поп[ьеё]м)", "ignore_case": true, "action": "skip" },
+    { "pattern": "содрать\\s+обои", "ignore_case": true, "action": "skip" },
+    { "pattern": "поднять\\s+холодильник", "ignore_case": true, "action": "skip" },
+    { "pattern": "(убрать|собрать|выкинуть)\\s+(строительный\\s+)?мусор", "ignore_case": true, "action": "skip" }
   ]
 }
  

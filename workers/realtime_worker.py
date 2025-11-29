@@ -212,6 +212,12 @@ async def run_realtime_worker(account_id: str | None = None) -> None:
                                 "chat_id": int(event.chat_id) if event.chat_id is not None else None,
                                 "message_id": int(event.message.id),
                             }
+                            # Bot filtering without extra network calls
+                            m = event.message
+                            if settings.exclude_bot_senders and bool(getattr(getattr(m, "sender", None), "bot", False)):
+                                return
+                            if settings.exclude_via_bots and getattr(m, "via_bot_id", None) is not None:
+                                return
                             # Best-effort usernames without extra network calls:
                             # Telethon sets .sender/.chat when available in the update; we do NOT call get_*()
                             sender_username = None
