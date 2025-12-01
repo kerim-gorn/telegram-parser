@@ -16,6 +16,39 @@ from app.signal_notifier import notifier as signal_notifier
 from app.prefilter import get_prefilter
 
 
+async def _stats_reporter(stats: dict[str, Any]) -> None:
+    """
+    Periodically print and reset ingestion statistics (every 60 seconds).
+    Mirrors the lightweight reporting style of the realtime worker.
+    """
+    while True:
+        try:
+            await asyncio.sleep(60)
+            consumed = int(stats.get("consumed", 0))
+            persisted = int(stats.get("persisted", 0))
+            failed = int(stats.get("failed", 0))
+            signals = int(stats.get("signals", 0))
+            forced = int(stats.get("forced", 0))
+            filtered = int(stats.get("filtered", 0))
+            last = stats.get("last_event")
+            print(
+                f"[Ingestor] stats: consumed={consumed} persisted={persisted} failed={failed} "
+                f"signals={signals} forced={forced} filtered={filtered} last={last}",
+                flush=True,
+            )
+            stats["consumed"] = 0
+            stats["persisted"] = 0
+            stats["failed"] = 0
+            stats["signals"] = 0
+            stats["forced"] = 0
+            stats["filtered"] = 0
+        except asyncio.CancelledError:
+            raise
+        except Exception:
+            # Avoid log spam if something goes wrong in the reporter; continue running.
+            pass
+
+
 def _parse_datetime(value: Any) -> datetime:
     """
     Parse ISO-like datetime string to aware UTC datetime. Fallback to now.
@@ -31,9 +64,10 @@ def _parse_datetime(value: Any) -> datetime:
     return datetime.now(tz=timezone.utc)
 
 
-async def _persist_message(payload: dict[str, Any]) -> None:
+async def _persist_message(payload: dict[str, Any]) -> dict[str, Any]:
     """
     Persist single message payload into PostgreSQL using upsert-like behavior.
+    Returns a small outcome dict for metrics: is_signal and prefilter decision.
     """
     chat_id = int(payload.get("chat_id")) if payload.get("chat_id") is not None else None
     message = payload.get("message") or {}
@@ -65,6 +99,7 @@ async def _persist_message(payload: dict[str, Any]) -> None:
     llm_data: dict[str, Any] | None = None
     analysis_json: dict[str, Any] | None = None
     is_signal: bool = False
+    decision: str | None = None  # "force" | "skip" | None
     if isinstance(text, str) and text.strip():
         # Prefilter (skip/force) before LLM
         try:
@@ -163,30 +198,81 @@ async def _persist_message(payload: dict[str, Any]) -> None:
         except Exception:
             # Do not fail ingestion on notifier issues
             pass
+    return {
+        "is_signal": is_signal,
+        "decision": decision,
+        "chat_id": chat_id,
+        "message_id": message_id,
+    }
 
 
-async def _consume_queue(channel: AbstractChannel, queue_name: str) -> None:
+async def _consume_queue(channel: AbstractChannel, queue_name: str, stats: dict[str, Any]) -> None:
     # Use passive declaration to avoid mismatched argument errors (definitions manage properties)
     queue: AbstractQueue = await channel.declare_queue(queue_name, durable=True, passive=True)
+    print(f"[Ingestor] Consuming '{queue_name}'", flush=True)
     async with queue.iterator() as queue_iter:
         async for message in queue_iter:
             async with message.process(ignore_processed=True, requeue=False):
                 try:
-                    payload = json.loads(message.body.decode("utf-8"))
-                    await _persist_message(payload)
-                except Exception:
+                    stats["consumed"] = int(stats.get("consumed", 0)) + 1
+                    raw = message.body or b""
+                    payload = json.loads(raw.decode("utf-8"))
+                    outcome = await _persist_message(payload)
+                    stats["persisted"] = int(stats.get("persisted", 0)) + 1
+                    if bool(outcome.get("is_signal", False)):
+                        stats["signals"] = int(stats.get("signals", 0)) + 1
+                    d = outcome.get("decision")
+                    if d == "force":
+                        stats["forced"] = int(stats.get("forced", 0)) + 1
+                    elif d == "skip":
+                        stats["filtered"] = int(stats.get("filtered", 0)) + 1
+                    stats["last_event"] = {
+                        "queue": queue_name,
+                        "chat_id": outcome.get("chat_id"),
+                        "message_id": outcome.get("message_id"),
+                    }
+                except Exception as e:
+                    stats["failed"] = int(stats.get("failed", 0)) + 1
+                    # Safe snippet of body for debugging (avoid flooding logs)
+                    snippet: str
+                    try:
+                        snippet = (message.body or b"")[:300].decode("utf-8", errors="replace")
+                    except Exception:
+                        snippet = "<unprintable>"
+                    print(
+                        f"[Ingestor] Error processing message from '{queue_name}': {e}. body_snippet={snippet}",
+                        flush=True,
+                    )
                     # nack without requeue to route to DLQ per queue policy
                     await message.reject(requeue=False)
 
 
 async def main() -> None:
+    print(
+        "[Ingestor] Starting. "
+        f"Broker={settings.celery_broker_url} "
+        f"Prefilter={settings.prefilter_config_json or 'disabled'} "
+        f"Reload={settings.prefilter_reload_seconds}s",
+        flush=True,
+    )
     connection: AbstractRobustConnection = await aio_pika.connect_robust(settings.celery_broker_url)
     try:
         channel: AbstractChannel = await connection.channel()
         await channel.set_qos(prefetch_count=100)
+        print("[Ingestor] Consuming queues: realtime_raw, historical_raw", flush=True)
+        stats: dict[str, Any] = {
+            "consumed": 0,
+            "persisted": 0,
+            "failed": 0,
+            "signals": 0,
+            "forced": 0,
+            "filtered": 0,
+            "last_event": None,
+        }
         await asyncio.gather(
-            _consume_queue(channel, "realtime_raw"),
-            _consume_queue(channel, "historical_raw"),
+            _stats_reporter(stats),
+            _consume_queue(channel, "realtime_raw", stats),
+            _consume_queue(channel, "historical_raw", stats),
         )
     finally:
         await connection.close()
