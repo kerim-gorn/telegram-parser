@@ -3,10 +3,11 @@
     { "pattern": "Комнатка маленькая надо двоих", "ignore_case": true, "action": "skip" },
     { "pattern": "Студенточк", "ignore_case": true, "action": "skip" },
     { "pattern": "парсинг", "ignore_case": true, "action": "skip" },
+    { "pattern": "накормлю", "ignore_case": true, "action": "skip" },
     { "pattern": "нашему администратору", "ignore_case": true, "action": "skip" }
   ],
   "regexes": [
-    { "pattern": "(по\\s+времени|работа)\\s+около\\s+\\d{1,2}\\s+час(ов|а|)", "ignore_case": true, "action": "skip" },
+    { "pattern": "(по\\s+времени|работа)\\s+(около|примерно)\\s+\\d{1,2}\\s+час(ов|а|)", "ignore_case": true, "action": "skip" },
     { "pattern": "(прикрутить|закрутить|вкрутить|заменить)\\s+(лампочки|лампочку|пару\\s+лампочек)", "ignore_case": true, "action": "skip" },
     { "pattern": "денюжкой\\s+не\\s+обижу", "ignore_case": true, "action": "skip" },
     { "pattern": "деньги\\s+здесь\\s+и\\s+сейчас", "ignore_case": true, "action": "skip" },
@@ -14,7 +15,6 @@
     { "pattern": "Работа\\s+на\\s+полдня", "ignore_case": true, "action": "skip" },
     { "pattern": "переставить\\s+мебель", "ignore_case": true, "action": "skip" },
     { "pattern": "муж(ья|у|ем|и|ом|ем)?\\s+на\\s+час", "ignore_case": true, "action": "skip" },
-    { "pattern": "накормлю", "ignore_case": true, "action": "skip" },
     { "pattern": "заменить\\s+люстру", "ignore_case": true, "action": "skip" },
     { "pattern": "Нужен\\s+подручный", "ignore_case": true, "action": "skip" },
     { "pattern": "Нужны\\s+на\\s+сегодня\\s+пару\\s+людей", "ignore_case": true, "action": "skip" },
@@ -30,7 +30,7 @@
     { "pattern": "промыть\\s+пластиковые\\s+панели", "ignore_case": true, "action": "skip" },
     { "pattern": "чай\\s+(выпьем|поп[ьеё]м)", "ignore_case": true, "action": "skip" },
     { "pattern": "содрать\\s+обои", "ignore_case": true, "action": "skip" },
-    { "pattern": "собрать\\s+стеллаж", "ignore_case": true, "action": "skip" },
+    { "pattern": "(разобрать|собрать)\\s+(старый\\s+)?(деревянный\\s+)?стеллаж", "ignore_case": true, "action": "skip" },
     { "pattern": "прикрутить\\s+полк", "ignore_case": true, "action": "skip" },
     { "pattern": "поднять\\s+холодильник", "ignore_case": true, "action": "skip" },
     { "pattern": "перетаскать\\s+мешки", "ignore_case": true, "action": "skip" },
@@ -40,12 +40,20 @@
     { "pattern": "помочь\\s+с\\s+разными\\s+мелкими\\s+делами", "ignore_case": true, "action": "skip" },
     { "pattern": "ищу\\s+людей\\s+на\\s+шабашку", "ignore_case": true, "action": "skip" },
     { "pattern": "срочно\\s+на\\s+шабашку", "ignore_case": true, "action": "skip" },
-    { "pattern": "(убрать|собрать|выкинуть).*?(строительный|строй\\s+)?мусор", "ignore_case": true, "action": "skip" },
+    { "pattern": "(убрать|собрать|выкинуть|вынести).*?(строительный|строй\\s+)?мусор", "ignore_case": true, "action": "skip" },
     { "pattern": "собрать\\s+(детскую\\s+)?кровать", "ignore_case": true, "action": "skip" },
     { "pattern": "\\b(казик|казино|slots?)\\b", "ignore_case": true, "action": "skip" },
     { "pattern": "\\bигра(й|ть)\\b.{0,40}https?://\\S+", "ignore_case": true, "action": "skip" },
     { "pattern": "рассылк[аеи]\\s*-?\\s*по\\s+чатам", "ignore_case": true, "action": "skip" },
-    { "pattern": "рассылка\\s+вашего\\s+объявления", "ignore_case": true, "action": "skip" }
+    { "pattern": "рассылка\\s+вашего\\s+объявления", "ignore_case": true, "action": "skip" },
+    { "pattern": "выкопать\\s+деревья\\s+во\\s+дворе", "ignore_case": true, "action": "skip" },
+    { "pattern": "вынести\\s+старые\\s+вещи", "ignore_case": true, "action": "skip" },
+    { "pattern": "покрасить\\s+забор", "ignore_case": true, "action": "skip" },
+    { "pattern": "очистить\\s+бордюр", "ignore_case": true, "action": "skip" },
+    { "pattern": "выгрузить\\s+машину", "ignore_case": true, "action": "skip" },
+    { "pattern": "сделать\\s+перестановку", "ignore_case": true, "action": "skip" },
+    { "pattern": "совсем\\s+(все|всё)\\s+(тяжелое|тяжёлое)", "ignore_case": true, "action": "skip" },
+    { "pattern": "люди\\s+на\\s+шабашку", "ignore_case": true, "action": "skip" }
   ]
 }
  

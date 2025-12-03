@@ -30,7 +30,6 @@ build/
 .env
 .env.*
 !.env.example
-realtime_config.json
 
 # Docker
 docker-compose.override.yml
