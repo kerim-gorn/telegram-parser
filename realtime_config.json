@@ -1188,7 +1188,7 @@
         },
         {
             "identifier": "@pav_city",
-            "chat_id": null
+            "chat_id": -1001286988678
         },
         {
             "identifier": "@westtowwer",
@@ -1304,7 +1304,7 @@
         },
         {
             "identifier": "t.me/strana_ozernaya",
-            "chat_id": null
+            "chat_id": -1001676229377
         },
         {
             "identifier": "t.me/jk_Strana_Ozernaya",
@@ -1324,10 +1324,6 @@
         },
         {
             "identifier": "@skolkovo13",
-            "chat_id": null
-        },
-        {
-            "identifier": "@V0skresenskoE",
             "chat_id": null
         },
         {
@@ -1364,7 +1360,7 @@
         },
         {
             "identifier": "@S_Sosedi",
-            "chat_id": null
+            "chat_id": -1001949763872
         },
         {
             "identifier": "@new_odintsovo_chat",
@@ -1561,6 +1557,38 @@
         {
             "identifier": "t.me/zhk_troparevo_park",
             "chat_id": -1001889227567
+        },
+        {
+            "identifier": "t.me/dmitrovskoe169",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/DNsosedi",
+            "chat_id": -1001635645196
+        },
+        {
+            "identifier": "t.me/jkdmitrovskoenebo",
+            "chat_id": -1001753357049
+        },
+        {
+            "identifier": "t.me/nurupino",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/marushkino_zhk",
+            "chat_id": -1001736324194
+        },
+        {
+            "identifier": "t.me/akinshino_chat",
+            "chat_id": -1001169602881
+        },
+        {
+            "identifier": "t.me/jkssburovoclab",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/kpNewEurope",
+            "chat_id": -1001371548213
         }
     ]
 }
