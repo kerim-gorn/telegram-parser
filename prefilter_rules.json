@@ -22,14 +22,18 @@
     { "pattern": "Сама\\s+(уже\\s+)?не\\s+(справлюсь|справляюсь|осилю)", "ignore_case": true, "action": "skip" },
     { "pattern": "ищу\\s+людей\\s+для\\s+помощи", "ignore_case": true, "action": "skip" },
     { "pattern": "после\\s+банкета", "ignore_case": true, "action": "skip" },
+    { "pattern": "развесить\\s+шторы", "ignore_case": true, "action": "skip" },
     { "pattern": "Сама\\s+не\\s+осилю", "ignore_case": true, "action": "skip" },
+    { "pattern": "шкаф\\s+перенести", "ignore_case": true, "action": "skip" },
+    { "pattern": "люди\\s+на\\s+халтуру", "ignore_case": true, "action": "skip" },
     { "pattern": "ищу\\s+пару\\s+людей", "ignore_case": true, "action": "skip" },
     { "pattern": "моей\\s+бабули", "ignore_case": true, "action": "skip" },
     { "pattern": "покрасить\\s+ворота", "ignore_case": true, "action": "skip" },
     { "pattern": "занести\\s+шкаф", "ignore_case": true, "action": "skip" },
+    { "pattern": "прикрутить\\s+карниз", "ignore_case": true, "action": "skip" },
     { "pattern": "промыть\\s+пластиковые\\s+панели", "ignore_case": true, "action": "skip" },
     { "pattern": "чай\\s+(выпьем|поп[ьеё]м)", "ignore_case": true, "action": "skip" },
-    { "pattern": "содрать\\s+обои", "ignore_case": true, "action": "skip" },
+    { "pattern": "содрать\\s+(старые\\s+)?обои", "ignore_case": true, "action": "skip" },
     { "pattern": "(разобрать|собрать)\\s+(старый\\s+)?(деревянный\\s+)?стеллаж", "ignore_case": true, "action": "skip" },
     { "pattern": "прикрутить\\s+полк", "ignore_case": true, "action": "skip" },
     { "pattern": "поднять\\s+холодильник", "ignore_case": true, "action": "skip" },
@@ -53,7 +57,8 @@
     { "pattern": "выгрузить\\s+машину", "ignore_case": true, "action": "skip" },
     { "pattern": "сделать\\s+перестановку", "ignore_case": true, "action": "skip" },
     { "pattern": "совсем\\s+(все|всё)\\s+(тяжелое|тяжёлое)", "ignore_case": true, "action": "skip" },
-    { "pattern": "люди\\s+на\\s+шабашку", "ignore_case": true, "action": "skip" }
+    { "pattern": "люди\\s+на\\s+шабашку", "ignore_case": true, "action": "skip" },
+    { "pattern": "\\b([1-9]|[1-9]\\d|[1-9]\\d\\d|[1-9] ?\\d{1,2}[ .]\\d{3}|[1-9]\\.\\d{3}|[1-9] ?\\d{3}|10000)\\s*(00)\\b", "ignore_case": true, "action": "skip" }
   ]
 }
  
