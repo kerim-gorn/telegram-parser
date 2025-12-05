@@ -23,63 +23,63 @@
     ],
     "chats": [
         {
-            "identifier": "@jksimvol",
+            "identifier": "t.me/jksimvol",
             "chat_id": -1001304824820
         },
         {
-            "identifier": "@luberecki_common",
+            "identifier": "t.me/luberecki_common",
             "chat_id": -1001101264208
         },
         {
-            "identifier": "@buninskieluga",
+            "identifier": "t.me/buninskieluga",
             "chat_id": -1001319374035
         },
         {
-            "identifier": "@salarevolife",
+            "identifier": "t.me/salarevolife",
             "chat_id": -1001393919792
         },
         {
-            "identifier": "@lublinskiypark",
+            "identifier": "t.me/lublinskiypark",
             "chat_id": -1001233127122
         },
         {
-            "identifier": "@chat_zilart",
+            "identifier": "t.me/chat_zilart",
             "chat_id": -1002486570405
         },
         {
-            "identifier": "@gkskandinavia",
+            "identifier": "t.me/gkskandinavia",
             "chat_id": -1001279125921
         },
         {
-            "identifier": "@novoe_medvedkovo",
+            "identifier": "t.me/novoe_medvedkovo",
             "chat_id": -1001184763681
         },
         {
-            "identifier": "@bigputilkovo",
+            "identifier": "t.me/bigputilkovo",
             "chat_id": -1001344126304
         },
         {
-            "identifier": "@GB1_GB2",
+            "identifier": "t.me/GB1_GB2",
             "chat_id": -1001676775602
         },
         {
-            "identifier": "@Tushino2018_Main",
+            "identifier": "t.me/Tushino2018_Main",
             "chat_id": -1001289602480
         },
         {
-            "identifier": "@rasskazovo2",
+            "identifier": "t.me/rasskazovo2",
             "chat_id": -1001713368026
         },
         {
-            "identifier": "@solncevo_park",
+            "identifier": "t.me/solncevo_park",
             "chat_id": -1001311643212
         },
         {
-            "identifier": "@tomilino_park",
+            "identifier": "t.me/tomilino_park",
             "chat_id": -1001283112004
         },
         {
-            "identifier": "@ecovidnoe20",
+            "identifier": "t.me/ecovidnoe20",
             "chat_id": -1001280652646
         },
         {
@@ -87,167 +87,139 @@
             "chat_id": null
         },
         {
-            "identifier": "@kp_garmoniya",
+            "identifier": "t.me/kp_garmoniya",
             "chat_id": -1001167121232
         },
         {
-            "identifier": "@jk2119",
+            "identifier": "t.me/jk2119",
             "chat_id": -1001121458603
         },
         {
-            "identifier": "@seligercity",
+            "identifier": "t.me/seligercity",
             "chat_id": -1001121568067
         },
         {
-            "identifier": "@tatparklife",
+            "identifier": "t.me/tatparklife",
             "chat_id": -1001346095049
         },
         {
-            "identifier": "@gk_mainstreet",
-            "chat_id": -1001349467787
-        },
-        {
-            "identifier": "@greenpark_zhk",
+            "identifier": "t.me/greenpark_zhk",
             "chat_id": -1001748103356
         },
         {
-            "identifier": "@jazzpremium",
-            "chat_id": -1001905541482
-        },
-        {
-            "identifier": "@jk_Nastroenie",
+            "identifier": "t.me/jk_Nastroenie",
             "chat_id": -1002025417420
         },
         {
-            "identifier": "@rikhardfskgeneral",
+            "identifier": "t.me/rikhardfskgeneral",
             "chat_id": -1001251903339
         },
         {
-            "identifier": "@zhk_ostrov",
+            "identifier": "t.me/zhk_ostrov",
             "chat_id": -1001280567312
         },
         {
-            "identifier": "@klenovie_allei",
+            "identifier": "t.me/klenovie_allei",
             "chat_id": -1001268409747
         },
         {
-            "identifier": "@filicity_chat",
+            "identifier": "t.me/filicity_chat",
             "chat_id": -1002261913458
         },
         {
-            "identifier": "@myheadliner",
+            "identifier": "t.me/myheadliner",
             "chat_id": -1001636269846
         },
         {
-            "identifier": "@ProfiZagChat",
+            "identifier": "t.me/ProfiZagChat",
             "chat_id": -1001213875334
         },
         {
-            "identifier": "@ever_tekta",
-            "chat_id": -1001422510260
-        },
-        {
-            "identifier": "@JKLesoparkoviy",
+            "identifier": "t.me/JKLesoparkoviy",
             "chat_id": -1001393739661
         },
         {
-            "identifier": "@yujnoe_bunino",
-            "chat_id": -1001153406971
-        },
-        {
-            "identifier": "@Rassudovka",
+            "identifier": "t.me/Rassudovka",
             "chat_id": -1001431375881
         },
         {
-            "identifier": "@inf_BG",
-            "chat_id": -1001202663324
-        },
-        {
-            "identifier": "@bogorodskoe_chat",
+            "identifier": "t.me/bogorodskoe_chat",
             "chat_id": -1001277713781
         },
         {
-            "identifier": "@dubrovka_uvao",
+            "identifier": "t.me/dubrovka_uvao",
             "chat_id": -1002313582453
         },
         {
-            "identifier": "@mechtatalk",
+            "identifier": "t.me/mechtatalk",
             "chat_id": -1001063395918
         },
         {
-            "identifier": "@favorit_poselok",
-            "chat_id": -1001139570579
-        },
-        {
-            "identifier": "@chat_akvareli",
+            "identifier": "t.me/chat_akvareli",
             "chat_id": -1001944000975
         },
         {
-            "identifier": "@lovebalance",
+            "identifier": "t.me/lovebalance",
             "chat_id": -1001215204049
         },
         {
-            "identifier": "@HighWay_msk",
+            "identifier": "t.me/HighWay_msk",
             "chat_id": -1001592535363
         },
         {
-            "identifier": "@troparevo_park_jk",
+            "identifier": "t.me/troparevo_park_jk",
             "chat_id": -1001629505169
         },
         {
-            "identifier": "@portland_moscow",
+            "identifier": "t.me/portland_moscow",
             "chat_id": -1001878435829
         },
         {
-            "identifier": "@riverpark_life",
+            "identifier": "t.me/riverpark_life",
             "chat_id": -1001110789552
         },
         {
-            "identifier": "@carskayaploshad",
+            "identifier": "t.me/carskayaploshad",
             "chat_id": -1001995577406
         },
         {
-            "identifier": "@mesherskiyles_chat",
+            "identifier": "t.me/mesherskiyles_chat",
             "chat_id": -1002143186889
         },
         {
-            "identifier": "@GK_WelltonTower",
+            "identifier": "t.me/GK_WelltonTower",
             "chat_id": null
         },
         {
-            "identifier": "@Jk_Lucky_Chat",
+            "identifier": "t.me/Jk_Lucky_Chat",
             "chat_id": -1002123449709
         },
         {
-            "identifier": "@trikolor_chat",
+            "identifier": "t.me/trikolor_chat",
             "chat_id": -1001794191943
         },
         {
-            "identifier": "@ever_tekta",
+            "identifier": "t.me/ever_tekta",
             "chat_id": -1001422510260
         },
         {
-            "identifier": "@capital_towers_zhk",
+            "identifier": "t.me/capital_towers_zhk",
             "chat_id": -1001684757471
         },
         {
-            "identifier": "t.me/bch25",
-            "chat_id": -1001222541445
-        },
-        {
-            "identifier": "@dream_towers",
+            "identifier": "t.me/dream_towers",
             "chat_id": -1001847393015
         },
         {
-            "identifier": "@zorge9_sao",
+            "identifier": "t.me/zorge9_sao",
             "chat_id": -1002246308224
         },
         {
-            "identifier": "@ilove_svao",
+            "identifier": "t.me/ilove_svao",
             "chat_id": -1001926994612
         },
         {
-            "identifier": "@Kvartal_Zolotoy",
+            "identifier": "t.me/Kvartal_Zolotoy",
             "chat_id": -1002017556129
         },
         {
@@ -255,11 +227,11 @@
             "chat_id": -1001578017133
         },
         {
-            "identifier": "@ZhKSberSitiSosedi1",
+            "identifier": "t.me/ZhKSberSitiSosedi1",
             "chat_id": -1002542966924
         },
         {
-            "identifier": "@chat_skyhouse",
+            "identifier": "t.me/chat_skyhouse",
             "chat_id": -1002020946991
         },
         {
@@ -267,55 +239,47 @@
             "chat_id": -1001174474556
         },
         {
-            "identifier": "@reka_chattt",
+            "identifier": "t.me/reka_chattt",
             "chat_id": -1002945935572
         },
         {
-            "identifier": "@JK_Afi_Park",
+            "identifier": "t.me/JK_Afi_Park",
             "chat_id": -1002093298990
         },
         {
-            "identifier": "@jk_Primavera",
+            "identifier": "t.me/jk_Primavera",
             "chat_id": -1001837223620
         },
         {
-            "identifier": "@vespertverskaya_chat",
+            "identifier": "t.me/vespertverskaya_chat",
             "chat_id": -1002855480906
         },
         {
-            "identifier": "@levelprichalniy_chat",
+            "identifier": "t.me/levelprichalniy_chat",
             "chat_id": -1001641991824
         },
         {
-            "identifier": "@red7_chat",
+            "identifier": "t.me/red7_chat",
             "chat_id": -1002817299748
         },
         {
-            "identifier": "@sobytie_chat",
+            "identifier": "t.me/sobytie_chat",
             "chat_id": -1001227063452
         },
         {
-            "identifier": "@FestPark2Chat",
+            "identifier": "t.me/FestPark2Chat",
             "chat_id": -1001465375561
         },
         {
-            "identifier": "@mfkslava",
+            "identifier": "t.me/mfkslava",
             "chat_id": -1001285175797
         },
         {
-            "identifier": "@west_garden",
-            "chat_id": -1001433216405
-        },
-        {
-            "identifier": "@headliner_cao",
-            "chat_id": -1002344153362
-        },
-        {
-            "identifier": "@jk_Headliner",
+            "identifier": "t.me/jk_Headliner",
             "chat_id": -1001998802339
         },
         {
-            "identifier": "@oktyabrskoe_pole_zhk",
+            "identifier": "t.me/oktyabrskoe_pole_zhk",
             "chat_id": -1001515366242
         },
         {
@@ -323,51 +287,35 @@
             "chat_id": null
         },
         {
-            "identifier": "@mihalkovskaya48",
+            "identifier": "t.me/mihalkovskaya48",
             "chat_id": null
         },
         {
-            "identifier": "@JKLunarChatsobstvennikov",
+            "identifier": "t.me/JKLunarChatsobstvennikov",
             "chat_id": -1001713994080
         },
         {
-            "identifier": "@CrystalTrilogy",
+            "identifier": "t.me/CrystalTrilogy",
             "chat_id": -1002085790206
         },
         {
-            "identifier": "@jkForstForma",
+            "identifier": "t.me/jkForstForma",
             "chat_id": -1001954655682
         },
         {
-            "identifier": "@intonacia_magneziya",
+            "identifier": "t.me/intonacia_magneziya",
             "chat_id": -1001664154684
-        },
-        {
-            "identifier": "@tessensky1",
-            "chat_id": -1001925485152
-        },
-        {
-            "identifier": "@rezidencii_arhitektorov",
-            "chat_id": -1001251787564
         },
         {
             "identifier": "t.me/PraimPark",
             "chat_id": -1001893667490
         },
         {
-            "identifier": "@westtowwer",
-            "chat_id": -1002829824599
-        },
-        {
-            "identifier": "@sidneycitylife",
-            "chat_id": -1001484872753
-        },
-        {
-            "identifier": "@alia_remont",
+            "identifier": "t.me/alia_remont",
             "chat_id": -1001457720807
         },
         {
-            "identifier": "@alia_main",
+            "identifier": "t.me/alia_main",
             "chat_id": -1001321018235
         },
         {
@@ -375,59 +323,47 @@
             "chat_id": null
         },
         {
-            "identifier": "@FizTehS0bstvenniki",
+            "identifier": "t.me/FizTehS0bstvenniki",
             "chat_id": -1001705553647
         },
         {
-            "identifier": "@afi_tower_zhk",
+            "identifier": "t.me/afi_tower_zhk",
             "chat_id": -1001953741028
         },
         {
-            "identifier": "@kutuzovgrad_ii",
+            "identifier": "t.me/kutuzovgrad_ii",
             "chat_id": -1001944629252
         },
         {
-            "identifier": "@Luchi_chat",
-            "chat_id": null
-        },
-        {
-            "identifier": "@zhk_Metropolia",
+            "identifier": "t.me/zhk_Metropolia",
             "chat_id": -1001281986646
         },
         {
-            "identifier": "@will_towers",
+            "identifier": "t.me/will_towers",
             "chat_id": -1001868612486
         },
         {
-            "identifier": "@citybay",
+            "identifier": "t.me/citybay",
             "chat_id": -1001295229530
         },
         {
-            "identifier": "@zhk_ostrov",
-            "chat_id": -1001280567312
-        },
-        {
-            "identifier": "@monodom_lake",
+            "identifier": "t.me/monodom_lake",
             "chat_id": -1002225760287
-        },
-        {
-            "identifier": "t.me/gkriversky",
-            "chat_id": null
         },
         {
             "identifier": "t.me/remont_chat_seligercity",
             "chat_id": -1001780331234
         },
         {
-            "identifier": "@zhk_dom_chkalov",
+            "identifier": "t.me/zhk_dom_chkalov",
             "chat_id": -1002449190186
         },
         {
-            "identifier": "@ZhKRezVishnevysadChats",
+            "identifier": "t.me/ZhKRezVishnevysadChats",
             "chat_id": -1002788744817
         },
         {
-            "identifier": "@marshal_sobstvenniki",
+            "identifier": "t.me/marshal_sobstvenniki",
             "chat_id": -1002244577583
         },
         {
@@ -435,339 +371,319 @@
             "chat_id": -1001324633700
         },
         {
-            "identifier": "@fsk_rezhiser_public",
+            "identifier": "t.me/fsk_rezhiser_public",
             "chat_id": -1001715155064
         },
         {
-            "identifier": "@STELLAR_CITY",
+            "identifier": "t.me/STELLAR_CITY",
             "chat_id": -1001300314702
         },
         {
-            "identifier": "@LifeVarshavskaya",
+            "identifier": "t.me/LifeVarshavskaya",
             "chat_id": -1001366657637
         },
         {
-            "identifier": "@sireneviypark_chat",
+            "identifier": "t.me/sireneviypark_chat",
             "chat_id": null
         },
         {
-            "identifier": "@sireneviy_park",
+            "identifier": "t.me/sireneviy_park",
             "chat_id": -1001194702609
         },
         {
-            "identifier": "@kinetik_chat",
+            "identifier": "t.me/kinetik_chat",
             "chat_id": null
         },
         {
-            "identifier": "@jkkinetik",
+            "identifier": "t.me/jkkinetik",
             "chat_id": -1001733225914
         },
         {
-            "identifier": "@zhkfullhouse",
+            "identifier": "t.me/zhkfullhouse",
             "chat_id": -1001271149719
         },
         {
-            "identifier": "@rasskazovo_sosedi",
+            "identifier": "t.me/rasskazovo_sosedi",
             "chat_id": null
         },
         {
-            "identifier": "@rasskazovo2",
-            "chat_id": -1001713368026
-        },
-        {
-            "identifier": "@verynabot",
+            "identifier": "t.me/verynabot",
             "chat_id": null
         },
         {
-            "identifier": "@Rustaveli14_Chat",
-            "chat_id": -1001327932056
-        },
-        {
-            "identifier": "@rustaveli14_svao",
-            "chat_id": null
-        },
-        {
-            "identifier": "@gkleningradski",
+            "identifier": "t.me/gkleningradski",
             "chat_id": -1001686995397
         },
         {
-            "identifier": "@perviyleningradskiy",
+            "identifier": "t.me/perviyleningradskiy",
             "chat_id": null
         },
         {
-            "identifier": "@jkbuninskiekvartali",
+            "identifier": "t.me/jkbuninskiekvartali",
             "chat_id": null
         },
         {
-            "identifier": "@buninskie_kvartaly_a101",
+            "identifier": "t.me/buninskie_kvartaly_a101",
             "chat_id": null
         },
         {
-            "identifier": "@buninskiye_kvartaly_chat",
+            "identifier": "t.me/buninskiye_kvartaly_chat",
             "chat_id": null
         },
         {
-            "identifier": "@arhitektorlife",
+            "identifier": "t.me/arhitektorlife",
             "chat_id": -1001490837189
         },
         {
-            "identifier": "@matveypark",
+            "identifier": "t.me/matveypark",
             "chat_id": null
         },
         {
-            "identifier": "@gk_mtvpark",
+            "identifier": "t.me/gk_mtvpark",
             "chat_id": -1001611003022
         },
         {
-            "identifier": "@matveevpark_chat",
+            "identifier": "t.me/matveevpark_chat",
             "chat_id": null
         },
         {
-            "identifier": "@pro_prokshino_chat",
+            "identifier": "t.me/pro_prokshino_chat",
             "chat_id": -1001636399735
         },
         {
-            "identifier": "@prokshino101",
+            "identifier": "t.me/prokshino101",
             "chat_id": null
         },
         {
-            "identifier": "@barkla6",
+            "identifier": "t.me/barkla6",
             "chat_id": -1001371772044
         },
         {
-            "identifier": "@barklaya6_chat",
+            "identifier": "t.me/barklaya6_chat",
             "chat_id": null
         },
         {
-            "identifier": "@zhkbarclay6",
+            "identifier": "t.me/zhkbarclay6",
             "chat_id": null
         },
         {
-            "identifier": "@citimix",
+            "identifier": "t.me/citimix",
             "chat_id": -1001369367956
         },
         {
-            "identifier": "@ZhKCitimixsitimikschats",
+            "identifier": "t.me/ZhKCitimixsitimikschats",
             "chat_id": null
         },
         {
-            "identifier": "@citimix_new",
+            "identifier": "t.me/citimix_new",
             "chat_id": null
         },
         {
-            "identifier": "@skandinavia1",
+            "identifier": "t.me/skandinavia1",
             "chat_id": -1001381298042
         },
         {
-            "identifier": "@michurpark",
+            "identifier": "t.me/michurpark",
             "chat_id": -1001403414954
         },
         {
-            "identifier": "@michurinskiypark_chat",
+            "identifier": "t.me/michurinskiypark_chat",
             "chat_id": null
         },
         {
-            "identifier": "@mitinskiy_les",
+            "identifier": "t.me/mitinskiy_les",
             "chat_id": -1001421038614
         },
         {
-            "identifier": "@mitinskiyles_chat",
+            "identifier": "t.me/mitinskiyles_chat",
             "chat_id": null
         },
         {
-            "identifier": "@mitinskiylec",
+            "identifier": "t.me/mitinskiylec",
             "chat_id": null
         },
         {
-            "identifier": "@juzhns",
+            "identifier": "t.me/juzhns",
             "chat_id": -1001157650599
         },
         {
-            "identifier": "@uzhniesadi",
+            "identifier": "t.me/uzhniesadi",
             "chat_id": null
         },
         {
-            "identifier": "@yujnie_sadi",
+            "identifier": "t.me/yujnie_sadi",
             "chat_id": null
         },
         {
-            "identifier": "@bolshaya_akademicheskaya_85",
+            "identifier": "t.me/bolshaya_akademicheskaya_85",
             "chat_id": null
         },
         {
-            "identifier": "@zhk_bolshaya_akademicheskaya85",
+            "identifier": "t.me/zhk_bolshaya_akademicheskaya85",
             "chat_id": -1001617314110
         },
         {
-            "identifier": "@New_Star_7k1_7k2",
+            "identifier": "t.me/New_Star_7k1_7k2",
             "chat_id": -1001971001470
         },
         {
-            "identifier": "@ap_pik",
+            "identifier": "t.me/ap_pik",
             "chat_id": -1001447489461
         },
         {
-            "identifier": "@amurskiypark_chat",
+            "identifier": "t.me/amurskiypark_chat",
             "chat_id": null
         },
         {
-            "identifier": "@kolskaya8_chat",
+            "identifier": "t.me/kolskaya8_chat",
             "chat_id": null
         },
         {
-            "identifier": "@kolskaya82524",
+            "identifier": "t.me/kolskaya82524",
             "chat_id": null
         },
         {
-            "identifier": "@Kolskaya8_PIK",
+            "identifier": "t.me/Kolskaya8_PIK",
             "chat_id": -1002242122236
         },
         {
-            "identifier": "@zhk_kolskaya8",
+            "identifier": "t.me/zhk_kolskaya8",
             "chat_id": null
         },
         {
-            "identifier": "@nagatinskiy_chat",
+            "identifier": "t.me/nagatinskiy_chat",
             "chat_id": null
         },
         {
-            "identifier": "@nagatinsky2",
+            "identifier": "t.me/nagatinsky2",
             "chat_id": -1001194100316
         },
         {
-            "identifier": "@salarpark",
+            "identifier": "t.me/salarpark",
             "chat_id": null
         },
         {
-            "identifier": "@SalParkSosed",
+            "identifier": "t.me/SalParkSosed",
             "chat_id": -1001623926614
         },
         {
-            "identifier": "@signalnyy16",
+            "identifier": "t.me/signalnyy16",
             "chat_id": -1001290477673
         },
         {
-            "identifier": "@signalniy16_chat",
+            "identifier": "t.me/signalniy16_chat",
             "chat_id": null
         },
         {
-            "identifier": "@S16_General",
-            "chat_id": -1001172045755
-        },
-        {
-            "identifier": "@kronshtadskiy_9",
+            "identifier": "t.me/kronshtadskiy_9",
             "chat_id": null
         },
         {
-            "identifier": "@kron9chat",
+            "identifier": "t.me/kron9chat",
             "chat_id": -1001686725638
         },
         {
-            "identifier": "@hollandpark1",
+            "identifier": "t.me/hollandpark1",
             "chat_id": null
         },
         {
-            "identifier": "@hollandpark_chat",
+            "identifier": "t.me/hollandpark_chat",
             "chat_id": null
         },
         {
-            "identifier": "@volgskiypark",
+            "identifier": "t.me/volgskiypark",
             "chat_id": -1002021924536
         },
         {
-            "identifier": "@Businovpark",
+            "identifier": "t.me/Businovpark",
             "chat_id": -1001531752670
         },
         {
-            "identifier": "@businovskypark",
+            "identifier": "t.me/businovskypark",
             "chat_id": null
         },
         {
-            "identifier": "@gk_zelpark",
+            "identifier": "t.me/gk_zelpark",
             "chat_id": -1001765448362
         },
         {
-            "identifier": "@zeleniypark_chat",
+            "identifier": "t.me/zeleniypark_chat",
             "chat_id": null
         },
         {
-            "identifier": "@LosinPark_GK",
+            "identifier": "t.me/LosinPark_GK",
             "chat_id": -1001309576421
         },
         {
-            "identifier": "@losostrovpark",
+            "identifier": "t.me/losostrovpark",
             "chat_id": null
         },
         {
-            "identifier": "@altufevskoe_53_pik",
+            "identifier": "t.me/altufevskoe_53_pik",
             "chat_id": -1001681036387
         },
         {
-            "identifier": "@altufevskoe53_chat",
+            "identifier": "t.me/altufevskoe53_chat",
             "chat_id": null
         },
         {
-            "identifier": "@kavkaz_br51",
+            "identifier": "t.me/kavkaz_br51",
             "chat_id": null
         },
         {
-            "identifier": "@JKKavkazskiyBulvar51Chat",
+            "identifier": "t.me/JKKavkazskiyBulvar51Chat",
             "chat_id": null
         },
         {
-            "identifier": "@clementine_chat",
+            "identifier": "t.me/clementine_chat",
             "chat_id": null
         },
         {
-            "identifier": "@clementine_klementin",
+            "identifier": "t.me/clementine_klementin",
             "chat_id": -1001934739837
         },
         {
-            "identifier": "@nikolskie_luga",
+            "identifier": "t.me/nikolskie_luga",
             "chat_id": -1001615179467
         },
         {
-            "identifier": "@nikolskieluga_chat",
+            "identifier": "t.me/nikolskieluga_chat",
             "chat_id": null
         },
         {
-            "identifier": "@molzhaninovoo",
+            "identifier": "t.me/molzhaninovoo",
             "chat_id": null
         },
         {
-            "identifier": "@molzganinovo",
+            "identifier": "t.me/molzganinovo",
             "chat_id": -1001218919628
         },
         {
-            "identifier": "@chat_molzhaninovo",
+            "identifier": "t.me/chat_molzhaninovo",
             "chat_id": null
         },
         {
-            "identifier": "@terletskiy_park",
+            "identifier": "t.me/terletskiy_park",
             "chat_id": -1001665246873
         },
         {
-            "identifier": "@zhklevelnagatinskaya",
+            "identifier": "t.me/zhklevelnagatinskaya",
             "chat_id": -1001546678010
         },
         {
-            "identifier": "@jk_new_ochakovo",
-            "chat_id": -1001548383229
-        },
-        {
-            "identifier": "@novoe_ochakovo_zhk",
+            "identifier": "t.me/novoe_ochakovo_zhk",
             "chat_id": null
         },
         {
-            "identifier": "@TrueOchakovo",
+            "identifier": "t.me/TrueOchakovo",
             "chat_id": null
         },
         {
-            "identifier": "@novoeochakovo_chat",
+            "identifier": "t.me/novoeochakovo_chat",
             "chat_id": null
         },
         {
-            "identifier": "@self_msk",
+            "identifier": "t.me/self_msk",
             "chat_id": -1001734033713
         },
         {
@@ -823,10 +739,6 @@
             "chat_id": -1002823412491
         },
         {
-            "identifier": "t.me/nekrasovka_kvartal",
-            "chat_id": null
-        },
-        {
             "identifier": "t.me/yujnoe_bunino",
             "chat_id": -1001153406971
         },
@@ -849,10 +761,6 @@
         {
             "identifier": "t.me/akvilon_beside_jk",
             "chat_id": -1001472982690
-        },
-        {
-            "identifier": "t.me/jk_Nastroenie",
-            "chat_id": -1002025417420
         },
         {
             "identifier": "t.me/Navetroletchikov",
@@ -931,20 +839,8 @@
             "chat_id": -1001764925053
         },
         {
-            "identifier": "t.me/rikhardfskgeneral",
-            "chat_id": null
-        },
-        {
-            "identifier": "t.me/jk2119",
-            "chat_id": null
-        },
-        {
             "identifier": "t.me/ZapadniyPort",
             "chat_id": -1001317017652
-        },
-        {
-            "identifier": "t.me/gkvesterdam",
-            "chat_id": -1001126753407
         },
         {
             "identifier": "t.me/vstremleniiksvety",
@@ -976,10 +872,6 @@
         },
         {
             "identifier": "t.me/Green_Park_pik",
-            "chat_id": null
-        },
-        {
-            "identifier": "t.me/lublinskiypark",
             "chat_id": null
         },
         {
@@ -1027,59 +919,59 @@
             "chat_id": null
         },
         {
-            "identifier": "@luchi_zao",
+            "identifier": "t.me/luchi_zao",
             "chat_id": -1002102402434
         },
         {
-            "identifier": "@Luchi_chat",
+            "identifier": "t.me/Luchi_chat",
             "chat_id": null
         },
         {
-            "identifier": "@zkMDAll",
+            "identifier": "t.me/zkMDAll",
             "chat_id": null
         },
         {
-            "identifier": "@DelovoyBNL",
+            "identifier": "t.me/DelovoyBNL",
             "chat_id": -1001217863001
         },
         {
-            "identifier": "@@bezdedovo_chat",
-            "chat_id": null
+            "identifier": "t.me/bezdedovo_chat",
+            "chat_id": -1001672845787
         },
         {
-            "identifier": "@zkzilart",
+            "identifier": "t.me/zkzilart",
             "chat_id": -1001095066066
         },
         {
-            "identifier": "@sber_city_chat",
+            "identifier": "t.me/sber_city_chat",
             "chat_id": -1001954940854
         },
         {
-            "identifier": "@zhk_mod_owners",
+            "identifier": "t.me/zhk_mod_owners",
             "chat_id": -1001733545756
         },
         {
-            "identifier": "@symphony34_chat",
+            "identifier": "t.me/symphony34_chat",
             "chat_id": -1002195689803
         },
         {
-            "identifier": "@skyhouse_chat",
+            "identifier": "t.me/skyhouse_chat",
             "chat_id": -1002259335453
         },
         {
-            "identifier": "@ever_msk",
+            "identifier": "t.me/ever_msk",
             "chat_id": -1001822324890
         },
         {
-            "identifier": "@@jk_trikolor",
+            "identifier": "t.me/jk_trikolor",
             "chat_id": null
         },
         {
-            "identifier": "@sosedyilove",
+            "identifier": "t.me/sosedyilove",
             "chat_id": -1001780588782
         },
         {
-            "identifier": "@capital_towers_chat",
+            "identifier": "t.me/capital_towers_chat",
             "chat_id": -1002161060588
         },
         {
@@ -1107,147 +999,143 @@
             "chat_id": -1001258569599
         },
         {
+            "identifier": "t.me/prichalny",
+            "chat_id": -1001317181377
+        },
+        {
+            "identifier": "t.me/headliner_cao",
+            "chat_id": -1002344153362
+        },
+        {
+            "identifier": "t.me/westgardenremont",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/west_garden",
+            "chat_id": -1001433216405
+        },
+        {
+            "identifier": "t.me/slava_sao",
+            "chat_id": -1002148749337
+        },
+        {
+            "identifier": "t.me/rezidencii_arhitektorov",
+            "chat_id": -1001251787564
+        },
+        {
+            "identifier": "t.me/jk_Dream_Towers",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/nevatowers_chat",
+            "chat_id": -1001693030175
+        },
+        {
+            "identifier": "t.me/bch25",
+            "chat_id": -1001222541445
+        },
+        {
+            "identifier": "t.me/tessensky1",
+            "chat_id": -1001925485152
+        },
+        {
+            "identifier": "t.me/rozhdestvenka8",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/sidneycity",
+            "chat_id": -1001181933314
+        },
+        {
+            "identifier": "t.me/Sidneyrem",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/sidneycitylife",
+            "chat_id": -1001484872753
+        },
+        {
+            "identifier": "t.me/teatralnyy_kvartal",
+            "chat_id": -1001443305610
+        },
+        {
+            "identifier": "t.me/praympark_chat",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/mix_park",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/mihajlovskij_park",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/izmlespik",
+            "chat_id": -1001270149799
+        },
+        {
+            "identifier": "t.me/pav_city",
+            "chat_id": -1001286988678
+        },
+        {
+            "identifier": "t.me/westtowwer",
+            "chat_id": -1002829824599
+        },
+        {
+            "identifier": "t.me/crystal_szao",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/KDTurgenevChatSobstvennikov",
+            "chat_id": null
+        },
+        {
             "identifier": "t.me/novaya_zvezda_2",
             "chat_id": -1001611303268
         },
         {
-            "identifier": "@prichalny",
-            "chat_id": -1001317181377
-        },
-        {
-            "identifier": "@headliner_cao",
-            "chat_id": -1002344153362
-        },
-        {
-            "identifier": "@westgardenremont",
-            "chat_id": null
-        },
-        {
-            "identifier": "@west_garden",
-            "chat_id": -1001433216405
-        },
-        {
-            "identifier": "@slava_sao",
-            "chat_id": -1002148749337
-        },
-        {
-            "identifier": "@rezidencii_arhitektorov",
-            "chat_id": -1001251787564
-        },
-        {
-            "identifier": "@jk_Dream_Towers",
-            "chat_id": null
-        },
-        {
-            "identifier": "@nevatowers_chat",
-            "chat_id": -1001693030175
-        },
-        {
-            "identifier": "@bch25",
-            "chat_id": -1001222541445
-        },
-        {
-            "identifier": "@tessensky1",
-            "chat_id": -1001925485152
-        },
-        {
-            "identifier": "@rozhdestvenka8",
-            "chat_id": null
-        },
-        {
-            "identifier": "@sidneycity",
-            "chat_id": -1001181933314
-        },
-        {
-            "identifier": "@Sidneyrem",
-            "chat_id": null
-        },
-        {
-            "identifier": "@sidneycitylife",
-            "chat_id": -1001484872753
-        },
-        {
-            "identifier": "@teatralnyy_kvartal",
-            "chat_id": -1001443305610
-        },
-        {
-            "identifier": "@praympark_chat",
-            "chat_id": null
-        },
-        {
-            "identifier": "@mix_park",
-            "chat_id": null
-        },
-        {
-            "identifier": "@mihajlovskij_park",
-            "chat_id": null
-        },
-        {
-            "identifier": "@izmlespik",
-            "chat_id": -1001270149799
-        },
-        {
-            "identifier": "@pav_city",
-            "chat_id": -1001286988678
-        },
-        {
-            "identifier": "@westtowwer",
-            "chat_id": -1002829824599
-        },
-        {
-            "identifier": "@crystal_szao",
-            "chat_id": null
-        },
-        {
-            "identifier": "@KDTurgenevChatSobstvennikov",
-            "chat_id": null
-        },
-        {
-            "identifier": "@novaya_zvezda_2",
-            "chat_id": -1001611303268
-        },
-        {
-            "identifier": "@citybay1",
+            "identifier": "t.me/citybay1",
             "chat_id": -1001976085717
         },
         {
-            "identifier": "@vishnevyy_sad_zhk",
+            "identifier": "t.me/vishnevyy_sad_zhk",
             "chat_id": -1001800584091
         },
         {
-            "identifier": "@balance_uvao",
+            "identifier": "t.me/balance_uvao",
             "chat_id": -1001990635423
         },
         {
-            "identifier": "@top_hills_ingrad",
+            "identifier": "t.me/top_hills_ingrad",
             "chat_id": null
         },
         {
-            "identifier": "@gkriversky",
+            "identifier": "t.me/gkriversky",
             "chat_id": null
         },
         {
-            "identifier": "@Lime_residential_complex",
+            "identifier": "t.me/Lime_residential_complex",
             "chat_id": -1002625311940
         },
         {
-            "identifier": "@b4_life",
+            "identifier": "t.me/b4_life",
             "chat_id": null
         },
         {
-            "identifier": "@MYPBC",
+            "identifier": "t.me/MYPBC",
             "chat_id": null
         },
         {
-            "identifier": "@pb_service_pb",
+            "identifier": "t.me/pb_service_pb",
             "chat_id": null
         },
         {
-            "identifier": "@Rustaveli14_Chat",
+            "identifier": "t.me/Rustaveli14_Chat",
             "chat_id": -1001327932056
         },
         {
-            "identifier": "@rustaveli14_svao",
+            "identifier": "t.me/rustaveli14_svao",
             "chat_id": null
         },
         {
@@ -1315,71 +1203,71 @@
             "chat_id": -1001903805047
         },
         {
-            "identifier": "@rezidentsii_skolkovo",
+            "identifier": "t.me/rezidentsii_skolkovo",
             "chat_id": -1001824332652
         },
         {
-            "identifier": "@rezidencia_skolkovo",
+            "identifier": "t.me/rezidencia_skolkovo",
             "chat_id": -1002185096352
         },
         {
-            "identifier": "@skolkovo13",
+            "identifier": "t.me/skolkovo13",
             "chat_id": null
         },
         {
-            "identifier": "@podslushanodedovskchat",
+            "identifier": "t.me/podslushanodedovskchat",
             "chat_id": null
         },
         {
-            "identifier": "@ekobunino_chat",
+            "identifier": "t.me/ekobunino_chat",
             "chat_id": -1002313126998
         },
         {
-            "identifier": "@buninskiekvartali_chat",
+            "identifier": "t.me/buninskiekvartali_chat",
             "chat_id": -1002569909355
         },
         {
-            "identifier": "@barvikhachatt",
+            "identifier": "t.me/barvikhachatt",
             "chat_id": -1003007553450
         },
         {
-            "identifier": "@chat_barvikha_life",
+            "identifier": "t.me/chat_barvikha_life",
             "chat_id": null
         },
         {
-            "identifier": "@novaya_riga_sosedi",
+            "identifier": "t.me/novaya_riga_sosedi",
             "chat_id": null
         },
         {
-            "identifier": "@novayarigagroup",
+            "identifier": "t.me/novayarigagroup",
             "chat_id": -1002100683253
         },
         {
-            "identifier": "@jk_novayariga_chat",
+            "identifier": "t.me/jk_novayariga_chat",
             "chat_id": -1002337032308
         },
         {
-            "identifier": "@S_Sosedi",
+            "identifier": "t.me/S_Sosedi",
             "chat_id": -1001949763872
         },
         {
-            "identifier": "@new_odintsovo_chat",
+            "identifier": "t.me/new_odintsovo_chat",
             "chat_id": -1002093279228
         },
         {
-            "identifier": "@zarechye_chat",
+            "identifier": "t.me/zarechye_chat",
             "chat_id": -1001535335919
         },
         {
-            "identifier": "@odingrad_chat",
+            "identifier": "t.me/odingrad_chat",
             "chat_id": -1001522821164
         },
         {
-            "identifier": "@laykovo_chat",
+            "identifier": "t.me/laykovo_chat",
             "chat_id": -1001647197895
         },
         {
-            "identifier": "@kommunarka_tinao",
+            "identifier": "t.me/kommunarka_tinao",
             "chat_id": null
         },
         {
@@ -1435,24 +1323,8 @@
             "chat_id": -1001964693941
         },
         {
-            "identifier": "t.me/jk_bolshaya_semerka/28",
+            "identifier": "t.me/jk_bolshaya_semerka",
             "chat_id": -1002202915608
-        },
-        {
-            "identifier": "t.me/ap_pik",
-            "chat_id": -1001447489461
-        },
-        {
-            "identifier": "t.me/LosinPark_GK",
-            "chat_id": -1001309576421
-        },
-        {
-            "identifier": "t.me/jksimvol",
-            "chat_id": null
-        },
-        {
-            "identifier": "t.me/nedsimvol",
-            "chat_id": -1001453953057
         },
         {
             "identifier": "t.me/nedsimvol",
@@ -1473,10 +1345,6 @@
         {
             "identifier": "t.me/S16_General",
             "chat_id": -1001172045755
-        },
-        {
-            "identifier": "t.me/signalnyy16",
-            "chat_id": -1001290477673
         },
         {
             "identifier": "t.me/dostigenie_public",
@@ -1589,6 +1457,298 @@
         {
             "identifier": "t.me/kpNewEurope",
             "chat_id": -1001371548213
+        },
+        {
+            "identifier": "t.me/dom7danilovskiy_zhk",
+            "chat_id": -1002233190003
+        },
+        {
+            "identifier": "t.me/domsemdanilovski",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/jk_titul",
+            "chat_id": -1001228929030
+        },
+        {
+            "identifier": "t.me/vesperkutuzovskiy",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/solehillsgk",
+            "chat_id": -1002012769255
+        },
+        {
+            "identifier": "t.me/JKLunarChatsobstvennikov",
+            "chat_id": -1001713994080
+        },
+        {
+            "identifier": "t.me/vl_chkalova20",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/jk_narvin_chat",
+            "chat_id": -1002427692566
+        },
+        {
+            "identifier": "t.me/kavbul_51",
+            "chat_id": -1001416480349
+        },
+        {
+            "identifier": "t.me/losinopark",
+            "chat_id": -1001176172222
+        },
+        {
+            "identifier": "t.me/losinoostrovskyapark",
+            "chat_id": -1001853874313
+        },
+        {
+            "identifier": "t.me/perviysheremetevskij",
+            "chat_id": -1001813227876
+        },
+        {
+            "identifier": "t.me/zhkmangazeyanarechnom",
+            "chat_id": -1002053917673
+        },
+        {
+            "identifier": "t.me/zhk2irtyshskiy",
+            "chat_id": -1002051539128
+        },
+        {
+            "identifier": "t.me/irtishskiikvartal",
+            "chat_id": -1002041386732
+        },
+        {
+            "identifier": "t.me/sredanalobachevskogoo",
+            "chat_id": -1002192254684
+        },
+        {
+            "identifier": "t.me/sredanalobachevskogo_chat",
+            "chat_id": -1002191424690
+        },
+        {
+            "identifier": "t.me/FizTehS0bstvenniki",
+            "chat_id": -1001705553647
+        },
+        {
+            "identifier": "t.me/Indy_Towers",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/zhk_indy_towers",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/JKDiusS",
+            "chat_id": -1002361152595
+        },
+        {
+            "identifier": "t.me/ultimacitymsk",
+            "chat_id": -1002097688847
+        },
+        {
+            "identifier": "t.me/accenty_gk",
+            "chat_id": -1002411307247
+        },
+        {
+            "identifier": "t.me/kvartalmeet",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/stone_sokolniki_chat",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/emotion_szao",
+            "chat_id": -1001990346417
+        },
+        {
+            "identifier": "t.me/unosokolinayagora",
+            "chat_id": -1002498853517
+        },
+        {
+            "identifier": "t.me/unosokolinayagora_chat",
+            "chat_id": -1002332943682
+        },
+        {
+            "identifier": "t.me/zhk_soloss",
+            "chat_id": -1002393755637
+        },
+        {
+            "identifier": "t.me/kollektsiya_nahabino",
+            "chat_id": -1002525808862
+        },
+        {
+            "identifier": "t.me/rakurs_chat",
+            "chat_id": -1001505492318
+        },
+        {
+            "identifier": "t.me/zhk_insiderr",
+            "chat_id": -1002426202718
+        },
+        {
+            "identifier": "t.me/zhksredanakutuzovskom",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/zhk_sreda_na_kytyzovskom",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/sredanakutuzovskomm",
+            "chat_id": -1002169941966
+        },
+        {
+            "identifier": "t.me/buninskaya_naberejnaya",
+            "chat_id": -1001978168808
+        },
+        {
+            "identifier": "t.me/buninskayanaberezhnaya",
+            "chat_id": -1002629026061
+        },
+        {
+            "identifier": "t.me/ogoronii20",
+            "chat_id": -1001722186932
+        },
+        {
+            "identifier": "t.me/ms_pik",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/moskvorechyechat",
+            "chat_id": -1001879085022
+        },
+        {
+            "identifier": "t.me/MoskvorechyeSaburovoPIK",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/Kronshtadskiyyy9",
+            "chat_id": -1002035127194
+        },
+        {
+            "identifier": "t.me/jkmoments",
+            "chat_id": -1001702664480
+        },
+        {
+            "identifier": "t.me/SohoZorge9",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/zorge_9_St_Michael",
+            "chat_id": -1001580535074
+        },
+        {
+            "identifier": "t.me/soul_forma_pik",
+            "chat_id": -1001778878412
+        },
+        {
+            "identifier": "t.me/mangazeyavbogorodskom",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/emotion_szao/6",
+            "chat_id": -1001990346417
+        },
+        {
+            "identifier": "t.me/rasskazovochat",
+            "chat_id": -1001472589350
+        },
+        {
+            "identifier": "t.me/sezar_city_chat",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/simvol_21",
+            "chat_id": -1001281190335
+        },
+        {
+            "identifier": "t.me/insider_chattt",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/stanislavskiy_chattt",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/nametkintower_chat",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/unogolovinskie",
+            "chat_id": -1002050310620
+        },
+        {
+            "identifier": "t.me/paveletskaya_siti",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/paveleckayacity_chat/479",
+            "chat_id": -1002031121788
+        },
+        {
+            "identifier": "t.me/ilovekvartal",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/jkEvoPark",
+            "chat_id": -1001894739522
+        },
+        {
+            "identifier": "t.me/fiztehcity_chat",
+            "chat_id": -1001523743123
+        },
+        {
+            "identifier": "t.me/zhkmirapolis",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/injoy_chat",
+            "chat_id": -1001923900530
+        },
+        {
+            "identifier": "t.me/LevelMich",
+            "chat_id": -1001640029502
+        },
+        {
+            "identifier": "t.me/levelvojkovskaya",
+            "chat_id": -1001319444697
+        },
+        {
+            "identifier": "t.me/zhk_metropolia2",
+            "chat_id": -1001757335537
+        },
+        {
+            "identifier": "t.me/jkpetrovskii2",
+            "chat_id": -1001796510598
+        },
+        {
+            "identifier": "t.me/gksobytie",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/cityzenmrgroup",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/foriver_zhk",
+            "chat_id": -1001289987959
+        },
+        {
+            "identifier": "t.me/kit_2mo",
+            "chat_id": -1001934392328
+        },
+        {
+            "identifier": "t.me/zhk_om",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/ZhKDomMalevichSosedi",
+            "chat_id": -1002312063714
+        },
+        {
+            "identifier": "t.me/parkside_zhk",
+            "chat_id": -1001687363396
         }
     ]
 }
