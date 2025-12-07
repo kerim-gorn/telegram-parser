@@ -436,7 +436,7 @@
         },
         {
             "identifier": "t.me/matveypark",
-            "chat_id": null
+            "chat_id": -1001320577667
         },
         {
             "identifier": "t.me/gk_mtvpark",
@@ -820,7 +820,7 @@
         },
         {
             "identifier": "t.me/akvilonkommunarka",
-            "chat_id": null
+            "chat_id": -1001232450270
         },
         {
             "identifier": "t.me/nekrasovka_kvartal",
@@ -1128,7 +1128,7 @@
         },
         {
             "identifier": "t.me/pb_service_pb",
-            "chat_id": null
+            "chat_id": -1001244667532
         },
         {
             "identifier": "t.me/Rustaveli14_Chat",
@@ -1928,7 +1928,7 @@
         },
         {
             "identifier": "t.me/abbakumovoru",
-            "chat_id": null
+            "chat_id": -1001663759740
         },
         {
             "identifier": "t.me/KP_Volodarsky_Park",
@@ -1940,7 +1940,7 @@
         },
         {
             "identifier": "t.me/pb_service_pb",
-            "chat_id": null
+            "chat_id": -1001244667532
         },
         {
             "identifier": "t.me/novogorskklab",
@@ -2000,7 +2000,7 @@
         },
         {
             "identifier": "t.me/mirrorsdanie",
-            "chat_id": null
+            "chat_id": -1001663317518
         },
         {
             "identifier": "t.me/dmitrovnebo",
@@ -2136,7 +2136,7 @@
         },
         {
             "identifier": "t.me/filifamous",
-            "chat_id": null
+            "chat_id": -1002094841905
         },
         {
             "identifier": "t.me/sosedimod",
@@ -2176,7 +2176,7 @@
         },
         {
             "identifier": "t.me/jk_geroev",
-            "chat_id": null
+            "chat_id": -1001174804169
         },
         {
             "identifier": "t.me/dmitrovskoe_nebo_zhk",
@@ -2228,6 +2228,10 @@
         },
         {
             "identifier": "t.me/Чаты домов ЖК Мытищи Парк",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/kpb_flud",
             "chat_id": null
         }
     ]
