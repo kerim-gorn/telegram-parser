@@ -230,3 +230,4 @@ You will see:
 3) (Optional) Trigger redistribution as above.
 
 No restarts are required for redistribution itself; workers refresh allowed channels immediately.
+
