@@ -11,6 +11,53 @@ import httpx
 OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
 DEFAULT_MODEL_NAME = "qwen/qwen3-max"
 
+# Глобальный клиент для переиспользования (None до первой инициализации)
+_openrouter_client: httpx.AsyncClient | None = None
+_client_lock = asyncio.Lock()
+
+
+def _normalize_proxy_url(proxy_url: str) -> str:
+    """
+    Нормализует URL прокси для httpx.
+    Многие HTTP прокси требуют http:// в URL, даже для HTTPS трафика.
+    """
+    if not proxy_url:
+        return proxy_url
+    
+    # Если URL начинается с https://, заменяем на http://
+    # Это стандартная практика для HTTP прокси серверов
+    if proxy_url.startswith("https://"):
+        return proxy_url.replace("https://", "http://", 1)
+    
+    return proxy_url
+
+
+async def _get_openrouter_client() -> httpx.AsyncClient:
+    """
+    Lazy initialization глобального httpx.AsyncClient с поддержкой прокси.
+    Клиент создается один раз и переиспользуется для всех запросов.
+    """
+    global _openrouter_client
+    if _openrouter_client is None:
+        async with _client_lock:
+            if _openrouter_client is None:
+                proxy_url = os.getenv("OPENROUTER_PROXY_URL", "").strip()
+                
+                timeout = httpx.Timeout(connect=20.0, read=30.0, write=15.0, pool=15.0)
+                client_kwargs: dict[str, Any] = {
+                    "timeout": timeout,
+                    "follow_redirects": True,
+                }
+                
+                if proxy_url:
+                    # Нормализуем URL прокси (https:// -> http:// для HTTP прокси)
+                    normalized_proxy = _normalize_proxy_url(proxy_url)
+                    # httpx использует параметр 'proxy' для строки URL
+                    client_kwargs["proxy"] = normalized_proxy
+                
+                _openrouter_client = httpx.AsyncClient(**client_kwargs)
+    return _openrouter_client
+
 
 def _build_system_prompt() -> str:
     """
@@ -134,46 +181,44 @@ async def analyze_message_for_signal(text: str) -> Dict[str, Any]:
         "stop": ["}\n", "}\r\n"],
     }
 
-    timeout = httpx.Timeout(connect=10.0, read=30.0, write=10.0, pool=10.0)
-
     try:
-        async with httpx.AsyncClient(timeout=timeout, follow_redirects=True, headers=headers) as client:
-            response = await client.post(OPENROUTER_API_URL, json=payload)
-            # Raise for non-2xx so we can include status/body in the error path
-            response.raise_for_status()
+        client = await _get_openrouter_client()
+        response = await client.post(OPENROUTER_API_URL, json=payload, headers=headers)
+        # Raise for non-2xx so we can include status/body in the error path
+        response.raise_for_status()
 
-            api_json = response.json()
-            # OpenRouter (OpenAI-compatible) response shape:
-            # { choices: [ { message: { role: "assistant", content: "<JSON>" } } ] , ... }
-            choices = api_json.get("choices") or []
-            if not choices:
-                return {"ok": False, "error": "empty_response", "raw": api_json}
+        api_json = response.json()
+        # OpenRouter (OpenAI-compatible) response shape:
+        # { choices: [ { message: { role: "assistant", content: "<JSON>" } } ] , ... }
+        choices = api_json.get("choices") or []
+        if not choices:
+            return {"ok": False, "error": "empty_response", "raw": api_json}
 
-            content = (choices[0].get("message") or {}).get("content") or ""
-            if not isinstance(content, str) or not content.strip():
-                return {"ok": False, "error": "no_content", "raw": api_json}
+        content = (choices[0].get("message") or {}).get("content") or ""
+        if not isinstance(content, str) or not content.strip():
+            return {"ok": False, "error": "no_content", "raw": api_json}
 
-            # Primary parse attempt
-            try:
-                parsed = json.loads(content)
-            except json.JSONDecodeError:
-                # Fallback: attempt to extract the first JSON object from the content
-                parsed = _extract_first_json_object(content)
-                if not isinstance(parsed, dict):
-                    # Attempt truncated JSON recovery (e.g., missing final '}')
-                    parsed = _recover_truncated_json(content)
-
+        # Primary parse attempt
+        try:
+            parsed = json.loads(content)
+        except json.JSONDecodeError:
+            # Fallback: attempt to extract the first JSON object from the content
+            parsed = _extract_first_json_object(content)
             if not isinstance(parsed, dict):
-                return {
-                    "ok": False,
-                    "error": "parse_error",
-                    "message": "LLM did not return valid JSON",
-                    "raw": api_json,
-                    "text": content,
-                }
+                # Attempt truncated JSON recovery (e.g., missing final '}')
+                parsed = _recover_truncated_json(content)
 
-            usage = api_json.get("usage", {})
-            return {"ok": True, "data": parsed, "raw": api_json, "usage": usage}
+        if not isinstance(parsed, dict):
+            return {
+                "ok": False,
+                "error": "parse_error",
+                "message": "LLM did not return valid JSON",
+                "raw": api_json,
+                "text": content,
+            }
+
+        usage = api_json.get("usage", {})
+        return {"ok": True, "data": parsed, "raw": api_json, "usage": usage}
 
     except httpx.TimeoutException:
         return {"ok": False, "error": "timeout", "message": "OpenRouter request timed out"}
