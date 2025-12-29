@@ -5,7 +5,7 @@ from datetime import datetime
 
 from sqlalchemy import BigInteger, Boolean, DateTime, Index, Integer, String, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.dialects.postgresql import ARRAY, JSONB
 
 from db.base import Base
 
@@ -25,8 +25,14 @@ class Message(Base):
     # Content
     text: Mapped[str | None] = mapped_column(Text, nullable=True)
 
-    # LLM analysis fields
-    is_signal: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False, index=True)
+    # LLM classification fields
+    intents: Mapped[list[str] | None] = mapped_column(ARRAY(String), nullable=True)
+    domains: Mapped[dict[str, Any] | None] = mapped_column(JSONB, nullable=True)
+    urgency_score: Mapped[int | None] = mapped_column(Integer, nullable=True, index=True)
+    is_spam: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False, index=True)
+    reasoning: Mapped[str | None] = mapped_column(Text, nullable=True)
+    
+    # Legacy LLM analysis field (for backward compatibility)
     llm_analysis: Mapped[dict[str, Any] | None] = mapped_column(JSONB, nullable=True)
 
     # Indexing timestamp (when this message was ingested into our system)

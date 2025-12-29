@@ -65,12 +65,54 @@ Notes:
 - `REALTIME_CONFIG_JSON` points to a unified JSON config for accounts and chats.
 - Realtime assignment uses Redis pub/sub, so redistribution applies instantly without restarts.
 
+## Message Classification Schema
+
+The ingestor processes messages in batches (50 messages at a time) and uses an advanced LLM classification schema with the following fields:
+
+### Classification Fields
+
+- **intents** (ARRAY[String]): List of detected user intentions:
+  - `REQUEST`: User is looking for a product/service/info (potential lead)
+  - `OFFER`: User is offering a product or service
+  - `RECOMMENDATION`: User recommends a specific performer/place
+  - `COMPLAINT`: Negative feedback or complaint about a problem
+  - `INFO`: Neutral information sharing
+  - `OTHER`: Greetings, emojis without text, meaningless phrases
+
+- **domains** (JSONB): Array of domain objects with subcategories:
+  - `CONSTRUCTION_AND_REPAIR`: `MAJOR_RENOVATION`, `REPAIR_SERVICES`
+  - `RENTAL_OF_REAL_ESTATE`: `RENTAL_APARTMENT`, `RENTAL_HOUSE`, `RENTAL_PARKING`, `RENTAL_STORAGE`, `RENTAL_LAND`
+  - `PURCHASE_OF_REAL_ESTATE`: `PURCHASE_APARTMENT`, `PURCHASE_HOUSE`, `PURCHASE_PARKING`, `PURCHASE_STORAGE`, `PURCHASE_LAND`
+  - `SERVICES`: `BEAUTY_AND_HEALTH`, `HOUSEHOLD_SERVICES`, `CHILD_CARE_AND_EDUCATION`, `AUTO_SERVICES`, `DELIVERY_SERVICES`, `TECH_REPAIR`
+  - `MARKETPLACE`: `BUY_SELL_GOODS`, `GIVE_AWAY`, `HOMEMADE_FOOD`, `BUYER_SERVICES`
+  - `SOCIAL_CAPITAL`: `PARENTING`, `HOBBY_AND_SPORT`, `EVENTS`
+  - `OPERATIONAL_MANAGEMENT`: `LOST_AND_FOUND`, `SECURITY`, `LIVING_ENVIRONMENT`, `MANAGEMENT_COMPANY_INTERACTION`
+  - `REPUTATION`: `PERSONAL_BRAND`, `COMPANIES_REPUTATION`
+  - `NONE`: No suitable domain found
+
+- **urgency_score** (Integer, 1-5, indexed):
+  - `5`: Emergency (fire, flood, fight, immediate danger)
+  - `4`: Urgent problem requiring quick attention (elevator stuck, no water)
+  - `3`: Standard problem/question
+  - `1-2`: Non-urgent info/chatter
+
+- **is_spam** (Boolean, indexed): True if message has signs of mass mailing, excessive emojis, external links, or is clearly not from a resident
+
+- **reasoning** (Text): Brief explanation of the classification (max 1 sentence)
+
+### Signal Detection
+
+A message is considered a signal (and triggers notification) if:
+- It has `REQUEST` intent AND
+- It belongs to `CONSTRUCTION_AND_REPAIR` or `SERVICES` domains
+
 ## Ingestor Prefilter (skip/force before LLM)
 
 - You can prefilter messages by substrings and regexes to:
-  - force a message as signal (skip LLM): `is_signal=true`
-  - skip a message as non-signal (skip LLM): `is_signal=false`
+  - force a message as signal (skip LLM): Messages matching `force` rules are classified with `REQUEST` intent and `CONSTRUCTION_AND_REPAIR` domain
+  - skip a message as non-signal (skip LLM): Messages matching `skip` rules are classified with `OTHER` intent and `NONE` domain
 - Configure with `PREFILTER_CONFIG_JSON` pointing to a JSON file. The file is hot-reloaded every `PREFILTER_RELOAD_SECONDS` seconds.
+- Prefilter is applied **before** batch formation to avoid unnecessary LLM calls.
 
 Example `prefilter_rules.json`:
 
@@ -89,17 +131,29 @@ Example `prefilter_rules.json`:
 
 Behavior on match:
 
-- action `force`: `is_signal=true`, `llm_analysis={"ok": true, "is_signal": true, "forced": true, "matched":[...] }`
-- action `skip`:  `is_signal=false`, `llm_analysis={"ok": true, "is_signal": false, "filtered": true, "matched":[...] }`
+- action `force`: Classified with `REQUEST` intent, `CONSTRUCTION_AND_REPAIR` domain, `urgency_score=3`, `reasoning` includes matched patterns
+- action `skip`: Classified with `OTHER` intent, `NONE` domain, `urgency_score=1`, `reasoning` includes matched patterns
 - Precedence: if both force and skip rules match, force wins.
+- Prefilter results are stored in `llm_analysis` JSONB field with `forced: true` or `filtered: true` flags.
 
 Notes:
 
 - `matched` contains the patterns that triggered a decision.
+- Messages filtered by prefilter are excluded from LLM batch processing to save costs.
+
+## Batch Processing
+
+The ingestor processes messages in batches:
+- **Batch size**: 50 messages
+- **Batch timeout**: 5 seconds (messages are processed when batch is full or timeout expires)
+- Messages are accumulated in a buffer until batch size or timeout is reached
+- Prefilter is applied before batch formation (forced/skipped messages are excluded from LLM calls)
+- All messages in a batch are sent to LLM in a single API call using structured JSON schema
 
 ## Signal Notifications (via Telegram Bot)
 
 - Signals are sent using a Telegram Bot (aiogram), not a user session.
+- A message is considered a signal if it has `REQUEST` intent and belongs to `CONSTRUCTION_AND_REPAIR` or `SERVICES` domains.
 - Required env variables:
   - `TELEGRAM_BOT_TOKEN` — Bot API token from BotFather
   - `SIGNALS_BOT_CHAT_ID` — chat id (e.g. `-100...`) or user id where the bot will post
