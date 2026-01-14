@@ -15,6 +15,8 @@ from db.session import create_loop_bound_session_factory
 from app.batch_llm_analyzer import analyze_messages_batch
 from app.signal_notifier import notifier as signal_notifier
 from app.prefilter import get_prefilter
+from app.domain_router import get_domain_router
+from app.classification import IntentType, DomainInfo
 
 # Batch processing configuration
 BATCH_SIZE = 50
@@ -126,36 +128,6 @@ def _extract_message_data(payload: dict[str, Any]) -> dict[str, Any] | None:
         "message_date": message_date,
         "original_payload": payload,  # Keep for notification
     }
-
-
-def _is_signal_from_classification(intents: list[str] | None, domains: list[dict[str, Any]] | None) -> bool:
-    """
-    Determine if a message is a signal based on new classification format.
-    Signal = REQUEST intent + relevant domains (CONSTRUCTION_AND_REPAIR or SERVICES).
-    """
-    if not intents:
-        return False
-    
-    # Check if REQUEST intent is present
-    if "REQUEST" not in intents:
-        return False
-    
-    if not domains:
-        return False
-    
-    # Check for relevant domains
-    relevant_domains = {
-        "CONSTRUCTION_AND_REPAIR",
-        "SERVICES",
-    }
-    
-    for domain_info in domains:
-        if isinstance(domain_info, dict):
-            domain_name = domain_info.get("domain")
-            if domain_name in relevant_domains:
-                return True
-    
-    return False
 
 
 async def _process_batch(payloads: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -290,8 +262,40 @@ async def _process_batch(payloads: list[dict[str, Any]]) -> list[dict[str, Any]]
                     "llm_analysis": {"ok": True, **classified},
                 }
         else:
-            # LLM failed, mark candidates with error
-            error_msg = llm_result.get("message") or llm_result.get("error") or "LLM analysis failed"
+            # LLM failed, mark candidates with detailed error info
+            error_type = llm_result.get("error") or "unknown_error"
+            status_code = llm_result.get("status_code")
+            body = llm_result.get("body")
+            base_message = llm_result.get("message")
+
+            # Build human-readable error message with as much context as possible
+            parts: list[str] = [error_type]
+            if status_code is not None:
+                parts.append(f"status={status_code}")
+            if body:
+                # Truncate body to avoid huge payloads in reasoning
+                body_snippet = str(body)
+                if len(body_snippet) > 500:
+                    body_snippet = body_snippet[:500] + "...(truncated)"
+                parts.append(f"body_snippet={body_snippet}")
+            if base_message and base_message not in parts:
+                parts.append(f"message={base_message}")
+            error_msg = "; ".join(parts)
+
+            # Store full LLM error payload (except ok flag) in llm_analysis for debugging
+            error_payload = {k: v for k, v in llm_result.items() if k != "ok"}
+
+            # Log once per failed batch for easier debugging in container logs
+            try:
+                print(
+                    "[Ingestor] LLM batch error: "
+                    + json.dumps(error_payload, ensure_ascii=False)[:1000],
+                    flush=True,
+                )
+            except Exception:
+                # Never break ingestion because of logging issues
+                pass
+
             for idx, msg_data in zip(llm_candidate_indices, llm_candidates):
                 results[idx] = {
                     "msg_data": msg_data,
@@ -301,7 +305,7 @@ async def _process_batch(payloads: list[dict[str, Any]]) -> list[dict[str, Any]]
                     "is_spam": False,
                     "urgency_score": 1,
                     "reasoning": f"LLM analysis failed: {error_msg}",
-                    "llm_analysis": {"ok": False, "error": llm_result.get("error"), "message": error_msg},
+                    "llm_analysis": {"ok": False, **error_payload},
                 }
     
     return results
@@ -313,6 +317,9 @@ async def _persist_batch(results: list[dict[str, Any]], stats: dict[str, Any]) -
     """
     rows: list[dict[str, Any]] = []
     notifications: list[dict[str, Any]] = []
+    
+    # Get domain router instance
+    domain_router = get_domain_router()
     
     for result in results:
         if result.get("skipped"):
@@ -343,19 +350,47 @@ async def _persist_batch(results: list[dict[str, Any]], stats: dict[str, Any]) -
         }
         rows.append(row)
         
-        # Check if this is a signal for notification
+        # Check if this message should be sent to Telegram groups
+        # Only messages with REQUEST intent are routed
         intents = result.get("intents", [])
-        domains = result.get("domains", [])
-        if _is_signal_from_classification(intents, domains) and isinstance(msg_data.get("text"), str) and msg_data["text"].strip():
-            notifications.append({
-                "text": msg_data["text"],
-                "source_chat_id": msg_data["chat_id"],
-                "sender_id": msg_data["sender_id"],
-                "source_message_id": msg_data["message_id"],
-                "sender_username": msg_data.get("sender_username"),
-                "chat_username": msg_data.get("chat_username"),
-                "message_date": msg_data["message_date"],
-            })
+        domains_raw = result.get("domains", [])
+        
+        # Check if REQUEST intent is present
+        has_request_intent = False
+        if intents:
+            # Handle both string and IntentType enum values
+            intent_values = [str(intent) if not isinstance(intent, str) else intent for intent in intents]
+            has_request_intent = IntentType.REQUEST.value in intent_values or "REQUEST" in intent_values
+        
+        if has_request_intent and isinstance(msg_data.get("text"), str) and msg_data["text"].strip():
+            # Convert domains from dict format to DomainInfo objects
+            domain_infos: list[DomainInfo] = []
+            for domain_dict in domains_raw:
+                if isinstance(domain_dict, dict):
+                    try:
+                        domain_info = DomainInfo(**domain_dict)
+                        domain_infos.append(domain_info)
+                    except Exception:
+                        # Skip invalid domain info
+                        continue
+                elif isinstance(domain_dict, DomainInfo):
+                    domain_infos.append(domain_dict)
+            
+            # Get chat_ids for these domains
+            target_chat_ids = domain_router.get_chat_ids_for_domains(domain_infos)
+            
+            # Create notification entry for each target chat_id
+            for target_chat_id in target_chat_ids:
+                notifications.append({
+                    "text": msg_data["text"],
+                    "source_chat_id": msg_data["chat_id"],
+                    "sender_id": msg_data["sender_id"],
+                    "source_message_id": msg_data["message_id"],
+                    "sender_username": msg_data.get("sender_username"),
+                    "chat_username": msg_data.get("chat_username"),
+                    "message_date": msg_data["message_date"],
+                    "target_chat_id": target_chat_id,
+                })
         
         # Update statistics
         prefilter_decision = result.get("prefilter_decision")

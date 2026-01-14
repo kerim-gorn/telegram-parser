@@ -81,6 +81,10 @@ class Settings(BaseSettings):
     # Hot-reload interval for the prefilter rules (seconds)
     prefilter_reload_seconds: int = Field(180, alias="PREFILTER_RELOAD_SECONDS")
 
+    # Domain routing configuration
+    # Path to JSON file with domain-to-chat_id mapping for message routing
+    domain_routing_config_path: str = Field("domain_routing.json", alias="DOMAIN_ROUTING_CONFIG_JSON")
+
     # Demo / testing
     test_public_chat_id: int | None = Field(default=None, alias="TEST_PUBLIC_CHAT_ID")
 

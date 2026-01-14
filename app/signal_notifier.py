@@ -82,10 +82,21 @@ class SignalNotifier:
         sender_username: Optional[str] = None,
         chat_username: Optional[str] = None,
         message_date: Optional[datetime] = None,
+        target_chat_id: Optional[int] = None,
     ) -> None:
         """
         Send a formatted notification with original text, author, source chat and timestamp.
         All username/time fields are optional; when absent, placeholders are used.
+        
+        Args:
+            text: Message text content.
+            source_chat_id: Source Telegram chat ID.
+            sender_id: Sender user ID.
+            source_message_id: Original message ID for deep linking.
+            sender_username: Sender username (optional).
+            chat_username: Source chat username (optional).
+            message_date: Message timestamp (optional).
+            target_chat_id: Target chat ID for notification. If None, uses default from settings.
         """
         safe_text = (text or "").strip()
         if not safe_text:
@@ -106,7 +117,10 @@ class SignalNotifier:
             f"<pre>{escaped}</pre>"
             f"{link_line}"
         )
-        await self._send_html(self._target_chat_id, body)
+        
+        # Use provided target_chat_id or fallback to default
+        chat_id = target_chat_id if target_chat_id is not None else self._target_chat_id
+        await self._send_html(chat_id, body)
 
     async def close(self) -> None:
         if self._bot is not None:

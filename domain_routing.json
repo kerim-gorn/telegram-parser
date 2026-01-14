@@ -1,0 +1,24 @@
+{
+  "domains": {
+    "CONSTRUCTION_AND_REPAIR": {
+      "default": -1003203343510,
+      "subcategories": {
+        "REPAIR_SERVICES": null,
+        "MAJOR_RENOVATION": null,
+        "SMALL_TOOLS_AND_MATERIALS": "muted"
+      }
+    },
+    "RENTAL_OF_REAL_ESTATE": null,
+    "PURCHASE_OF_REAL_ESTATE": null,
+    "REAL_ESTATE_AGENT": null,
+    "LAW": null,
+    "SERVICES": "muted",
+    "AUTO": null,
+    "MARKETPLACE": "muted",
+    "SOCIAL_CAPITAL": "muted",
+    "OPERATIONAL_MANAGEMENT": "muted",
+    "REPUTATION": "muted",
+    "NONE": "muted"
+  },
+  "fallback": -5235037863
+}
