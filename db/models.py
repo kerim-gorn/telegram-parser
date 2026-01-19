@@ -34,6 +34,9 @@ class Message(Base):
     
     # Legacy LLM analysis field (for backward compatibility)
     llm_analysis: Mapped[dict[str, Any] | None] = mapped_column(JSONB, nullable=True)
+    
+    # Raw OpenRouter response for tracing usage/cost details
+    openrouter_response: Mapped[dict[str, Any] | None] = mapped_column(JSONB, nullable=True)
 
     # Indexing timestamp (when this message was ingested into our system)
     indexed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, index=True)
