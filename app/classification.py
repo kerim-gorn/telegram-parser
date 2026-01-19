@@ -15,7 +15,47 @@ Role:
 You are an advanced AI classifier specializing in analyzing community chat messages.
 
 Task:
-You will receive a list of messages in JSON format. Your goal is to map each message to the correct Intents, Domains, and Flags according to the strict JSON Schema provided in the output format.
+You will receive a list of messages in JSON format. Your goal is to map each message to the correct Intents, Domains, and Flags according to the strict compact JSON Schema provided in the output format.
+
+### Output format (compact keys + numeric codes)
+Return JSON with short keys to minimize tokens:
+{
+  "m": [
+    {
+      "i": "<message_id>",
+      "t": [<intent_code>, ...],
+      "d": [{"d": <domain_code>, "s": [<subcategory_code>, ...]}],
+      "p": <is_spam_bool>,
+      "u": <urgency_score_1_to_5>,
+      "r": "<reasoning_max_50_chars>"
+    }
+  ]
+}
+
+Reasoning must be extremely short (3-5 words, max 50 chars).
+
+### Codes
+Intents:
+1=REQUEST, 2=OFFER, 3=RECOMMENDATION, 4=COMPLAINT, 5=INFO, 6=OTHER
+
+Domains:
+1=CONSTRUCTION_AND_REPAIR, 2=RENTAL_OF_REAL_ESTATE, 3=PURCHASE_OF_REAL_ESTATE, 4=REAL_ESTATE_AGENT,
+5=LAW, 6=SERVICES, 7=AUTO, 8=MARKETPLACE, 9=SOCIAL_CAPITAL, 10=OPERATIONAL_MANAGEMENT,
+11=REPUTATION, 12=NONE
+
+Subcategories by domain:
+1 CONSTRUCTION_AND_REPAIR: 1=MAJOR_RENOVATION, 2=REPAIR_SERVICES, 3=SMALL_TOOLS_AND_MATERIALS
+2 RENTAL_OF_REAL_ESTATE: 1=RENTAL_APARTMENT, 2=RENTAL_HOUSE, 3=RENTAL_PARKING, 4=RENTAL_STORAGE, 5=RENTAL_LAND
+3 PURCHASE_OF_REAL_ESTATE: 1=PURCHASE_APARTMENT, 2=PURCHASE_HOUSE, 3=PURCHASE_PARKING, 4=PURCHASE_STORAGE, 5=PURCHASE_LAND
+4 REAL_ESTATE_AGENT: 1=AGENT
+5 LAW: 1=LAWYER
+6 SERVICES: 1=BEAUTY_AND_HEALTH, 2=HOUSEHOLD_SERVICES, 3=CHILD_CARE_AND_EDUCATION, 4=DELIVERY_SERVICES, 5=TECH_REPAIR
+7 AUTO: 1=AUTO_PURCHASE, 2=AUTO_PREMIUM_DETAILING, 3=AUTO_REPAIR, 4=AUTO_SERVICE_STATION
+8 MARKETPLACE: 1=BUY_SELL_GOODS, 2=GIVE_AWAY, 3=HOMEMADE_FOOD, 4=BUYER_SERVICES
+9 SOCIAL_CAPITAL: 1=PARENTING, 2=HOBBY_AND_SPORT, 3=EVENTS
+10 OPERATIONAL_MANAGEMENT: 1=LOST_AND_FOUND, 2=SECURITY, 3=LIVING_ENVIRONMENT, 4=MANAGEMENT_COMPANY_INTERACTION
+11 REPUTATION: 1=PERSONAL_BRAND, 2=COMPANIES_REPUTATION
+12 NONE: no subcategories
 
 ### Ключевая идея (что такое REQUEST и лид)
 
@@ -159,7 +199,7 @@ You will receive a list of messages in JSON format. Your goal is to map each mes
    
 6. **Subcategories:** Only specify subcategories if they are clearly inferred from the text. Если домен ясен, но подкатегория неочевидна — subcategories оставить пустым.
 
-### Few-Shot Batch Example
+### Few-Shot Batch Example (compact output)
 
 User Input:
 [
@@ -174,78 +214,14 @@ User Input:
 
 Model Output:
 {
-  "classified_messages": [
-    {
-      "id": "1",
-      "intents": ["REQUEST"],
-      "domains": [
-        {"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": ["REPAIR_SERVICES"]}
-      ],
-      "is_spam": false,
-      "urgency_score": 3,
-      "reasoning": "Явный запрос контактa ремонтной бригады — это лид, запрос услуги ремонта."
-    },
-    {
-      "id": "2",
-      "intents": ["INFO"],
-      "domains": [
-        {"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": []}
-      ],
-      "is_spam": false,
-      "urgency_score": 1,
-      "reasoning": "Просто уточнение характеристик объекта (высота потолков), без поиска исполнителя — информационный вопрос, не лид."
-    },
-    {
-      "id": "3",
-      "intents": ["REQUEST"],
-      "domains": [
-        {"domain": "LAW", "subcategories": ["LAWYER"]},
-        {"domain": "PURCHASE_OF_REAL_ESTATE", "subcategories": []}
-      ],
-      "is_spam": false,
-      "urgency_score": 3,
-      "reasoning": "Пользователь ищет юриста для консультации по договору — явный запрос услуги специалиста (лид)."
-    },
-    {
-      "id": "4",
-      "intents": ["OFFER"],
-      "domains": [
-        {"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": []}
-      ],
-      "is_spam": false,
-      "urgency_score": 1,
-      "reasoning": "Поиск помощника на простую физическую работу (расставить мебель, подать инструмент) с оплатой — это мелкая подработка, не REQUEST-лид."
-    },
-    {
-      "id": "5",
-      "intents": ["OTHER"],
-      "domains": [
-        {"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": []}
-      ],
-      "is_spam": false,
-      "urgency_score": 1,
-      "reasoning": "Неполное сообщение, обрывок фразы без контекста и без запроса — не является REQUEST-лидом."
-    },
-    {
-      "id": "6",
-      "intents": ["REQUEST"],
-      "domains": [
-        {"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": ["SMALL_TOOLS_AND_MATERIALS"]}
-      ],
-      "is_spam": false,
-      "urgency_score": 2,
-      "reasoning": "Запрос на аренду/одолжить инструмент (строительный пылесос) — это REQUEST-лид, относится к мелким стройматериалам/инструментам."
-    },
-    {
-      "id": "7",
-      "intents": ["OFFER"],
-      "domains": [
-        {"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": []}
-      ],
-      "is_spam": false,
-      "urgency_score": 1,
-      "reasoning": "Предложение простой физической работы (сложить кирпичи) с небольшой оплатой — это мелкая подработка, не REQUEST-лид."
-    }
+  "m": [
+    {"i": "1", "t": [1], "d": [{"d": 1, "s": [2]}], "p": false, "u": 3, "r": "Ищет ремонтную бригаду"},
+    {"i": "2", "t": [5], "d": [{"d": 1, "s": []}], "p": false, "u": 1, "r": "Уточняет высоту потолка"},
+    {"i": "3", "t": [1], "d": [{"d": 5, "s": [1]}, {"d": 3, "s": []}], "p": false, "u": 3, "r": "Ищет юриста по договору"},
+    {"i": "4", "t": [2], "d": [{"d": 1, "s": []}], "p": false, "u": 1, "r": "Мелкая подработка, не лид"},
+    {"i": "5", "t": [6], "d": [{"d": 1, "s": []}], "p": false, "u": 1, "r": "Обрывок фразы"},
+    {"i": "6", "t": [1], "d": [{"d": 1, "s": [3]}], "p": false, "u": 2, "r": "Просит одолжить инструмент"},
+    {"i": "7", "t": [2], "d": [{"d": 1, "s": []}], "p": false, "u": 1, "r": "Предложение работы"}
   ]
 }
 """
@@ -276,6 +252,121 @@ class DomainType(str, Enum):
     OPERATIONAL_MANAGEMENT = "OPERATIONAL_MANAGEMENT"
     REPUTATION = "REPUTATION"
     NONE = "NONE"
+
+
+INTENT_CODE_TO_VALUE: dict[int, IntentType] = {
+    1: IntentType.REQUEST,
+    2: IntentType.OFFER,
+    3: IntentType.RECOMMENDATION,
+    4: IntentType.COMPLAINT,
+    5: IntentType.INFO,
+    6: IntentType.OTHER,
+}
+INTENT_VALUE_TO_CODE: dict[IntentType, int] = {v: k for k, v in INTENT_CODE_TO_VALUE.items()}
+
+DOMAIN_CODE_TO_VALUE: dict[int, DomainType] = {
+    1: DomainType.CONSTRUCTION_AND_REPAIR,
+    2: DomainType.RENTAL_OF_REAL_ESTATE,
+    3: DomainType.PURCHASE_OF_REAL_ESTATE,
+    4: DomainType.REAL_ESTATE_AGENT,
+    5: DomainType.LAW,
+    6: DomainType.SERVICES,
+    7: DomainType.AUTO,
+    8: DomainType.MARKETPLACE,
+    9: DomainType.SOCIAL_CAPITAL,
+    10: DomainType.OPERATIONAL_MANAGEMENT,
+    11: DomainType.REPUTATION,
+    12: DomainType.NONE,
+}
+DOMAIN_VALUE_TO_CODE: dict[DomainType, int] = {v: k for k, v in DOMAIN_CODE_TO_VALUE.items()}
+
+SUBCATEGORY_CODE_TO_VALUE: dict[DomainType, dict[int, str]] = {
+    DomainType.CONSTRUCTION_AND_REPAIR: {
+        1: "MAJOR_RENOVATION",
+        2: "REPAIR_SERVICES",
+        3: "SMALL_TOOLS_AND_MATERIALS",
+    },
+    DomainType.RENTAL_OF_REAL_ESTATE: {
+        1: "RENTAL_APARTMENT",
+        2: "RENTAL_HOUSE",
+        3: "RENTAL_PARKING",
+        4: "RENTAL_STORAGE",
+        5: "RENTAL_LAND",
+    },
+    DomainType.PURCHASE_OF_REAL_ESTATE: {
+        1: "PURCHASE_APARTMENT",
+        2: "PURCHASE_HOUSE",
+        3: "PURCHASE_PARKING",
+        4: "PURCHASE_STORAGE",
+        5: "PURCHASE_LAND",
+    },
+    DomainType.REAL_ESTATE_AGENT: {
+        1: "AGENT",
+    },
+    DomainType.LAW: {
+        1: "LAWYER",
+    },
+    DomainType.SERVICES: {
+        1: "BEAUTY_AND_HEALTH",
+        2: "HOUSEHOLD_SERVICES",
+        3: "CHILD_CARE_AND_EDUCATION",
+        4: "DELIVERY_SERVICES",
+        5: "TECH_REPAIR",
+    },
+    DomainType.AUTO: {
+        1: "AUTO_PURCHASE",
+        2: "AUTO_PREMIUM_DETAILING",
+        3: "AUTO_REPAIR",
+        4: "AUTO_SERVICE_STATION",
+    },
+    DomainType.MARKETPLACE: {
+        1: "BUY_SELL_GOODS",
+        2: "GIVE_AWAY",
+        3: "HOMEMADE_FOOD",
+        4: "BUYER_SERVICES",
+    },
+    DomainType.SOCIAL_CAPITAL: {
+        1: "PARENTING",
+        2: "HOBBY_AND_SPORT",
+        3: "EVENTS",
+    },
+    DomainType.OPERATIONAL_MANAGEMENT: {
+        1: "LOST_AND_FOUND",
+        2: "SECURITY",
+        3: "LIVING_ENVIRONMENT",
+        4: "MANAGEMENT_COMPANY_INTERACTION",
+    },
+    DomainType.REPUTATION: {
+        1: "PERSONAL_BRAND",
+        2: "COMPANIES_REPUTATION",
+    },
+    DomainType.NONE: {},
+}
+SUBCATEGORY_VALUE_TO_CODE: dict[DomainType, dict[str, int]] = {
+    domain: {value: code for code, value in mapping.items()}
+    for domain, mapping in SUBCATEGORY_CODE_TO_VALUE.items()
+}
+
+
+class CompactDomainInfo(BaseModel):
+    """Compact domain info with numeric codes."""
+    d: int = Field(..., description="Domain code (see mapping in prompt).")
+    s: List[int] = Field(default_factory=list, description="Subcategory codes for the domain.")
+
+
+class CompactClassifiedMessage(BaseModel):
+    """Compact classification result for a single message."""
+    i: str = Field(..., description="Message ID from input.")
+    t: List[int] = Field(..., description="Intent codes.")
+    d: List[CompactDomainInfo] = Field(..., description="Domain codes and subcategory codes.")
+    p: bool = Field(..., description="Is spam.")
+    u: int = Field(..., description="Urgency score [1,5].")
+    r: str = Field(..., max_length=50, description="Very short reasoning (max 50 chars).")
+
+
+class CompactClassificationBatchResult(BaseModel):
+    """Compact batch classification output."""
+    m: List[CompactClassifiedMessage]
 
 
 # Pydantic models for classification
@@ -363,7 +454,7 @@ class ClassifiedMessage(BaseModel):
     
     is_spam: bool = Field(
         ..., 
-        description="True, если сообщение имеет признаки массовой рассылки, обилие эмодзи, ссылки на внешние каналы, и явно не от жителя."
+        description="True, если сообщение имеет признаки массовой рассылки, обилие эмодзи, ссылки на внешние каналы, и явно не от пользователя."
     )
     
     urgency_score: int = Field(
@@ -388,6 +479,57 @@ class ClassificationBatchResult(BaseModel):
     classified_messages: List[ClassifiedMessage]
 
 
+def _parse_int_code(value: int | str) -> int:
+    if isinstance(value, int):
+        return value
+    if isinstance(value, str) and value.strip().isdigit():
+        return int(value.strip())
+    raise ValueError(f"Invalid code value: {value}")
+
+
+def decode_compact_batch(compact: CompactClassificationBatchResult) -> ClassificationBatchResult:
+    """
+    Decode compact output (numeric codes + short keys) into full classification schema.
+    """
+    decoded_messages: list[dict[str, object]] = []
+    for msg in compact.m:
+        intents: list[IntentType] = []
+        for code in msg.t:
+            int_code = _parse_int_code(code)
+            intent_value = INTENT_CODE_TO_VALUE.get(int_code)
+            if intent_value is None:
+                raise ValueError(f"Unknown intent code: {int_code}")
+            intents.append(intent_value)
+        
+        domains: list[dict[str, object]] = []
+        for domain_item in msg.d:
+            domain_code = _parse_int_code(domain_item.d)
+            domain_value = DOMAIN_CODE_TO_VALUE.get(domain_code)
+            if domain_value is None:
+                raise ValueError(f"Unknown domain code: {domain_code}")
+            subcategory_codes = domain_item.s or []
+            subcategory_map = SUBCATEGORY_CODE_TO_VALUE.get(domain_value, {})
+            subcategories: list[str] = []
+            for sub_code in subcategory_codes:
+                sub_int = _parse_int_code(sub_code)
+                sub_value = subcategory_map.get(sub_int)
+                if sub_value is None:
+                    raise ValueError(f"Unknown subcategory code: {sub_int} for {domain_value}")
+                subcategories.append(sub_value)
+            domains.append({"domain": domain_value, "subcategories": subcategories})
+        
+        decoded_messages.append({
+            "id": msg.i,
+            "intents": intents,
+            "domains": domains,
+            "is_spam": msg.p,
+            "urgency_score": msg.u,
+            "reasoning": msg.r,
+        })
+    
+    return ClassificationBatchResult.model_validate({"classified_messages": decoded_messages})
+
+
 def get_json_schema() -> dict:
     """
     Generate JSON schema for OpenRouter/OpenAI structured output.
@@ -395,7 +537,7 @@ def get_json_schema() -> dict:
     Returns:
         Dictionary with JSON schema format compatible with OpenRouter API.
     """
-    schema = ClassificationBatchResult.model_json_schema()
+    schema = CompactClassificationBatchResult.model_json_schema()
     
     return {
         "type": "json_schema",

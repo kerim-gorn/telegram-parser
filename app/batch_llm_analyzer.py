@@ -11,8 +11,9 @@ import httpx
 
 from app.openrouter_client import DEFAULT_MODEL_NAME, OPENROUTER_API_URL, get_openrouter_client
 from app.classification import (
-    ClassificationBatchResult,
+    CompactClassificationBatchResult,
     SYSTEM_PROMPT_TEXT,
+    decode_compact_batch,
     get_json_schema,
 )
 
@@ -102,14 +103,26 @@ async def analyze_messages_batch(messages: List[Dict[str, str]]) -> Dict[str, An
                 "text": content,
             }
         
-        # Validate against Pydantic schema
+        # Validate against compact Pydantic schema
         try:
-            result = ClassificationBatchResult.model_validate(parsed)
+            compact = CompactClassificationBatchResult.model_validate(parsed)
         except Exception as e:
             return {
                 "ok": False,
                 "error": "validation_error",
                 "message": f"Response does not match schema: {e}",
+                "raw": api_json,
+                "parsed": parsed,
+            }
+        
+        # Decode compact result into full schema
+        try:
+            result = decode_compact_batch(compact)
+        except Exception as e:
+            return {
+                "ok": False,
+                "error": "decode_error",
+                "message": f"Failed to decode compact response: {e}",
                 "raw": api_json,
                 "parsed": parsed,
             }
