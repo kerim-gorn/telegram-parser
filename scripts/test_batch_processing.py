@@ -47,8 +47,39 @@ def create_mock_payload(chat_id: int, message_id: int, text: str, sender_id: int
     }
 
 
+INTENT_CODE = {
+    "REQUEST": 1,
+    "OFFER": 2,
+    "RECOMMENDATION": 3,
+    "COMPLAINT": 4,
+    "INFO": 5,
+    "OTHER": 6,
+}
+
+DOMAIN_CODE = {
+    "CONSTRUCTION_AND_REPAIR": 1,
+    "RENTAL_OF_REAL_ESTATE": 2,
+    "PURCHASE_OF_REAL_ESTATE": 3,
+    "REAL_ESTATE_AGENT": 4,
+    "LAW": 5,
+    "SERVICES": 6,
+    "AUTO": 7,
+    "MARKETPLACE": 8,
+    "SOCIAL_CAPITAL": 9,
+    "OPERATIONAL_MANAGEMENT": 10,
+    "REPUTATION": 11,
+    "NONE": 12,
+}
+
+SUBCATEGORY_CODE = {
+    "CONSTRUCTION_AND_REPAIR": {"REPAIR_SERVICES": 2},
+    "OPERATIONAL_MANAGEMENT": {"SECURITY": 2},
+    "MARKETPLACE": {"BUY_SELL_GOODS": 1},
+}
+
+
 def create_mock_llm_response(messages: list[dict[str, str]]) -> dict[str, Any]:
-    """Create a mock LLM API response."""
+    """Create a mock LLM response in full (decoded) format."""
     classified = []
     for msg in messages:
         msg_id = msg["id"]
@@ -88,6 +119,64 @@ def create_mock_llm_response(messages: list[dict[str, str]]) -> dict[str, Any]:
         "ok": True,
         "data": {"classified_messages": classified},
         "raw": {"choices": [{"message": {"content": json.dumps({"classified_messages": classified})}}]},
+    }
+
+
+def create_mock_llm_compact_payload(messages: list[dict[str, str]]) -> dict[str, Any]:
+    """Create a mock LLM API response in compact format."""
+    compact_messages = []
+    for msg in messages:
+        msg_id = msg["id"]
+        text = msg.get("text", "")
+        
+        if "электрик" in text.lower() or "мастер" in text.lower():
+            intents = ["REQUEST"]
+            domains = [{"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": ["REPAIR_SERVICES"]}]
+            urgency = 3
+        elif "срочно" in text.lower() or "пожар" in text.lower():
+            intents = ["COMPLAINT", "INFO"]
+            domains = [
+                {"domain": "OPERATIONAL_MANAGEMENT", "subcategories": ["SECURITY"]},
+                {"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": ["REPAIR_SERVICES"]},
+            ]
+            urgency = 5
+        elif "продам" in text.lower() or "куплю" in text.lower():
+            intents = ["OFFER", "REQUEST"]
+            domains = [{"domain": "MARKETPLACE", "subcategories": ["BUY_SELL_GOODS"]}]
+            urgency = 1
+        else:
+            intents = ["INFO"]
+            domains = [{"domain": "NONE", "subcategories": []}]
+            urgency = 1
+        
+        compact_domains = []
+        for domain in domains:
+            domain_name = domain["domain"]
+            subcats = domain.get("subcategories", [])
+            subcat_map = SUBCATEGORY_CODE.get(domain_name, {})
+            subcat_codes = []
+            for subcat in subcats:
+                code = subcat_map.get(subcat)
+                if code is None:
+                    raise AssertionError(f"Missing subcategory code for {domain_name}:{subcat}")
+                subcat_codes.append(code)
+            compact_domains.append({
+                "d": DOMAIN_CODE[domain_name],
+                "s": subcat_codes,
+            })
+        
+        compact_messages.append({
+            "i": msg_id,
+            "t": [INTENT_CODE[intent] for intent in intents],
+            "d": compact_domains,
+            "p": False,
+            "u": urgency,
+            "r": f"Test msg {msg_id}",
+        })
+    
+    return {
+        "choices": [{"message": {"content": json.dumps({"m": compact_messages})}}],
+        "usage": {"prompt_tokens": 100, "completion_tokens": 50},
     }
 
 
@@ -161,10 +250,7 @@ async def test_batch_llm_analyzer() -> None:
         mock_http_client = AsyncMock()
         mock_response_obj = MagicMock()
         mock_response_obj.status_code = 200
-        mock_response_obj.json.return_value = {
-            "choices": [{"message": {"content": json.dumps(mock_response["data"])}}],
-            "usage": {"prompt_tokens": 100, "completion_tokens": 50},
-        }
+        mock_response_obj.json.return_value = create_mock_llm_compact_payload(messages)
         mock_response_obj.raise_for_status = MagicMock()
         mock_http_client.post = AsyncMock(return_value=mock_response_obj)
         mock_client.return_value = mock_http_client

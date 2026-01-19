@@ -19,7 +19,7 @@ from app.domain_router import get_domain_router
 from app.classification import IntentType, DomainInfo
 
 # Batch processing configuration
-BATCH_SIZE = 50
+BATCH_SIZE = 70
 BATCH_TIMEOUT_SECONDS = 5.0
 
 
@@ -178,6 +178,7 @@ async def _process_batch(payloads: list[dict[str, Any]]) -> list[dict[str, Any]]
                 "urgency_score": 3,
                 "reasoning": f"Forced by prefilter (matched: {', '.join(matched)})",
                 "llm_analysis": {"ok": True, "forced": True, "matched": matched},
+                "openrouter_response": None,
             })
         elif decision == "skip":
             # Skipped message - mark as non-signal with minimal classification
@@ -191,6 +192,7 @@ async def _process_batch(payloads: list[dict[str, Any]]) -> list[dict[str, Any]]
                 "urgency_score": 1,
                 "reasoning": f"Filtered by prefilter (matched: {', '.join(matched)})",
                 "llm_analysis": {"ok": True, "filtered": True, "matched": matched},
+                "openrouter_response": None,
             })
         else:
             # Candidate for LLM analysis
@@ -214,6 +216,7 @@ async def _process_batch(payloads: list[dict[str, Any]]) -> list[dict[str, Any]]
                     "urgency_score": 1,
                     "reasoning": "Empty or no text content",
                     "llm_analysis": None,
+                    "openrouter_response": None,
                 })
     
     # Call LLM for candidates
@@ -231,6 +234,7 @@ async def _process_batch(payloads: list[dict[str, Any]]) -> list[dict[str, Any]]
         llm_result = await analyze_messages_batch(llm_messages)
         
         if llm_result.get("ok") is True:
+            openrouter_response = llm_result.get("raw")
             data = llm_result.get("data", {})
             classified_messages = data.get("classified_messages", [])
             
@@ -260,6 +264,7 @@ async def _process_batch(payloads: list[dict[str, Any]]) -> list[dict[str, Any]]
                     "urgency_score": urgency_score,
                     "reasoning": reasoning,
                     "llm_analysis": {"ok": True, **classified},
+                    "openrouter_response": openrouter_response,
                 }
         else:
             # LLM failed, mark candidates with detailed error info
@@ -284,6 +289,7 @@ async def _process_batch(payloads: list[dict[str, Any]]) -> list[dict[str, Any]]
 
             # Store full LLM error payload (except ok flag) in llm_analysis for debugging
             error_payload = {k: v for k, v in llm_result.items() if k != "ok"}
+            openrouter_response = llm_result.get("raw") or error_payload or None
 
             # Log once per failed batch for easier debugging in container logs
             try:
@@ -306,6 +312,7 @@ async def _process_batch(payloads: list[dict[str, Any]]) -> list[dict[str, Any]]
                     "urgency_score": 1,
                     "reasoning": f"LLM analysis failed: {error_msg}",
                     "llm_analysis": {"ok": False, **error_payload},
+                    "openrouter_response": openrouter_response,
                 }
     
     return results
@@ -345,6 +352,7 @@ async def _persist_batch(results: list[dict[str, Any]], stats: dict[str, Any]) -
             "is_spam": result.get("is_spam", False),
             "reasoning": result.get("reasoning"),
             "llm_analysis": result.get("llm_analysis"),
+            "openrouter_response": result.get("openrouter_response"),
             "message_date": msg_data["message_date"],
             "indexed_at": datetime.now(tz=timezone.utc),
         }
@@ -452,6 +460,8 @@ async def _consume_queue(channel: AbstractChannel, queue_name: str, stats: dict[
         async with buffer_lock:
             if not buffer:
                 return
+            if len(buffer) < BATCH_SIZE:
+                return
             
             messages_to_process = buffer[:]
             buffer.clear()
@@ -516,7 +526,7 @@ async def _consume_queue(channel: AbstractChannel, queue_name: str, stats: dict[
                 await asyncio.sleep(1.0)  # Check every second
                 now = asyncio.get_event_loop().time()
                 async with buffer_lock:
-                    if buffer and (now - last_batch_time) >= BATCH_TIMEOUT_SECONDS:
+                    if buffer and len(buffer) >= BATCH_SIZE and (now - last_batch_time) >= BATCH_TIMEOUT_SECONDS:
                         # Trigger processing
                         asyncio.create_task(process_buffered())
             except asyncio.CancelledError:
