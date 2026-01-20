@@ -10,6 +10,7 @@ from typing import Any, Dict, List
 import httpx
 
 from app.openrouter_client import DEFAULT_MODEL_NAME, OPENROUTER_API_URL, get_openrouter_client
+from core.config import settings
 from app.classification import (
     CompactClassificationBatchResult,
     SYSTEM_PROMPT_TEXT,
@@ -37,11 +38,11 @@ async def analyze_messages_batch(messages: List[Dict[str, str]]) -> Dict[str, An
     if not messages:
         return {"ok": False, "error": "empty_batch", "message": "Messages list cannot be empty"}
     
-    if len(messages) > 50:
+    if len(messages) > settings.llm_batch_size:
         return {
             "ok": False,
             "error": "batch_too_large",
-            "message": f"Batch size {len(messages)} exceeds maximum of 50",
+            "message": f"Batch size {len(messages)} exceeds maximum of {settings.llm_batch_size}",
         }
     
     # Validate message format

@@ -19,8 +19,9 @@ from app.domain_router import get_domain_router
 from app.classification import IntentType, DomainInfo
 
 # Batch processing configuration
-BATCH_SIZE = 70
-BATCH_TIMEOUT_SECONDS = 5.0
+READ_BATCH_SIZE = 70
+READ_BATCH_TIMEOUT_SECONDS = 5.0
+LLM_BATCH_SIZE = settings.llm_batch_size
 
 
 async def _stats_reporter(stats: dict[str, Any]) -> None:
@@ -130,14 +131,14 @@ def _extract_message_data(payload: dict[str, Any]) -> dict[str, Any] | None:
     }
 
 
-async def _process_batch(payloads: list[dict[str, Any]]) -> list[dict[str, Any]]:
+async def _prefilter_batch(
+    payloads: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[int]]:
     """
     Process a batch of message payloads:
-    1. Apply prefilter to each message (before batch formation)
+    1. Apply prefilter to each message
     2. Split into forced/skip/llm_candidates
-    3. Call LLM for candidates
-    4. Combine results
-    5. Return list of results ready for persistence
+    3. Return results for immediate persistence + LLM candidates
     """
     results: list[dict[str, Any]] = []
     llm_candidates: list[dict[str, Any]] = []
@@ -219,43 +220,54 @@ async def _process_batch(payloads: list[dict[str, Any]]) -> list[dict[str, Any]]
                     "openrouter_response": None,
                 })
     
-    # Call LLM for candidates
-    if llm_candidates:
-        # Prepare messages for LLM
-        llm_messages = [
-            {
-                "id": f"{msg['chat_id']}_{msg['message_id']}",
-                "text": msg["text"] or "",
-            }
-            for msg in llm_candidates
-        ]
-        
-        # Call batch LLM analyzer
-        llm_result = await analyze_messages_batch(llm_messages)
-        
-        if llm_result.get("ok") is True:
-            openrouter_response = llm_result.get("raw")
-            data = llm_result.get("data", {})
-            classified_messages = data.get("classified_messages", [])
-            
-            # Map LLM results back to candidates
-            llm_result_map: dict[str, dict[str, Any]] = {}
-            for classified in classified_messages:
-                msg_id = classified.get("id", "")
-                llm_result_map[msg_id] = classified
-            
-            # Update results with LLM classification
-            for idx, msg_data in zip(llm_candidate_indices, llm_candidates):
-                msg_id = f"{msg_data['chat_id']}_{msg_data['message_id']}"
-                classified = llm_result_map.get(msg_id, {})
-                
-                intents = [intent for intent in classified.get("intents", [])]
-                domains = classified.get("domains", [])
-                is_spam = classified.get("is_spam", False)
-                urgency_score = classified.get("urgency_score", 1)
-                reasoning = classified.get("reasoning", "LLM classification")
-                
-                results[idx] = {
+    return results, llm_candidates, llm_candidate_indices
+
+
+async def _process_llm_batch(llm_candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """
+    Process a batch of LLM candidates (strictly sized).
+    Returns list of results ready for persistence.
+    """
+    if not llm_candidates:
+        return []
+
+    # Prepare messages for LLM
+    llm_messages = [
+        {
+            "id": f"{msg['chat_id']}_{msg['message_id']}",
+            "text": msg["text"] or "",
+        }
+        for msg in llm_candidates
+    ]
+
+    # Call batch LLM analyzer
+    llm_result = await analyze_messages_batch(llm_messages)
+
+    results: list[dict[str, Any]] = []
+    if llm_result.get("ok") is True:
+        openrouter_response = llm_result.get("raw")
+        data = llm_result.get("data", {})
+        classified_messages = data.get("classified_messages", [])
+
+        # Map LLM results back to candidates
+        llm_result_map: dict[str, dict[str, Any]] = {}
+        for classified in classified_messages:
+            msg_id = classified.get("id", "")
+            llm_result_map[msg_id] = classified
+
+        # Update results with LLM classification
+        for msg_data in llm_candidates:
+            msg_id = f"{msg_data['chat_id']}_{msg_data['message_id']}"
+            classified = llm_result_map.get(msg_id, {})
+
+            intents = [intent for intent in classified.get("intents", [])]
+            domains = classified.get("domains", [])
+            is_spam = classified.get("is_spam", False)
+            urgency_score = classified.get("urgency_score", 1)
+            reasoning = classified.get("reasoning", "LLM classification")
+
+            results.append(
+                {
                     "msg_data": msg_data,
                     "prefilter_decision": None,
                     "intents": intents,
@@ -266,44 +278,46 @@ async def _process_batch(payloads: list[dict[str, Any]]) -> list[dict[str, Any]]
                     "llm_analysis": {"ok": True, **classified},
                     "openrouter_response": openrouter_response,
                 }
-        else:
-            # LLM failed, mark candidates with detailed error info
-            error_type = llm_result.get("error") or "unknown_error"
-            status_code = llm_result.get("status_code")
-            body = llm_result.get("body")
-            base_message = llm_result.get("message")
+            )
+    else:
+        # LLM failed, mark candidates with detailed error info
+        error_type = llm_result.get("error") or "unknown_error"
+        status_code = llm_result.get("status_code")
+        body = llm_result.get("body")
+        base_message = llm_result.get("message")
 
-            # Build human-readable error message with as much context as possible
-            parts: list[str] = [error_type]
-            if status_code is not None:
-                parts.append(f"status={status_code}")
-            if body:
-                # Truncate body to avoid huge payloads in reasoning
-                body_snippet = str(body)
-                if len(body_snippet) > 500:
-                    body_snippet = body_snippet[:500] + "...(truncated)"
-                parts.append(f"body_snippet={body_snippet}")
-            if base_message and base_message not in parts:
-                parts.append(f"message={base_message}")
-            error_msg = "; ".join(parts)
+        # Build human-readable error message with as much context as possible
+        parts: list[str] = [error_type]
+        if status_code is not None:
+            parts.append(f"status={status_code}")
+        if body:
+            # Truncate body to avoid huge payloads in reasoning
+            body_snippet = str(body)
+            if len(body_snippet) > 500:
+                body_snippet = body_snippet[:500] + "...(truncated)"
+            parts.append(f"body_snippet={body_snippet}")
+        if base_message and base_message not in parts:
+            parts.append(f"message={base_message}")
+        error_msg = "; ".join(parts)
 
-            # Store full LLM error payload (except ok flag) in llm_analysis for debugging
-            error_payload = {k: v for k, v in llm_result.items() if k != "ok"}
-            openrouter_response = llm_result.get("raw") or error_payload or None
+        # Store full LLM error payload (except ok flag) in llm_analysis for debugging
+        error_payload = {k: v for k, v in llm_result.items() if k != "ok"}
+        openrouter_response = llm_result.get("raw") or error_payload or None
 
-            # Log once per failed batch for easier debugging in container logs
-            try:
-                print(
-                    "[Ingestor] LLM batch error: "
-                    + json.dumps(error_payload, ensure_ascii=False)[:1000],
-                    flush=True,
-                )
-            except Exception:
-                # Never break ingestion because of logging issues
-                pass
+        # Log once per failed batch for easier debugging in container logs
+        try:
+            print(
+                "[Ingestor] LLM batch error: "
+                + json.dumps(error_payload, ensure_ascii=False)[:1000],
+                flush=True,
+            )
+        except Exception:
+            # Never break ingestion because of logging issues
+            pass
 
-            for idx, msg_data in zip(llm_candidate_indices, llm_candidates):
-                results[idx] = {
+        for msg_data in llm_candidates:
+            results.append(
+                {
                     "msg_data": msg_data,
                     "prefilter_decision": None,
                     "intents": ["OTHER"],
@@ -314,7 +328,8 @@ async def _process_batch(payloads: list[dict[str, Any]]) -> list[dict[str, Any]]
                     "llm_analysis": {"ok": False, **error_payload},
                     "openrouter_response": openrouter_response,
                 }
-    
+            )
+
     return results
 
 
@@ -448,19 +463,23 @@ async def _consume_queue(channel: AbstractChannel, queue_name: str, stats: dict[
     Accumulates messages in buffer until batch size or timeout is reached.
     """
     queue: AbstractQueue = await channel.declare_queue(queue_name, durable=True, passive=True)
-    print(f"[Ingestor] Consuming '{queue_name}' (batch_size={BATCH_SIZE}, timeout={BATCH_TIMEOUT_SECONDS}s)", flush=True)
+    print(
+        "[Ingestor] Consuming "
+        f"'{queue_name}' (read_batch={READ_BATCH_SIZE}, timeout={READ_BATCH_TIMEOUT_SECONDS}s, "
+        f"llm_batch={LLM_BATCH_SIZE})",
+        flush=True,
+    )
     
     buffer: list[aio_pika.IncomingMessage] = []
     buffer_lock = asyncio.Lock()
     last_batch_time = asyncio.get_event_loop().time()
+    llm_pending: list[dict[str, Any]] = []
     
     async def process_buffered() -> None:
         """Process all messages currently in buffer."""
         nonlocal last_batch_time
         async with buffer_lock:
             if not buffer:
-                return
-            if len(buffer) < BATCH_SIZE:
                 return
             
             messages_to_process = buffer[:]
@@ -492,15 +511,16 @@ async def _consume_queue(channel: AbstractChannel, queue_name: str, stats: dict[
         try:
             stats["consumed"] = int(stats.get("consumed", 0)) + len(payloads)
             
-            # Process batch
-            results = await _process_batch(payloads)
+            # Prefilter batch
+            results, llm_candidates, llm_candidate_indices = await _prefilter_batch(payloads)
             
-            # Persist results
-            await _persist_batch(results, stats)
-            
-            # Update last event
-            if results:
-                last_result = results[-1]
+            # Persist non-LLM results immediately
+            results_for_persist = [result for result in results if not result.get("llm_pending")]
+            if results_for_persist:
+                await _persist_batch(results_for_persist, stats)
+                
+                # Update last event
+                last_result = results_for_persist[-1]
                 msg_data = last_result.get("msg_data")
                 if msg_data:
                     stats["last_event"] = {
@@ -509,9 +529,44 @@ async def _consume_queue(channel: AbstractChannel, queue_name: str, stats: dict[
                         "message_id": msg_data.get("message_id"),
                     }
             
-            # Ack all successfully processed messages
-            for message in ack_messages:
-                await message.ack()
+            # Ack non-LLM messages after persistence
+            for idx, result in enumerate(results):
+                if result.get("llm_pending"):
+                    continue
+                try:
+                    await ack_messages[idx].ack()
+                except Exception:
+                    pass
+            
+            # Buffer LLM candidates and ack them immediately (per selected strategy)
+            llm_batches_to_process: list[list[dict[str, Any]]] = []
+            async with buffer_lock:
+                if llm_candidates:
+                    llm_pending.extend(llm_candidates)
+                    while len(llm_pending) >= LLM_BATCH_SIZE:
+                        llm_batches_to_process.append(llm_pending[:LLM_BATCH_SIZE])
+                        del llm_pending[:LLM_BATCH_SIZE]
+            
+            for idx in llm_candidate_indices:
+                try:
+                    await ack_messages[idx].ack()
+                except Exception:
+                    pass
+            
+            # Process any full LLM batches
+            for llm_batch in llm_batches_to_process:
+                llm_results = await _process_llm_batch(llm_batch)
+                if llm_results:
+                    await _persist_batch(llm_results, stats)
+                    
+                    last_result = llm_results[-1]
+                    msg_data = last_result.get("msg_data")
+                    if msg_data:
+                        stats["last_event"] = {
+                            "queue": queue_name,
+                            "chat_id": msg_data.get("chat_id"),
+                            "message_id": msg_data.get("message_id"),
+                        }
         except Exception as e:
             stats["failed"] = int(stats.get("failed", 0)) + len(payloads)
             print(f"[Ingestor] Error processing batch from '{queue_name}': {e}", flush=True)
@@ -526,7 +581,7 @@ async def _consume_queue(channel: AbstractChannel, queue_name: str, stats: dict[
                 await asyncio.sleep(1.0)  # Check every second
                 now = asyncio.get_event_loop().time()
                 async with buffer_lock:
-                    if buffer and len(buffer) >= BATCH_SIZE and (now - last_batch_time) >= BATCH_TIMEOUT_SECONDS:
+                    if buffer and (now - last_batch_time) >= READ_BATCH_TIMEOUT_SECONDS:
                         # Trigger processing
                         asyncio.create_task(process_buffered())
             except asyncio.CancelledError:
@@ -544,7 +599,7 @@ async def _consume_queue(channel: AbstractChannel, queue_name: str, stats: dict[
                     buffer.append(message)
                     
                     # Process immediately if batch size reached
-                    if len(buffer) >= BATCH_SIZE:
+                    if len(buffer) >= READ_BATCH_SIZE:
                         asyncio.create_task(process_buffered())
     finally:
         timeout_task.cancel()
@@ -561,8 +616,9 @@ async def main() -> None:
     print(
         "[Ingestor] Starting (batch mode). "
         f"Broker={settings.celery_broker_url} "
-        f"BatchSize={BATCH_SIZE} "
-        f"BatchTimeout={BATCH_TIMEOUT_SECONDS}s "
+        f"ReadBatch={READ_BATCH_SIZE} "
+        f"ReadTimeout={READ_BATCH_TIMEOUT_SECONDS}s "
+        f"LlmBatch={LLM_BATCH_SIZE} "
         f"Prefilter={settings.prefilter_config_json or 'disabled'} "
         f"Reload={settings.prefilter_reload_seconds}s",
         flush=True,
