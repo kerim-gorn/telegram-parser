@@ -80,6 +80,8 @@ class Settings(BaseSettings):
     prefilter_config_json: str | None = Field(default=None, alias="PREFILTER_CONFIG_JSON")
     # Hot-reload interval for the prefilter rules (seconds)
     prefilter_reload_seconds: int = Field(180, alias="PREFILTER_RELOAD_SECONDS")
+    # LLM batch size (strict)
+    llm_batch_size: int = Field(50, alias="LLM_BATCH_SIZE")
 
     # Domain routing configuration
     # Path to JSON file with domain-to-chat_id mapping for message routing

@@ -15,24 +15,22 @@ Role:
 You are an advanced AI classifier specializing in analyzing community chat messages.
 
 Task:
-You will receive a list of messages in JSON format. Your goal is to map each message to the correct Intents, Domains, and Flags according to the strict compact JSON Schema provided in the output format.
+You will receive a list of messages in JSON format. Your goal is to map each message to the correct Intents, Domains, and Flags and return a compact bitwise output.
 
-### Output format (compact keys + numeric codes)
-Return JSON with short keys to minimize tokens:
-{
-  "m": [
-    {
-      "i": "<message_id>",
-      "t": [<intent_code>, ...],
-      "d": [{"d": <domain_code>, "s": [<subcategory_code>, ...]}],
-      "p": <is_spam_bool>,
-      "u": <urgency_score_1_to_5>,
-      "r": "<reasoning_max_50_chars>"
-    }
-  ]
-}
+### Output format (compact numeric, one line per message)
+Return plain text. One line per message, in the same order as input:
+<id>|<intent>|<domains>|<subcats>|<spam>|<urgency>|<reasoning>
 
-Reasoning must be extremely short (3-5 words, max 50 chars).
+Where:
+- intent = single intent code (1..6)
+- domains = comma-separated domain codes; use 12 (NONE) if no domain; if 12 is present, it must be the only domain
+- subcats = optional subcategory list per domain: <domain>=<sub1,sub2>; separate domains by ';'
+  Example: 4=1,2;7=1 means subcategories 1 and 2 for domain 4, and subcategory 1 for domain 7.
+  If no subcategories, output an empty field.
+- spam = 0/1
+- urgency = 1..5
+
+Reasoning must be extremely short (3-5 words, max 50 chars), no '|' character.
 
 ### Codes
 Intents:
@@ -199,7 +197,7 @@ Subcategories by domain:
    
 6. **Subcategories:** Only specify subcategories if they are clearly inferred from the text. Если домен ясен, но подкатегория неочевидна — subcategories оставить пустым.
 
-### Few-Shot Batch Example (compact output)
+### Few-Shot Batch Example (bitwise output)
 
 User Input:
 [
@@ -213,17 +211,13 @@ User Input:
 ]
 
 Model Output:
-{
-  "m": [
-    {"i": "1", "t": [1], "d": [{"d": 1, "s": [2]}], "p": false, "u": 3, "r": "Ищет ремонтную бригаду"},
-    {"i": "2", "t": [5], "d": [{"d": 1, "s": []}], "p": false, "u": 1, "r": "Уточняет высоту потолка"},
-    {"i": "3", "t": [1], "d": [{"d": 5, "s": [1]}, {"d": 3, "s": []}], "p": false, "u": 3, "r": "Ищет юриста по договору"},
-    {"i": "4", "t": [2], "d": [{"d": 1, "s": []}], "p": false, "u": 1, "r": "Мелкая подработка, не лид"},
-    {"i": "5", "t": [6], "d": [{"d": 1, "s": []}], "p": false, "u": 1, "r": "Обрывок фразы"},
-    {"i": "6", "t": [1], "d": [{"d": 1, "s": [3]}], "p": false, "u": 2, "r": "Просит одолжить инструмент"},
-    {"i": "7", "t": [2], "d": [{"d": 1, "s": []}], "p": false, "u": 1, "r": "Предложение работы"}
-  ]
-}
+1|1|1|1=2|0|3|Ищет ремонтную бригаду
+2|5|1||0|1|Уточняет высоту потолка
+3|1|3,5|5=1|0|3|Ищет юриста по договору
+4|2|1||0|1|Мелкая подработка, не лид
+5|6|12||0|1|Обрывок фразы
+6|1|1|1=3|0|2|Просит одолжить инструмент
+7|2|1||0|1|Предложение работы
 """
 
 
@@ -348,27 +342,6 @@ SUBCATEGORY_VALUE_TO_CODE: dict[DomainType, dict[str, int]] = {
 }
 
 
-class CompactDomainInfo(BaseModel):
-    """Compact domain info with numeric codes."""
-    d: int = Field(..., description="Domain code (see mapping in prompt).")
-    s: List[int] = Field(default_factory=list, description="Subcategory codes for the domain.")
-
-
-class CompactClassifiedMessage(BaseModel):
-    """Compact classification result for a single message."""
-    i: str = Field(..., description="Message ID from input.")
-    t: List[int] = Field(..., description="Intent codes.")
-    d: List[CompactDomainInfo] = Field(..., description="Domain codes and subcategory codes.")
-    p: bool = Field(..., description="Is spam.")
-    u: int = Field(..., description="Urgency score [1,5].")
-    r: str = Field(..., max_length=50, description="Very short reasoning (max 50 chars).")
-
-
-class CompactClassificationBatchResult(BaseModel):
-    """Compact batch classification output."""
-    m: List[CompactClassifiedMessage]
-
-
 # Pydantic models for classification
 class DomainInfo(BaseModel):
     """Domain information with optional subcategories."""
@@ -487,64 +460,125 @@ def _parse_int_code(value: int | str) -> int:
     raise ValueError(f"Invalid code value: {value}")
 
 
-def decode_compact_batch(compact: CompactClassificationBatchResult) -> ClassificationBatchResult:
+def _parse_code_list(value: str, label: str) -> list[int]:
+    if not isinstance(value, str):
+        raise ValueError(f"{label} must be a string")
+    items = [item.strip() for item in value.split(",") if item.strip()]
+    codes: list[int] = []
+    for item in items:
+        if not item.isdigit():
+            raise ValueError(f"Invalid {label} code: {item}")
+        codes.append(int(item))
+    return codes
+
+
+def _parse_subcategory_map(segment: str) -> dict[int, list[int]]:
+    subcats: dict[int, list[int]] = {}
+    if not isinstance(segment, str) or not segment.strip():
+        return subcats
+    tokens: list[str] = []
+    for part in segment.split(";"):
+        part = part.strip()
+        if not part:
+            continue
+        tokens.extend([item.strip() for item in part.split(",") if item.strip()])
+    current_domain: int | None = None
+    for token in tokens:
+        if "=" in token:
+            domain_str, sub_str = token.split("=", 1)
+            domain_code = _parse_int_code(domain_str.strip())
+            if not sub_str.strip():
+                raise ValueError(f"Invalid subcategory entry: {token}")
+            current_domain = domain_code
+            subcodes = _parse_code_list(sub_str, f"S{domain_code}")
+            subcats.setdefault(domain_code, []).extend(subcodes)
+        else:
+            if current_domain is None:
+                raise ValueError(f"Subcategory code without domain: {token}")
+            subcodes = _parse_code_list(token, f"S{current_domain}")
+            subcats.setdefault(current_domain, []).extend(subcodes)
+    return subcats
+
+
+def parse_compact_batch(text: str) -> ClassificationBatchResult:
     """
-    Decode compact output (numeric codes + short keys) into full classification schema.
+    Parse compact numeric batch output into full classification schema.
+
+    Expected line format:
+    <id>|<intent>|<domains>|<subcats>|<spam>|<urgency>|<reasoning>
     """
+    if not isinstance(text, str) or not text.strip():
+        raise ValueError("Empty compact output")
+
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    if not lines:
+        raise ValueError("No compact lines found")
+
     decoded_messages: list[dict[str, object]] = []
-    for msg in compact.m:
-        intents: list[IntentType] = []
-        for code in msg.t:
-            int_code = _parse_int_code(code)
-            intent_value = INTENT_CODE_TO_VALUE.get(int_code)
-            if intent_value is None:
-                raise ValueError(f"Unknown intent code: {int_code}")
-            intents.append(intent_value)
-        
+    for line in lines:
+        parts = line.split("|", 6)
+        if len(parts) != 7:
+            raise ValueError(f"Invalid line format (expected 7 parts): {line}")
+        msg_id, intent_raw, domains_raw, subcats_raw, spam_raw, urgency_raw, reasoning = [
+            part.strip() for part in parts
+        ]
+        if not msg_id:
+            raise ValueError(f"Missing message id in line: {line}")
+
+        intent_code = _parse_int_code(intent_raw)
+        intent_value = INTENT_CODE_TO_VALUE.get(intent_code)
+        if intent_value is None:
+            raise ValueError(f"Unknown intent code: {intent_code}")
+        intents = [intent_value]
+
+        domain_codes = _parse_code_list(domains_raw, "D") if domains_raw else []
+        if not domain_codes:
+            domain_codes = [DOMAIN_VALUE_TO_CODE[DomainType.NONE]]
+        subcategory_map = _parse_subcategory_map(subcats_raw)
+        if DOMAIN_VALUE_TO_CODE[DomainType.NONE] in domain_codes and len(domain_codes) > 1:
+            # LLM sometimes returns NONE alongside real domains. Ignore NONE in that case.
+            domain_codes = [
+                code for code in domain_codes
+                if code != DOMAIN_VALUE_TO_CODE[DomainType.NONE]
+            ]
+            subcategory_map.pop(DOMAIN_VALUE_TO_CODE[DomainType.NONE], None)
+        extra_subcats = set(subcategory_map.keys()) - set(domain_codes)
+        if extra_subcats:
+            raise ValueError(f"Subcategory entries for non-selected domains: {sorted(extra_subcats)}")
+
         domains: list[dict[str, object]] = []
-        for domain_item in msg.d:
-            domain_code = _parse_int_code(domain_item.d)
+        for domain_code in domain_codes:
             domain_value = DOMAIN_CODE_TO_VALUE.get(domain_code)
             if domain_value is None:
                 raise ValueError(f"Unknown domain code: {domain_code}")
-            subcategory_codes = domain_item.s or []
-            subcategory_map = SUBCATEGORY_CODE_TO_VALUE.get(domain_value, {})
+            if domain_value == DomainType.NONE and domain_code in subcategory_map:
+                raise ValueError("Subcategories not allowed for NONE domain")
+            allowed_subcats = SUBCATEGORY_CODE_TO_VALUE.get(domain_value, {})
+            subcodes = subcategory_map.get(domain_code, [])
             subcategories: list[str] = []
-            for sub_code in subcategory_codes:
-                sub_int = _parse_int_code(sub_code)
-                sub_value = subcategory_map.get(sub_int)
+            for sub_code in subcodes:
+                sub_value = allowed_subcats.get(sub_code)
                 if sub_value is None:
-                    raise ValueError(f"Unknown subcategory code: {sub_int} for {domain_value}")
+                    raise ValueError(f"Unknown subcategory code: {sub_code} for {domain_value}")
                 subcategories.append(sub_value)
             domains.append({"domain": domain_value, "subcategories": subcategories})
-        
+
+        if spam_raw not in {"0", "1"}:
+            raise ValueError(f"Invalid spam flag: {spam_raw}")
+        is_spam = spam_raw == "1"
+
+        urgency_code = _parse_int_code(urgency_raw)
+        if urgency_code < 1 or urgency_code > 5:
+            raise ValueError(f"Urgency out of range (1..5): {urgency_code}")
+
         decoded_messages.append({
-            "id": msg.i,
+            "id": msg_id,
             "intents": intents,
             "domains": domains,
-            "is_spam": msg.p,
-            "urgency_score": msg.u,
-            "reasoning": msg.r,
+            "is_spam": is_spam,
+            "urgency_score": urgency_code,
+            "reasoning": reasoning,
         })
-    
+
     return ClassificationBatchResult.model_validate({"classified_messages": decoded_messages})
-
-
-def get_json_schema() -> dict:
-    """
-    Generate JSON schema for OpenRouter/OpenAI structured output.
-    
-    Returns:
-        Dictionary with JSON schema format compatible with OpenRouter API.
-    """
-    schema = CompactClassificationBatchResult.model_json_schema()
-    
-    return {
-        "type": "json_schema",
-        "json_schema": {
-            "name": "classification_result",
-            "strict": True,
-            "schema": schema
-        }
-    }
 

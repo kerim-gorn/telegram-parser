@@ -10,12 +10,8 @@ from typing import Any, Dict, List
 import httpx
 
 from app.openrouter_client import DEFAULT_MODEL_NAME, OPENROUTER_API_URL, get_openrouter_client
-from app.classification import (
-    CompactClassificationBatchResult,
-    SYSTEM_PROMPT_TEXT,
-    decode_compact_batch,
-    get_json_schema,
-)
+from core.config import settings
+from app.classification import SYSTEM_PROMPT_TEXT, parse_compact_batch
 
 
 async def analyze_messages_batch(messages: List[Dict[str, str]]) -> Dict[str, Any]:
@@ -37,11 +33,11 @@ async def analyze_messages_batch(messages: List[Dict[str, str]]) -> Dict[str, An
     if not messages:
         return {"ok": False, "error": "empty_batch", "message": "Messages list cannot be empty"}
     
-    if len(messages) > 50:
+    if len(messages) > settings.llm_batch_size:
         return {
             "ok": False,
             "error": "batch_too_large",
-            "message": f"Batch size {len(messages)} exceeds maximum of 50",
+            "message": f"Batch size {len(messages)} exceeds maximum of {settings.llm_batch_size}",
         }
     
     # Validate message format
@@ -66,15 +62,25 @@ async def analyze_messages_batch(messages: List[Dict[str, str]]) -> Dict[str, An
         "Content-Type": "application/json",
     }
     
+    max_tokens = min(2000, 120 + len(messages) * 35)
+    order_messages: list[dict[str, str]] = []
+    order_id_map: dict[str, str] = {}
+    for idx, msg in enumerate(messages, start=1):
+        order_id = str(idx)
+        order_messages.append({"id": order_id, "text": msg.get("text", "")})
+        order_id_map[order_id] = str(msg.get("id", order_id))
+    user_prelude = (
+        "Ответ только в формате битовых строк. "
+        "Никаких пояснений. Reasoning 3-5 слов.\n"
+    )
     payload: Dict[str, Any] = {
         "model": model_name,
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT_TEXT},
-            {"role": "user", "content": json.dumps(messages, ensure_ascii=False)},
+            {"role": "user", "content": user_prelude + json.dumps(order_messages, ensure_ascii=False)},
         ],
-        "response_format": get_json_schema(),
         "temperature": 0.1,
-        "max_tokens": 64000,
+        "max_tokens": max_tokens,
     }
     
     try:
@@ -91,46 +97,39 @@ async def analyze_messages_batch(messages: List[Dict[str, str]]) -> Dict[str, An
         if not isinstance(content, str) or not content.strip():
             return {"ok": False, "error": "no_content", "raw": api_json}
         
-        # Parse JSON response
+        # Parse compact response
         try:
-            parsed = json.loads(content)
-        except json.JSONDecodeError as e:
+            result = parse_compact_batch(content)
+            data = result.model_dump()
+            classified = data.get("classified_messages") or []
+            unknown_ids: list[str] = []
+            for item in classified:
+                order_id = str(item.get("id", "")).strip()
+                if order_id not in order_id_map:
+                    unknown_ids.append(order_id)
+                    continue
+                item["id"] = order_id_map[order_id]
+            if unknown_ids:
+                return {
+                    "ok": False,
+                    "error": "parse_error",
+                    "message": f"Unknown LLM ids in response: {sorted(set(unknown_ids))}",
+                    "raw": api_json,
+                    "text": content,
+                }
+        except Exception as e:
             return {
                 "ok": False,
                 "error": "parse_error",
-                "message": f"Failed to parse JSON response: {e}",
+                "message": f"Failed to parse compact response: {e}",
                 "raw": api_json,
                 "text": content,
-            }
-        
-        # Validate against compact Pydantic schema
-        try:
-            compact = CompactClassificationBatchResult.model_validate(parsed)
-        except Exception as e:
-            return {
-                "ok": False,
-                "error": "validation_error",
-                "message": f"Response does not match schema: {e}",
-                "raw": api_json,
-                "parsed": parsed,
-            }
-        
-        # Decode compact result into full schema
-        try:
-            result = decode_compact_batch(compact)
-        except Exception as e:
-            return {
-                "ok": False,
-                "error": "decode_error",
-                "message": f"Failed to decode compact response: {e}",
-                "raw": api_json,
-                "parsed": parsed,
             }
         
         usage = api_json.get("usage", {})
         return {
             "ok": True,
-            "data": result.model_dump(),
+            "data": data,
             "raw": api_json,
             "usage": usage,
         }

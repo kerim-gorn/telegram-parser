@@ -560,7 +560,7 @@
         },
         {
             "identifier": "t.me/salarpark",
-            "chat_id": null
+            "chat_id": -1001475498130
         },
         {
             "identifier": "t.me/SalParkSosed",
@@ -780,7 +780,7 @@
         },
         {
             "identifier": "t.me/krasnokaz15",
-            "chat_id": null
+            "chat_id": -1001215532722
         },
         {
             "identifier": "t.me/gk_mainstreet",
@@ -816,7 +816,7 @@
         },
         {
             "identifier": "t.me/gkaviatika",
-            "chat_id": null
+            "chat_id": -1001401160688
         },
         {
             "identifier": "t.me/akvilonkommunarka",
@@ -1616,7 +1616,7 @@
         },
         {
             "identifier": "t.me/MoskvorechyeSaburovoPIK",
-            "chat_id": null
+            "chat_id": -1002233437671
         },
         {
             "identifier": "t.me/Kronshtadskiyyy9",
@@ -2052,7 +2052,7 @@
         },
         {
             "identifier": "t.me/HighLifeMoscow",
-            "chat_id": null
+            "chat_id": -1001271481427
         },
         {
             "identifier": "t.me/PIK_Kronshtadtskiy_14",
@@ -2264,7 +2264,7 @@
         },
         {
             "identifier": "t.me/dom_edelveys",
-            "chat_id": null
+            "chat_id": -1002152176977
         },
         {
             "identifier": "t.me/pirogovskayariviera",
@@ -2280,7 +2280,7 @@
         },
         {
             "identifier": "t.me/DomodedovoOptima",
-            "chat_id": null
+            "chat_id": -1002383790228
         },
         {
             "identifier": "t.me/bestconbig7",
@@ -2364,7 +2364,7 @@
         },
         {
             "identifier": "t.me/solnechnyj_park",
-            "chat_id": null
+            "chat_id": -1002802342688
         },
         {
             "identifier": "t.me/alh_chat",
@@ -2428,7 +2428,7 @@
         },
         {
             "identifier": "t.me/SkySputnik_16_17_18",
-            "chat_id": null
+            "chat_id": -1002494136509
         },
         {
             "identifier": "t.me/jkgrafikanavode",
@@ -2448,7 +2448,7 @@
         },
         {
             "identifier": "t.me/welltongoldmsc",
-            "chat_id": null
+            "chat_id": -1001527010501
         },
         {
             "identifier": "t.me/mytischi_city",
@@ -2456,7 +2456,7 @@
         },
         {
             "identifier": "t.me/gkbgorog",
-            "chat_id": null
+            "chat_id": -1002285043101
         },
         {
             "identifier": "t.me/zhk_doro_mille",
@@ -2500,7 +2500,7 @@
         },
         {
             "identifier": "t.me/otradanasinichke",
-            "chat_id": null
+            "chat_id": -1002743948035
         },
         {
             "identifier": "t.me/JkBrigantina",
@@ -2544,7 +2544,7 @@
         },
         {
             "identifier": "t.me/edelwiess1",
-            "chat_id": null
+            "chat_id": -1001562380157
         },
         {
             "identifier": "t.me/jk_7nebo",
@@ -2621,6 +2621,162 @@
         {
             "identifier": "t.me/novoseltsevo",
             "chat_id": null
+        },
+        {
+            "identifier": "t.me/dubai_chat_russia",
+            "chat_id": -1001686273730
+        },
+        {
+            "identifier": "t.me/chat_dubai_group",
+            "chat_id": -1001708076550
+        },
+        {
+            "identifier": "t.me/znakomstva_dxb",
+            "chat_id": -1001292640514
+        },
+        {
+            "identifier": "t.me/BusinessBayD",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/UAEDubai_official",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/UAE_chat",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/uaechatt",
+            "chat_id": -1001663871206
+        },
+        {
+            "identifier": "t.me/dubai_uae_chat",
+            "chat_id": -1001514091674
+        },
+        {
+            "identifier": "t.me/DubaiMarinaD",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/dubailanguage",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/pdr_dubai_vb",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/PalmJumeirahD",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/creekharboar",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/creekharbor",
+            "chat_id": -1001628499062
+        },
+        {
+            "identifier": "t.me/dubaicreekharbour",
+            "chat_id": -1001719725280
+        },
+        {
+            "identifier": "t.me/damac_hills2",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/damacrus",
+            "chat_id": -1001806589105
+        },
+        {
+            "identifier": "t.me/Damachills2sosedi",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/russiansmumsindubai",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/teens_dubai",
+            "chat_id": -1001649965105
+        },
+        {
+            "identifier": "t.me/Dubayg",
+            "chat_id": -1001546639923
+        },
+        {
+            "identifier": "t.me/womensclubdubai",
+            "chat_id": -1002122526601
+        },
+        {
+            "identifier": "t.me/DubaiExpertsClub",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/Flame_club_dubai",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/terra_dubai",
+            "chat_id": -1001819104623
+        },
+        {
+            "identifier": "t.me/netw_dubai",
+            "chat_id": -1001632243429
+        },
+        {
+            "identifier": "t.me/rent_in_dubai",
+            "chat_id": -1001144748083
+        },
+        {
+            "identifier": "t.me/albarshachat",
+            "chat_id": -1002076000997
+        },
+        {
+            "identifier": "t.me/kitcar2",
+            "chat_id": -1002612813439
+        },
+        {
+            "identifier": "t.me/avtobezzabot",
+            "chat_id": -1001655857470
+        },
+        {
+            "identifier": "t.me/GeelyGalaxy",
+            "chat_id": -1001630680068
+        },
+        {
+            "identifier": "t.me/TRDauto125_CHAT",
+            "chat_id": -1002304320983
+        },
+        {
+            "identifier": "t.me/Bigstone_auto",
+            "chat_id": -1002744737907
+        },
+        {
+            "identifier": "t.me/kawaiimotors1",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/avtorynokkyrgyzstan1",
+            "chat_id": -1001839286158
+        },
+        {
+            "identifier": "t.me/mircarss",
+            "chat_id": -1002684284451
+        },
+        {
+            "identifier": "t.me/trafficlightracers",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/mashina_kg_official",
+            "chat_id": -1001272845269
+        },
+        {
+            "identifier": "https://t.me/+L91oGPWq_55jYTky",
+            "chat_id": -1001560193708
         }
     ]
 }
