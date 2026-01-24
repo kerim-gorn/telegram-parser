@@ -21,6 +21,8 @@ You will receive a list of messages in JSON format. Your goal is to map each mes
 Return plain text. One line per message, in the same order as input:
 <id>|<intent>|<domains>|<subcats>|<spam>|<urgency>|<reasoning>
 
+Be extremely careful and precise in following the output structure and separators.
+
 Where:
 - intent = single intent code (1..6)
 - domains = comma-separated domain codes; use 12 (NONE) if no domain; if 12 is present, it must be the only domain
@@ -500,6 +502,72 @@ def _parse_subcategory_map(segment: str) -> dict[int, list[int]]:
     return subcats
 
 
+def _parse_compact_line(line: str) -> dict[str, object]:
+    parts = line.split("|", 6)
+    if len(parts) != 7:
+        raise ValueError(f"Invalid line format (expected 7 parts): {line}")
+    msg_id, intent_raw, domains_raw, subcats_raw, spam_raw, urgency_raw, reasoning = [
+        part.strip() for part in parts
+    ]
+    if not msg_id:
+        raise ValueError(f"Missing message id in line: {line}")
+
+    intent_code = _parse_int_code(intent_raw)
+    intent_value = INTENT_CODE_TO_VALUE.get(intent_code)
+    if intent_value is None:
+        raise ValueError(f"Unknown intent code: {intent_code}")
+    intents = [intent_value]
+
+    domain_codes = _parse_code_list(domains_raw, "D") if domains_raw else []
+    if not domain_codes:
+        domain_codes = [DOMAIN_VALUE_TO_CODE[DomainType.NONE]]
+    subcategory_map = _parse_subcategory_map(subcats_raw)
+    if DOMAIN_VALUE_TO_CODE[DomainType.NONE] in domain_codes and len(domain_codes) > 1:
+        # LLM sometimes returns NONE alongside real domains. Ignore NONE in that case.
+        domain_codes = [
+            code for code in domain_codes
+            if code != DOMAIN_VALUE_TO_CODE[DomainType.NONE]
+        ]
+        subcategory_map.pop(DOMAIN_VALUE_TO_CODE[DomainType.NONE], None)
+    extra_subcats = set(subcategory_map.keys()) - set(domain_codes)
+    if extra_subcats:
+        raise ValueError(f"Subcategory entries for non-selected domains: {sorted(extra_subcats)}")
+
+    domains: list[dict[str, object]] = []
+    for domain_code in domain_codes:
+        domain_value = DOMAIN_CODE_TO_VALUE.get(domain_code)
+        if domain_value is None:
+            raise ValueError(f"Unknown domain code: {domain_code}")
+        if domain_value == DomainType.NONE and domain_code in subcategory_map:
+            raise ValueError("Subcategories not allowed for NONE domain")
+        allowed_subcats = SUBCATEGORY_CODE_TO_VALUE.get(domain_value, {})
+        subcodes = subcategory_map.get(domain_code, [])
+        subcategories: list[str] = []
+        for sub_code in subcodes:
+            sub_value = allowed_subcats.get(sub_code)
+            if sub_value is None:
+                raise ValueError(f"Unknown subcategory code: {sub_code} for {domain_value}")
+            subcategories.append(sub_value)
+        domains.append({"domain": domain_value, "subcategories": subcategories})
+
+    if spam_raw not in {"0", "1"}:
+        raise ValueError(f"Invalid spam flag: {spam_raw}")
+    is_spam = spam_raw == "1"
+
+    urgency_code = _parse_int_code(urgency_raw)
+    if urgency_code < 1 or urgency_code > 5:
+        raise ValueError(f"Urgency out of range (1..5): {urgency_code}")
+
+    return {
+        "id": msg_id,
+        "intents": intents,
+        "domains": domains,
+        "is_spam": is_spam,
+        "urgency_score": urgency_code,
+        "reasoning": reasoning,
+    }
+
+
 def parse_compact_batch(text: str) -> ClassificationBatchResult:
     """
     Parse compact numeric batch output into full classification schema.
@@ -516,69 +584,44 @@ def parse_compact_batch(text: str) -> ClassificationBatchResult:
 
     decoded_messages: list[dict[str, object]] = []
     for line in lines:
-        parts = line.split("|", 6)
-        if len(parts) != 7:
-            raise ValueError(f"Invalid line format (expected 7 parts): {line}")
-        msg_id, intent_raw, domains_raw, subcats_raw, spam_raw, urgency_raw, reasoning = [
-            part.strip() for part in parts
-        ]
-        if not msg_id:
-            raise ValueError(f"Missing message id in line: {line}")
-
-        intent_code = _parse_int_code(intent_raw)
-        intent_value = INTENT_CODE_TO_VALUE.get(intent_code)
-        if intent_value is None:
-            raise ValueError(f"Unknown intent code: {intent_code}")
-        intents = [intent_value]
-
-        domain_codes = _parse_code_list(domains_raw, "D") if domains_raw else []
-        if not domain_codes:
-            domain_codes = [DOMAIN_VALUE_TO_CODE[DomainType.NONE]]
-        subcategory_map = _parse_subcategory_map(subcats_raw)
-        if DOMAIN_VALUE_TO_CODE[DomainType.NONE] in domain_codes and len(domain_codes) > 1:
-            # LLM sometimes returns NONE alongside real domains. Ignore NONE in that case.
-            domain_codes = [
-                code for code in domain_codes
-                if code != DOMAIN_VALUE_TO_CODE[DomainType.NONE]
-            ]
-            subcategory_map.pop(DOMAIN_VALUE_TO_CODE[DomainType.NONE], None)
-        extra_subcats = set(subcategory_map.keys()) - set(domain_codes)
-        if extra_subcats:
-            raise ValueError(f"Subcategory entries for non-selected domains: {sorted(extra_subcats)}")
-
-        domains: list[dict[str, object]] = []
-        for domain_code in domain_codes:
-            domain_value = DOMAIN_CODE_TO_VALUE.get(domain_code)
-            if domain_value is None:
-                raise ValueError(f"Unknown domain code: {domain_code}")
-            if domain_value == DomainType.NONE and domain_code in subcategory_map:
-                raise ValueError("Subcategories not allowed for NONE domain")
-            allowed_subcats = SUBCATEGORY_CODE_TO_VALUE.get(domain_value, {})
-            subcodes = subcategory_map.get(domain_code, [])
-            subcategories: list[str] = []
-            for sub_code in subcodes:
-                sub_value = allowed_subcats.get(sub_code)
-                if sub_value is None:
-                    raise ValueError(f"Unknown subcategory code: {sub_code} for {domain_value}")
-                subcategories.append(sub_value)
-            domains.append({"domain": domain_value, "subcategories": subcategories})
-
-        if spam_raw not in {"0", "1"}:
-            raise ValueError(f"Invalid spam flag: {spam_raw}")
-        is_spam = spam_raw == "1"
-
-        urgency_code = _parse_int_code(urgency_raw)
-        if urgency_code < 1 or urgency_code > 5:
-            raise ValueError(f"Urgency out of range (1..5): {urgency_code}")
-
-        decoded_messages.append({
-            "id": msg_id,
-            "intents": intents,
-            "domains": domains,
-            "is_spam": is_spam,
-            "urgency_score": urgency_code,
-            "reasoning": reasoning,
-        })
+        decoded_messages.append(_parse_compact_line(line))
 
     return ClassificationBatchResult.model_validate({"classified_messages": decoded_messages})
+
+
+def parse_compact_batch_partial(
+    text: str,
+) -> tuple[list[dict[str, object]], list[dict[str, str]]]:
+    """
+    Best-effort parsing: returns successfully parsed messages and per-line errors.
+    """
+    if not isinstance(text, str) or not text.strip():
+        raise ValueError("Empty compact output")
+
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    if not lines:
+        raise ValueError("No compact lines found")
+
+    decoded_messages: list[dict[str, object]] = []
+    errors: list[dict[str, str]] = []
+    for line in lines:
+        try:
+            parsed = _parse_compact_line(line)
+            validated = ClassifiedMessage.model_validate(parsed).model_dump()
+            decoded_messages.append(validated)
+        except Exception as exc:
+            msg_id = ""
+            try:
+                msg_id = line.split("|", 1)[0].strip()
+            except Exception:
+                msg_id = ""
+            errors.append(
+                {
+                    "id": msg_id,
+                    "line": line,
+                    "error": str(exc),
+                }
+            )
+
+    return decoded_messages, errors
 

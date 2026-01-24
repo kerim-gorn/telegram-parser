@@ -11,7 +11,7 @@ import httpx
 
 from app.openrouter_client import DEFAULT_MODEL_NAME, OPENROUTER_API_URL, get_openrouter_client
 from core.config import settings
-from app.classification import SYSTEM_PROMPT_TEXT, parse_compact_batch
+from app.classification import SYSTEM_PROMPT_TEXT, parse_compact_batch_partial
 
 
 async def analyze_messages_batch(messages: List[Dict[str, str]]) -> Dict[str, Any]:
@@ -97,10 +97,10 @@ async def analyze_messages_batch(messages: List[Dict[str, str]]) -> Dict[str, An
         if not isinstance(content, str) or not content.strip():
             return {"ok": False, "error": "no_content", "raw": api_json}
         
-        # Parse compact response
+        # Parse compact response (best-effort per line)
         try:
-            result = parse_compact_batch(content)
-            data = result.model_dump()
+            parsed_messages, parse_errors = parse_compact_batch_partial(content)
+            data = {"classified_messages": parsed_messages}
             classified = data.get("classified_messages") or []
             unknown_ids: list[str] = []
             for item in classified:
@@ -117,6 +117,11 @@ async def analyze_messages_batch(messages: List[Dict[str, str]]) -> Dict[str, An
                     "raw": api_json,
                     "text": content,
                 }
+            # Remap parse errors to original ids when possible
+            for err in parse_errors:
+                order_id = str(err.get("id", "")).strip()
+                if order_id and order_id in order_id_map:
+                    err["id"] = order_id_map[order_id]
         except Exception as e:
             return {
                 "ok": False,
@@ -132,6 +137,7 @@ async def analyze_messages_batch(messages: List[Dict[str, str]]) -> Dict[str, An
             "data": data,
             "raw": api_json,
             "usage": usage,
+            "parse_errors": parse_errors,
         }
     
     except httpx.TimeoutException:

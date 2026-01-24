@@ -256,6 +256,13 @@ async def _process_llm_batch(llm_candidates: list[dict[str, Any]]) -> list[dict[
         openrouter_response = llm_result.get("raw")
         data = llm_result.get("data", {})
         classified_messages = data.get("classified_messages", [])
+        parse_errors = llm_result.get("parse_errors") or []
+        parse_error_map: dict[str, str] = {}
+        for err in parse_errors:
+            err_id = str(err.get("id", "")).strip()
+            err_msg = str(err.get("error", "")).strip() or "unknown_parse_error"
+            if err_id:
+                parse_error_map[err_id] = err_msg
 
         # Map LLM results back to candidates
         llm_result_map: dict[str, dict[str, Any]] = {}
@@ -268,11 +275,25 @@ async def _process_llm_batch(llm_candidates: list[dict[str, Any]]) -> list[dict[
             msg_id = f"{msg_data['chat_id']}_{msg_data['message_id']}"
             classified = llm_result_map.get(msg_id, {})
 
-            intents = [intent for intent in classified.get("intents", [])]
-            domains = classified.get("domains", [])
-            is_spam = classified.get("is_spam", False)
-            urgency_score = classified.get("urgency_score", 1)
-            reasoning = classified.get("reasoning", "LLM classification")
+            if classified:
+                intents = [intent for intent in classified.get("intents", [])]
+                domains = classified.get("domains", [])
+                is_spam = classified.get("is_spam", False)
+                urgency_score = classified.get("urgency_score", 1)
+                reasoning = classified.get("reasoning", "LLM classification")
+                llm_analysis = {"ok": True, **classified}
+            else:
+                parse_reason = parse_error_map.get(msg_id)
+                if parse_reason:
+                    reasoning = f"LLM parse failed: {parse_reason}"
+                    llm_analysis = {"ok": False, "error": "parse_error", "message": parse_reason}
+                else:
+                    reasoning = "LLM result missing for message"
+                    llm_analysis = {"ok": False, "error": "missing_result"}
+                intents = ["OTHER"]
+                domains = [{"domain": "NONE", "subcategories": []}]
+                is_spam = False
+                urgency_score = 1
 
             results.append(
                 {
@@ -283,7 +304,7 @@ async def _process_llm_batch(llm_candidates: list[dict[str, Any]]) -> list[dict[
                     "is_spam": is_spam,
                     "urgency_score": urgency_score,
                     "reasoning": reasoning,
-                    "llm_analysis": {"ok": True, **classified},
+                    "llm_analysis": llm_analysis,
                     "openrouter_response": openrouter_response,
                 }
             )
