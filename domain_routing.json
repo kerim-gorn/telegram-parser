@@ -8,12 +8,26 @@
         "SMALL_TOOLS_AND_MATERIALS": "muted"
       }
     },
-    "RENTAL_OF_REAL_ESTATE": null,
-    "PURCHASE_OF_REAL_ESTATE": null,
-    "REAL_ESTATE_AGENT": null,
+    "RENTAL_OF_REAL_ESTATE": {
+      "default": -5142806513
+    },
+    "PURCHASE_OF_REAL_ESTATE": {
+      "default": -5142806513
+    },
+    "REAL_ESTATE_AGENT": {
+      "default": -5142806513
+    },
     "LAW": null,
     "SERVICES": "muted",
-    "AUTO": null,
+    "AUTO": {
+      "default": null,
+      "subcategories": {
+        "AUTO_PURCHASE": -5280359023,
+        "AUTO_PREMIUM_DETAILING": -5280359023,
+        "AUTO_REPAIR": -5280359023,
+        "AUTO_SERVICE_STATION": null
+      }
+    },
     "MARKETPLACE": "muted",
     "SOCIAL_CAPITAL": "muted",
     "OPERATIONAL_MANAGEMENT": "muted",

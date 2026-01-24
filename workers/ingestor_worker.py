@@ -239,6 +239,14 @@ async def _process_llm_batch(llm_candidates: list[dict[str, Any]]) -> list[dict[
         }
         for msg in llm_candidates
     ]
+    try:
+        payload_preview = json.dumps(llm_messages, ensure_ascii=False)
+        if len(payload_preview) > 2000:
+            payload_preview = payload_preview[:2000] + "...(truncated)"
+        print(f"[Ingestor] LLM payload: {payload_preview}", flush=True)
+    except Exception:
+        # Never break ingestion because of logging issues
+        pass
 
     # Call batch LLM analyzer
     llm_result = await analyze_messages_batch(llm_messages)

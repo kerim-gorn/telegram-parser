@@ -76,8 +76,6 @@ SUBCATEGORY_CODE = {
     "OPERATIONAL_MANAGEMENT": {"SECURITY": 2},
     "MARKETPLACE": {"BUY_SELL_GOODS": 1},
 }
-
-
 def create_mock_llm_response(messages: list[dict[str, str]]) -> dict[str, Any]:
     """Create a mock LLM response in full (decoded) format."""
     classified = []
@@ -91,14 +89,14 @@ def create_mock_llm_response(messages: list[dict[str, str]]) -> dict[str, Any]:
             domains = [{"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": ["REPAIR_SERVICES"]}]
             urgency = 3
         elif "срочно" in text.lower() or "пожар" in text.lower():
-            intents = ["COMPLAINT", "INFO"]
+            intents = ["COMPLAINT"]
             domains = [
                 {"domain": "OPERATIONAL_MANAGEMENT", "subcategories": ["SECURITY"]},
                 {"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": ["REPAIR_SERVICES"]},
             ]
             urgency = 5
         elif "продам" in text.lower() or "куплю" in text.lower():
-            intents = ["OFFER", "REQUEST"]
+            intents = ["OFFER"]
             domains = [{"domain": "MARKETPLACE", "subcategories": ["BUY_SELL_GOODS"]}]
             urgency = 1
         else:
@@ -123,59 +121,54 @@ def create_mock_llm_response(messages: list[dict[str, str]]) -> dict[str, Any]:
 
 
 def create_mock_llm_compact_payload(messages: list[dict[str, str]]) -> dict[str, Any]:
-    """Create a mock LLM API response in compact format."""
-    compact_messages = []
-    for msg in messages:
-        msg_id = msg["id"]
+    """Create a mock LLM API response in compact numeric format."""
+    lines: list[str] = []
+    for idx, msg in enumerate(messages, start=1):
+        msg_id = str(idx)
         text = msg.get("text", "")
         
         if "электрик" in text.lower() or "мастер" in text.lower():
-            intents = ["REQUEST"]
+            intent = "REQUEST"
             domains = [{"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": ["REPAIR_SERVICES"]}]
             urgency = 3
         elif "срочно" in text.lower() or "пожар" in text.lower():
-            intents = ["COMPLAINT", "INFO"]
+            intent = "COMPLAINT"
             domains = [
                 {"domain": "OPERATIONAL_MANAGEMENT", "subcategories": ["SECURITY"]},
                 {"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": ["REPAIR_SERVICES"]},
             ]
             urgency = 5
         elif "продам" in text.lower() or "куплю" in text.lower():
-            intents = ["OFFER", "REQUEST"]
+            intent = "OFFER"
             domains = [{"domain": "MARKETPLACE", "subcategories": ["BUY_SELL_GOODS"]}]
             urgency = 1
         else:
-            intents = ["INFO"]
+            intent = "INFO"
             domains = [{"domain": "NONE", "subcategories": []}]
             urgency = 1
-        
-        compact_domains = []
+        intent_code = INTENT_CODE[intent]
+        domain_codes = [DOMAIN_CODE[domain["domain"]] for domain in domains]
+        domains_segment = ",".join(str(code) for code in domain_codes)
+
+        sub_segments = []
         for domain in domains:
             domain_name = domain["domain"]
             subcats = domain.get("subcategories", [])
-            subcat_map = SUBCATEGORY_CODE.get(domain_name, {})
-            subcat_codes = []
-            for subcat in subcats:
-                code = subcat_map.get(subcat)
-                if code is None:
-                    raise AssertionError(f"Missing subcategory code for {domain_name}:{subcat}")
-                subcat_codes.append(code)
-            compact_domains.append({
-                "d": DOMAIN_CODE[domain_name],
-                "s": subcat_codes,
-            })
-        
-        compact_messages.append({
-            "i": msg_id,
-            "t": [INTENT_CODE[intent] for intent in intents],
-            "d": compact_domains,
-            "p": False,
-            "u": urgency,
-            "r": f"Test msg {msg_id}",
-        })
-    
+            if not subcats:
+                continue
+            subcodes = [SUBCATEGORY_CODE[domain_name][subcat] for subcat in subcats]
+            sub_segments.append(
+                f"{DOMAIN_CODE[domain_name]}={','.join(str(code) for code in subcodes)}"
+            )
+        subcats_segment = ";".join(sub_segments)
+
+        lines.append(
+            f"{msg_id}|{intent_code}|{domains_segment}|{subcats_segment}|0|{urgency}|"
+            f"Test msg {msg_id}"
+        )
+
     return {
-        "choices": [{"message": {"content": json.dumps({"m": compact_messages})}}],
+        "choices": [{"message": {"content": "\n".join(lines)}}],
         "usage": {"prompt_tokens": 100, "completion_tokens": 50},
     }
 
@@ -266,6 +259,7 @@ async def test_batch_llm_analyzer() -> None:
         
         # Check first message (should be REQUEST + CONSTRUCTION_AND_REPAIR)
         first = result["data"]["classified_messages"][0]
+        assert first["id"] == "12345_1", "LLM order id should be remapped to original id"
         assert "REQUEST" in first["intents"], "First message should have REQUEST intent"
         
         print("  ✓ Batch LLM analyzer works correctly")

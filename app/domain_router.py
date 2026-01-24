@@ -262,6 +262,7 @@ class DomainRouter:
             if isinstance(domain_config, dict):
                 # Check subcategories mapping if they exist
                 subcategory_chat_id: int | str | None = None
+                subcategory_is_muted = False
                 if subcategories:
                     subcategories_config = domain_config.get("subcategories", {})
                     # Use first non-muted subcategory found
@@ -269,9 +270,14 @@ class DomainRouter:
                         subcat_str = str(subcat)
                         if subcat_str in subcategories_config:
                             candidate = subcategories_config[subcat_str]
-                            if candidate != "muted":
-                                subcategory_chat_id = candidate
+                            if candidate == "muted":
+                                subcategory_is_muted = True
                                 break
+                            subcategory_chat_id = candidate
+                            break
+                
+                if subcategory_is_muted:
+                    continue
                 
                 # Use subcategory chat_id if found, otherwise use default
                 chat_id_to_use = subcategory_chat_id if subcategory_chat_id is not None else domain_config.get("default")
