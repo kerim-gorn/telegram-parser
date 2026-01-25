@@ -62,7 +62,7 @@ async def analyze_messages_batch(messages: List[Dict[str, str]]) -> Dict[str, An
         "Content-Type": "application/json",
     }
     
-    max_tokens = min(2000, 120 + len(messages) * 35)
+    max_tokens = len(messages) * 50
     order_messages: list[dict[str, str]] = []
     order_id_map: dict[str, str] = {}
     for idx, msg in enumerate(messages, start=1):
