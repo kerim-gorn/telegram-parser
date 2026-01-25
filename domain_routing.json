@@ -22,9 +22,9 @@
     "AUTO": {
       "default": null,
       "subcategories": {
-        "AUTO_PURCHASE": -5280359023,
-        "AUTO_PREMIUM_DETAILING": -5280359023,
-        "AUTO_REPAIR": -5280359023,
+        "AUTO_PURCHASE": -1003837853682,
+        "AUTO_PREMIUM_DETAILING": -1003837853682,
+        "AUTO_REPAIR": -1003837853682,
         "AUTO_SERVICE_STATION": null
       }
     },
