@@ -9,26 +9,28 @@
       }
     },
     "RENTAL_OF_REAL_ESTATE": {
-      "default": -5142806513
+      "default": -1003804045628
     },
     "PURCHASE_OF_REAL_ESTATE": {
-      "default": -5142806513
+      "default": -1003804045628
     },
     "REAL_ESTATE_AGENT": {
-      "default": -5142806513
+      "default": -1003804045628
     },
-    "LAW": null,
+    "LAW": {
+      "default": -1003766913530
+    },
     "SERVICES": "muted",
     "AUTO": {
-      "default": null,
+      "default": -1003837853682,
       "subcategories": {
-        "AUTO_PURCHASE": -1003837853682,
-        "AUTO_PREMIUM_DETAILING": -1003837853682,
-        "AUTO_REPAIR": -1003837853682,
-        "AUTO_SERVICE_STATION": null
+        "AUTO_PURCHASE": null,
+        "AUTO_PREMIUM_DETAILING": null,
+        "AUTO_REPAIR": null,
+        "AUTO_SERVICE_STATION": "muted"
       }
     },
-    "MARKETPLACE": "muted",
+    "MARKETPLACE": -1003746282924,
     "SOCIAL_CAPITAL": "muted",
     "OPERATIONAL_MANAGEMENT": "muted",
     "REPUTATION": "muted",
