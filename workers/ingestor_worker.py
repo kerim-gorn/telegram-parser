@@ -223,13 +223,15 @@ async def _prefilter_batch(
     return results, llm_candidates, llm_candidate_indices
 
 
-async def _process_llm_batch(llm_candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
+async def _process_llm_batch(
+    llm_candidates: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], dict[str, Any] | None]:
     """
     Process a batch of LLM candidates (strictly sized).
-    Returns list of results ready for persistence.
+    Returns (results, error_info). error_info is set for requeue decisions.
     """
     if not llm_candidates:
-        return []
+        return [], None
 
     # Prepare messages for LLM
     llm_messages = [
@@ -308,6 +310,7 @@ async def _process_llm_batch(llm_candidates: list[dict[str, Any]]) -> list[dict[
                     "openrouter_response": openrouter_response,
                 }
             )
+        return results, None
     else:
         # LLM failed, mark candidates with detailed error info
         error_type = llm_result.get("error") or "unknown_error"
@@ -344,6 +347,19 @@ async def _process_llm_batch(llm_candidates: list[dict[str, Any]]) -> list[dict[
             # Never break ingestion because of logging issues
             pass
 
+        if (
+            error_type == "http_error"
+            and isinstance(status_code, int)
+            and 400 <= status_code < 600
+        ):
+            return [], {
+                "requeue": True,
+                "error": error_type,
+                "status_code": status_code,
+                "message": error_msg,
+                "payload": error_payload,
+            }
+
         for msg_data in llm_candidates:
             results.append(
                 {
@@ -359,7 +375,7 @@ async def _process_llm_batch(llm_candidates: list[dict[str, Any]]) -> list[dict[
                 }
             )
 
-    return results
+    return results, None
 
 
 async def _persist_batch(results: list[dict[str, Any]], stats: dict[str, Any]) -> None:
@@ -567,27 +583,39 @@ async def _consume_queue(channel: AbstractChannel, queue_name: str, stats: dict[
                 except Exception:
                     pass
             
-            # Buffer LLM candidates and ack them immediately (per selected strategy)
+            # Buffer LLM candidates for later processing; ack only after persistence
             llm_batches_to_process: list[list[dict[str, Any]]] = []
             async with buffer_lock:
                 if llm_candidates:
-                    llm_pending.extend(llm_candidates)
+                    llm_entries: list[dict[str, Any]] = []
+                    for msg_data, idx in zip(llm_candidates, llm_candidate_indices):
+                        if idx < len(ack_messages):
+                            llm_entries.append(
+                                {
+                                    "msg_data": msg_data,
+                                    "queue_message": ack_messages[idx],
+                                }
+                            )
+                    llm_pending.extend(llm_entries)
                     while len(llm_pending) >= LLM_BATCH_SIZE:
                         llm_batches_to_process.append(llm_pending[:LLM_BATCH_SIZE])
                         del llm_pending[:LLM_BATCH_SIZE]
             
-            for idx in llm_candidate_indices:
-                try:
-                    await ack_messages[idx].ack()
-                except Exception:
-                    pass
-            
             # Process any full LLM batches
             for llm_batch in llm_batches_to_process:
-                llm_results = await _process_llm_batch(llm_batch)
+                batch_candidates = [entry["msg_data"] for entry in llm_batch]
+                llm_results, llm_error = await _process_llm_batch(batch_candidates)
+                if llm_error and llm_error.get("requeue"):
+                    for entry in llm_batch:
+                        try:
+                            await entry["queue_message"].reject(requeue=True)
+                        except Exception:
+                            pass
+                    continue
+
                 if llm_results:
                     await _persist_batch(llm_results, stats)
-                    
+
                     last_result = llm_results[-1]
                     msg_data = last_result.get("msg_data")
                     if msg_data:
@@ -596,6 +624,12 @@ async def _consume_queue(channel: AbstractChannel, queue_name: str, stats: dict[
                             "chat_id": msg_data.get("chat_id"),
                             "message_id": msg_data.get("message_id"),
                         }
+
+                for entry in llm_batch:
+                    try:
+                        await entry["queue_message"].ack()
+                    except Exception:
+                        pass
         except Exception as e:
             stats["failed"] = int(stats.get("failed", 0)) + len(payloads)
             print(f"[Ingestor] Error processing batch from '{queue_name}': {e}", flush=True)
