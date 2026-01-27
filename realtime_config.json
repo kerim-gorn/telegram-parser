@@ -892,7 +892,7 @@
         },
         {
             "identifier": "t.me/cvetpol",
-            "chat_id": null
+            "chat_id": -1001451695815
         },
         {
             "identifier": "t.me/Tushino_2018",
@@ -2668,11 +2668,11 @@
         },
         {
             "identifier": "t.me/PalmJumeirahD",
-            "chat_id": null
+            "chat_id": -1002165534914
         },
         {
             "identifier": "t.me/creekharboar",
-            "chat_id": null
+            "chat_id": -1001637200105
         },
         {
             "identifier": "t.me/creekharbor",
@@ -2684,7 +2684,7 @@
         },
         {
             "identifier": "t.me/damac_hills2",
-            "chat_id": null
+            "chat_id": -1001807098554
         },
         {
             "identifier": "t.me/damacrus",
@@ -2756,7 +2756,7 @@
         },
         {
             "identifier": "t.me/kawaiimotors1",
-            "chat_id": null
+            "chat_id": -1001481047616
         },
         {
             "identifier": "t.me/avtorynokkyrgyzstan1",
@@ -2777,6 +2777,114 @@
         {
             "identifier": "https://t.me/+L91oGPWq_55jYTky",
             "chat_id": -1001560193708
+        },
+        {
+            "identifier": "t.me/tiguanlpro",
+            "chat_id": -1002185791983
+        },
+        {
+            "identifier": "t.me/lixiangautorussia",
+            "chat_id": -1001828160178
+        },
+        {
+            "identifier": "t.me/zeekrclubrus",
+            "chat_id": -1001526157104
+        },
+        {
+            "identifier": "t.me/lixiang_zeekr_voyah_avatr",
+            "chat_id": -1001863472286
+        },
+        {
+            "identifier": "t.me/voyahclubru",
+            "chat_id": -1001169983740
+        },
+        {
+            "identifier": "t.me/geely_monjaroclub",
+            "chat_id": -1001552428237
+        },
+        {
+            "identifier": "t.me/zeekrclub",
+            "chat_id": -1001673077839
+        },
+        {
+            "identifier": "t.me/geely_monjaro",
+            "chat_id": -1001989536849
+        },
+        {
+            "identifier": "t.me/HAVAL_community",
+            "chat_id": -1002237627148
+        },
+        {
+            "identifier": "t.me/dorogachat",
+            "chat_id": -1001488951158
+        },
+        {
+            "identifier": "t.me/voyahchat",
+            "chat_id": -1001610620798
+        },
+        {
+            "identifier": "t.me/geely_monjaro_club",
+            "chat_id": -1001883441745
+        },
+        {
+            "identifier": "t.me/tiggo_7pro",
+            "chat_id": -1001495808614
+        },
+        {
+            "identifier": "t.me/GAC_Rossiya",
+            "chat_id": -1002138771048
+        },
+        {
+            "identifier": "t.me/Jetour_Rossiya",
+            "chat_id": -1001603155389
+        },
+        {
+            "identifier": "t.me/BoyueGeely",
+            "chat_id": -1002176119176
+        },
+        {
+            "identifier": "t.me/gac_gs3",
+            "chat_id": -1002083282327
+        },
+        {
+            "identifier": "t.me/tayron_club",
+            "chat_id": -1002339992830
+        },
+        {
+            "identifier": "t.me/exeed_vx_club",
+            "chat_id": -1001684045567
+        },
+        {
+            "identifier": "t.me/voyah_clubs",
+            "chat_id": -1001658635808
+        },
+        {
+            "identifier": "t.me/Tiguan3G",
+            "chat_id": -1002021064377
+        },
+        {
+            "identifier": "t.me/jaecooclub",
+            "chat_id": -1001780838493
+        },
+        {
+            "identifier": "t.me/protradeinclub",
+            "chat_id": -1001425605101
+        },
+        {
+            "identifier": "t.me/bmwg20club",
+            "chat_id": -1001518418226
+        },
+        {
+            "identifier": "t.me/geelyatlas1",
+            "chat_id": -1002004767140
+        },
+        {
+            "identifier": "t.me/omoda5club",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/ChanganUni_k",
+            "chat_id": null
         }
     ]
 }
