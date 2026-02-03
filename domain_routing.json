@@ -25,7 +25,7 @@
       "default": -1003837853682,
       "subcategories": {
         "AUTO_PURCHASE": null,
-        "AUTO_PREMIUM_DETAILING": null,
+        "AUTO_PREMIUM_DETAILING": "muted",
         "AUTO_REPAIR": "muted",
         "AUTO_SERVICE_STATION": "muted"
       }
