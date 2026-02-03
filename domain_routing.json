@@ -1,4 +1,7 @@
 {
+  "_doc": {
+    "location_overrides": "Optional list of {city, district?, chat_id} under a domain or subcategory object. City required; district optional. Matching is case-insensitive and prefers city+district, then city-only. chat_id can be number, null (fallback), or 'muted' (skip). Subcategory objects may be {default, location_overrides}."
+  },
   "domains": {
     "CONSTRUCTION_AND_REPAIR": {
       "default": -1003203343510,
@@ -9,13 +12,22 @@
       }
     },
     "RENTAL_OF_REAL_ESTATE": {
-      "default": -1003804045628
+      "default": -1003804045628,
+      "location_overrides": [
+        { "city": "dubai", "chat_id": -5238348109 }
+      ]
     },
     "PURCHASE_OF_REAL_ESTATE": {
-      "default": -1003804045628
+      "default": -1003804045628,
+      "location_overrides": [
+        { "city": "dubai", "chat_id": -5238348109 }
+      ]
     },
     "REAL_ESTATE_AGENT": {
-      "default": -1003804045628
+      "default": -1003804045628,
+      "location_overrides": [
+        { "city": "dubai", "chat_id": -5238348109 }
+      ]
     },
     "LAW": {
       "default": -1003766913530

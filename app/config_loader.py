@@ -137,3 +137,48 @@ def get_numeric_chat_ids_from_config() -> List[int]:
     return out
 
 
+def get_chat_locations_from_config() -> Dict[int, List[Dict[str, str | None]]]:
+    """
+    Build a lookup of chat_id -> list of location tags.
+    Each location tag is a dict with optional "city" and "district" keys.
+    """
+    cfg = load_realtime_config()
+    chats_raw = cfg.get("chats", [])
+    out: Dict[int, List[Dict[str, str | None]]] = {}
+    for item in chats_raw:
+        if not isinstance(item, dict):
+            continue
+        locations_raw = item.get("locations")
+        if not isinstance(locations_raw, list) or not locations_raw:
+            continue
+        chat_id_val = item.get("chat_id", None)
+        if chat_id_val is None:
+            continue
+        try:
+            chat_id = int(chat_id_val)
+        except Exception:
+            continue
+        parsed_locations: List[Dict[str, str | None]] = []
+        for loc in locations_raw:
+            if not isinstance(loc, dict):
+                continue
+            city_val = loc.get("city")
+            district_val = loc.get("district")
+            city = str(city_val).strip() if city_val is not None else None
+            district = str(district_val).strip() if district_val is not None else None
+            if city == "":
+                city = None
+            if district == "":
+                district = None
+            if city is None and district is None:
+                continue
+            parsed_locations.append({"city": city, "district": district})
+        if not parsed_locations:
+            continue
+        if chat_id not in out:
+            out[chat_id] = parsed_locations
+        else:
+            out[chat_id].extend(parsed_locations)
+    return out
+
+

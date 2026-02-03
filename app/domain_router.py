@@ -28,12 +28,21 @@ class DomainRouter:
     1. Simple value:
        "CONSTRUCTION_AND_REPAIR": null  # or chat_id or "muted"
     
-    2. With subcategories:
+    2. With subcategories and optional location overrides:
        "CONSTRUCTION_AND_REPAIR": {
          "default": null,  # chat_id for domain without subcategories or when subcategory not found
+         "location_overrides": [
+           {"city": "moscow", "district": "szao", "chat_id": -1001234567890},
+           {"city": "dubai", "chat_id": -1001234567891}
+         ],
          "subcategories": {
            "REPAIR_SERVICES": -1001234567890,
-           "MAJOR_RENOVATION": -1001234567891,
+           "MAJOR_RENOVATION": {
+             "default": -1001234567891,
+             "location_overrides": [
+               {"city": "moscow", "district": "szao", "chat_id": -1001234567892}
+             ]
+           },
            "SMALL_TOOLS_AND_MATERIALS": "muted"
          }
        }
@@ -101,12 +110,26 @@ class DomainRouter:
                 default_value = domain_config.get("default")
                 parsed_config["default"] = self._parse_chat_id_value(default_value)
                 
+                # Parse location overrides
+                parsed_config["location_overrides"] = self._parse_location_overrides(
+                    domain_config.get("location_overrides")
+                )
+
                 # Parse subcategories mapping
                 subcategories_raw = domain_config.get("subcategories")
                 if isinstance(subcategories_raw, dict):
-                    parsed_subcategories: dict[str, int | str | None] = {}
+                    parsed_subcategories: dict[str, Any] = {}
                     for subcat_name, subcat_chat_id in subcategories_raw.items():
-                        parsed_subcategories[str(subcat_name)] = self._parse_chat_id_value(subcat_chat_id)
+                        if isinstance(subcat_chat_id, dict):
+                            parsed_subcat: dict[str, Any] = {
+                                "default": self._parse_chat_id_value(subcat_chat_id.get("default")),
+                                "location_overrides": self._parse_location_overrides(
+                                    subcat_chat_id.get("location_overrides")
+                                ),
+                            }
+                            parsed_subcategories[str(subcat_name)] = parsed_subcat
+                        else:
+                            parsed_subcategories[str(subcat_name)] = self._parse_chat_id_value(subcat_chat_id)
                     parsed_config["subcategories"] = parsed_subcategories
                 else:
                     parsed_config["subcategories"] = {}
@@ -158,6 +181,77 @@ class DomainRouter:
                 return int(value)
             except (ValueError, TypeError):
                 return None
+
+    def _normalize_location_value(self, value: Any) -> str | None:
+        if value is None:
+            return None
+        s = str(value).strip().lower()
+        return s if s else None
+
+    def _normalize_locations(self, locations: Any) -> list[dict[str, str | None]]:
+        if not isinstance(locations, list):
+            return []
+        out: list[dict[str, str | None]] = []
+        for loc in locations:
+            if not isinstance(loc, dict):
+                continue
+            city = self._normalize_location_value(loc.get("city"))
+            district = self._normalize_location_value(loc.get("district"))
+            if city is None and district is None:
+                continue
+            out.append({"city": city, "district": district})
+        return out
+
+    def _parse_location_overrides(self, overrides_raw: Any) -> list[dict[str, Any]]:
+        if not isinstance(overrides_raw, list):
+            return []
+        parsed: list[dict[str, Any]] = []
+        for entry in overrides_raw:
+            if not isinstance(entry, dict):
+                continue
+            city = self._normalize_location_value(entry.get("city"))
+            district = self._normalize_location_value(entry.get("district"))
+            if city is None:
+                continue
+            parsed.append(
+                {
+                    "city": city,
+                    "district": district,
+                    "chat_id": self._parse_chat_id_value(entry.get("chat_id")),
+                }
+            )
+        return parsed
+
+    def _match_location_override(
+        self,
+        overrides: list[dict[str, Any]],
+        locations: list[dict[str, str | None]],
+    ) -> tuple[bool, int | None, bool]:
+        if not overrides or not locations:
+            return (False, None, False)
+
+        # Prefer the most specific match: city + district
+        for loc in locations:
+            city = loc.get("city")
+            district = loc.get("district")
+            if not city or not district:
+                continue
+            for rule in overrides:
+                if rule.get("city") == city and rule.get("district") == district:
+                    resolved_chat_id, should_use_fallback = self._resolve_chat_id(rule.get("chat_id"))
+                    return (True, resolved_chat_id, should_use_fallback)
+
+        # Fallback to city-only match
+        for loc in locations:
+            city = loc.get("city")
+            if not city:
+                continue
+            for rule in overrides:
+                if rule.get("city") == city and not rule.get("district"):
+                    resolved_chat_id, should_use_fallback = self._resolve_chat_id(rule.get("chat_id"))
+                    return (True, resolved_chat_id, should_use_fallback)
+
+        return (False, None, False)
     
     def _resolve_chat_id(self, chat_id_value: int | str | None) -> tuple[int | None, bool]:
         """
@@ -176,7 +270,11 @@ class DomainRouter:
         else:
             return (None, True)  # None - use fallback
     
-    def get_chat_ids_for_domains(self, domains: list[DomainInfo]) -> list[int]:
+    def get_chat_ids_for_domains(
+        self,
+        domains: list[DomainInfo],
+        locations: list[dict[str, str | None]] | None = None,
+    ) -> list[int]:
         """
         Get list of chat_ids for given domains.
         
@@ -191,6 +289,7 @@ class DomainRouter:
           * If domain has assigned chat_id (not null) → use that chat_id
           * If domain has no assigned chat_id or is missing → use fallback
         - Global muted_subcategories list is also checked
+        - If location overrides exist, match city+district first, then city-only
         
         If multiple domains map to the same chat_id, duplicates are preserved
         (message will be sent to the same group multiple times, which is acceptable).
@@ -206,6 +305,7 @@ class DomainRouter:
             return []
         
         chat_ids: list[int] = []
+        normalized_locations = self._normalize_locations(locations)
         
         for domain_info in domains:
             domain_name: str | None = None
@@ -263,6 +363,7 @@ class DomainRouter:
                 # Check subcategories mapping if they exist
                 subcategory_chat_id: int | str | None = None
                 subcategory_is_muted = False
+                subcategory_overrides: list[dict[str, Any]] = []
                 if subcategories:
                     subcategories_config = domain_config.get("subcategories", {})
                     # Use first non-muted subcategory found
@@ -270,15 +371,45 @@ class DomainRouter:
                         subcat_str = str(subcat)
                         if subcat_str in subcategories_config:
                             candidate = subcategories_config[subcat_str]
-                            if candidate == "muted":
+                            if isinstance(candidate, dict):
+                                subcategory_chat_id = candidate.get("default")
+                                subcategory_overrides = candidate.get("location_overrides", []) or []
+                            else:
+                                subcategory_chat_id = candidate
+                            if subcategory_chat_id == "muted":
                                 subcategory_is_muted = True
-                                break
-                            subcategory_chat_id = candidate
                             break
-                
+
                 if subcategory_is_muted:
                     continue
-                
+
+                # Location overrides for subcategory (most specific)
+                if subcategory_overrides:
+                    matched, resolved_chat_id, should_use_fallback = self._match_location_override(
+                        subcategory_overrides,
+                        normalized_locations,
+                    )
+                    if matched:
+                        if resolved_chat_id is not None:
+                            chat_ids.append(resolved_chat_id)
+                        elif should_use_fallback and self._fallback_chat_id is not None:
+                            chat_ids.append(self._fallback_chat_id)
+                        continue
+
+                # Location overrides for domain (fallback)
+                domain_overrides = domain_config.get("location_overrides", []) or []
+                if domain_overrides:
+                    matched, resolved_chat_id, should_use_fallback = self._match_location_override(
+                        domain_overrides,
+                        normalized_locations,
+                    )
+                    if matched:
+                        if resolved_chat_id is not None:
+                            chat_ids.append(resolved_chat_id)
+                        elif should_use_fallback and self._fallback_chat_id is not None:
+                            chat_ids.append(self._fallback_chat_id)
+                        continue
+
                 # Use subcategory chat_id if found, otherwise use default
                 chat_id_to_use = subcategory_chat_id if subcategory_chat_id is not None else domain_config.get("default")
                 resolved_chat_id, should_use_fallback = self._resolve_chat_id(chat_id_to_use)
