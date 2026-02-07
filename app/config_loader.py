@@ -137,14 +137,33 @@ def get_numeric_chat_ids_from_config() -> List[int]:
     return out
 
 
-def get_chat_locations_from_config() -> Dict[int, List[Dict[str, str | None]]]:
+def normalize_chat_identifier(value: Any) -> str | None:
+    if value is None:
+        return None
+    s = str(value).strip().lower()
+    if not s:
+        return None
+    if s.startswith("http://"):
+        s = s[len("http://") :]
+    elif s.startswith("https://"):
+        s = s[len("https://") :]
+    if s.startswith("t.me/"):
+        s = s[len("t.me/") :]
+    elif s.startswith("telegram.me/"):
+        s = s[len("telegram.me/") :]
+    if s.startswith("@"):
+        s = s[1:]
+    return s if s else None
+
+
+def get_chat_locations_from_config() -> Dict[int | str, List[Dict[str, str | None]]]:
     """
     Build a lookup of chat_id -> list of location tags.
     Each location tag is a dict with optional "city" and "district" keys.
     """
     cfg = load_realtime_config()
     chats_raw = cfg.get("chats", [])
-    out: Dict[int, List[Dict[str, str | None]]] = {}
+    out: Dict[int | str, List[Dict[str, str | None]]] = {}
     for item in chats_raw:
         if not isinstance(item, dict):
             continue
@@ -152,12 +171,12 @@ def get_chat_locations_from_config() -> Dict[int, List[Dict[str, str | None]]]:
         if not isinstance(locations_raw, list) or not locations_raw:
             continue
         chat_id_val = item.get("chat_id", None)
-        if chat_id_val is None:
-            continue
-        try:
-            chat_id = int(chat_id_val)
-        except Exception:
-            continue
+        chat_id: int | None = None
+        if chat_id_val is not None:
+            try:
+                chat_id = int(chat_id_val)
+            except Exception:
+                chat_id = None
         parsed_locations: List[Dict[str, str | None]] = []
         for loc in locations_raw:
             if not isinstance(loc, dict):
@@ -175,10 +194,17 @@ def get_chat_locations_from_config() -> Dict[int, List[Dict[str, str | None]]]:
             parsed_locations.append({"city": city, "district": district})
         if not parsed_locations:
             continue
-        if chat_id not in out:
-            out[chat_id] = parsed_locations
-        else:
-            out[chat_id].extend(parsed_locations)
+        identifier_key = normalize_chat_identifier(item.get("identifier"))
+        if chat_id is not None:
+            if chat_id not in out:
+                out[chat_id] = parsed_locations
+            else:
+                out[chat_id].extend(parsed_locations)
+        if identifier_key:
+            if identifier_key not in out:
+                out[identifier_key] = parsed_locations
+            else:
+                out[identifier_key].extend(parsed_locations)
     return out
 
 

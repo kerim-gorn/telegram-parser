@@ -28,3392 +28,5789 @@
         {
             "identifier": "t.me/jksimvol",
             "chat_id": -1001304824820,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/luberecki_common",
             "chat_id": -1001101264208,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/buninskieluga",
             "chat_id": -1001319374035,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/salarevolife",
             "chat_id": -1001393919792,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/lublinskiypark",
             "chat_id": -1001233127122,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/chat_zilart",
             "chat_id": -1002486570405,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gkskandinavia",
             "chat_id": -1001279125921,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/novoe_medvedkovo",
             "chat_id": -1001184763681,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/bigputilkovo",
             "chat_id": -1001344126304,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/GB1_GB2",
             "chat_id": -1001676775602,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Tushino2018_Main",
             "chat_id": -1001289602480,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rasskazovo2",
             "chat_id": -1001713368026,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/solncevo_park",
             "chat_id": -1001311643212,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/tomilino_park",
             "chat_id": -1001283112004,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ecovidnoe20",
             "chat_id": -1001280652646,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/trekhgorka",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kp_garmoniya",
             "chat_id": -1001167121232,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk2119",
             "chat_id": -1001121458603,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/seligercity",
             "chat_id": -1001121568067,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/tatparklife",
             "chat_id": -1001346095049,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/greenpark_zhk",
             "chat_id": -1001748103356,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_Nastroenie",
             "chat_id": -1002025417420,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rikhardfskgeneral",
             "chat_id": -1001251903339,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_ostrov",
             "chat_id": -1001280567312,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/klenovie_allei",
             "chat_id": -1001268409747,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/filicity_chat",
             "chat_id": -1002261913458,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/myheadliner",
             "chat_id": -1001636269846,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ProfiZagChat",
             "chat_id": -1001213875334,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/JKLesoparkoviy",
             "chat_id": -1001393739661,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Rassudovka",
             "chat_id": -1001431375881,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/bogorodskoe_chat",
             "chat_id": -1001277713781,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dubrovka_uvao",
             "chat_id": -1002313582453,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/mechtatalk",
             "chat_id": -1001063395918,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/chat_akvareli",
             "chat_id": -1001944000975,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/lovebalance",
             "chat_id": -1001215204049,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/HighWay_msk",
             "chat_id": -1001592535363,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/troparevo_park_jk",
             "chat_id": -1001629505169,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/portland_moscow",
             "chat_id": -1001878435829,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/riverpark_life",
             "chat_id": -1001110789552,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/carskayaploshad",
             "chat_id": -1001995577406,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/mesherskiyles_chat",
             "chat_id": -1002143186889,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/GK_WelltonTower",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Jk_Lucky_Chat",
             "chat_id": -1002123449709,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/trikolor_chat",
             "chat_id": -1001794191943,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ever_tekta",
             "chat_id": -1001422510260,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/capital_towers_zhk",
             "chat_id": -1001684757471,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dream_towers",
             "chat_id": -1001847393015,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zorge9_sao",
             "chat_id": -1002246308224,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ilove_svao",
             "chat_id": -1001926994612,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Kvartal_Zolotoy",
             "chat_id": -1002017556129,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ZHKsymphony34",
             "chat_id": -1001578017133,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ZhKSberSitiSosedi1",
             "chat_id": -1002542966924,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/chat_skyhouse",
             "chat_id": -1002020946991,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zil_art",
             "chat_id": -1001174474556,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/reka_chattt",
             "chat_id": -1002945935572,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/JK_Afi_Park",
             "chat_id": -1002093298990,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_Primavera",
             "chat_id": -1001837223620,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/vespertverskaya_chat",
             "chat_id": -1002855480906,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/levelprichalniy_chat",
             "chat_id": -1001641991824,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/red7_chat",
             "chat_id": -1002817299748,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/sobytie_chat",
             "chat_id": -1001227063452,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/FestPark2Chat",
             "chat_id": -1001465375561,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/mfkslava",
             "chat_id": -1001285175797,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_Headliner",
             "chat_id": -1001998802339,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/oktyabrskoe_pole_zhk",
             "chat_id": -1001515366242,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/nevatowers_oficial",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/mihalkovskaya48",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/JKLunarChatsobstvennikov",
             "chat_id": -1001713994080,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/CrystalTrilogy",
             "chat_id": -1002085790206,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkForstForma",
             "chat_id": -1001954655682,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/intonacia_magneziya",
             "chat_id": -1001664154684,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/PraimPark",
             "chat_id": -1001893667490,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/alia_remont",
             "chat_id": -1001457720807,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/alia_main",
             "chat_id": -1001321018235,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/pavremont",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/FizTehS0bstvenniki",
             "chat_id": -1001705553647,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/afi_tower_zhk",
             "chat_id": -1001953741028,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kutuzovgrad_ii",
             "chat_id": -1001944629252,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_Metropolia",
             "chat_id": -1001281986646,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/will_towers",
             "chat_id": -1001868612486,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/citybay",
             "chat_id": -1001295229530,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/monodom_lake",
             "chat_id": -1002225760287,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/remont_chat_seligercity",
             "chat_id": -1001780331234,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_dom_chkalov",
             "chat_id": -1002449190186,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ZhKRezVishnevysadChats",
             "chat_id": -1002788744817,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/marshal_sobstvenniki",
             "chat_id": -1002244577583,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Shagal_city",
             "chat_id": -1001324633700,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/fsk_rezhiser_public",
             "chat_id": -1001715155064,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/STELLAR_CITY",
             "chat_id": -1001300314702,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/LifeVarshavskaya",
             "chat_id": -1001366657637,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/sireneviypark_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/sireneviy_park",
             "chat_id": -1001194702609,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kinetik_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkkinetik",
             "chat_id": -1001733225914,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhkfullhouse",
             "chat_id": -1001271149719,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rasskazovo_sosedi",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/verynabot",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gkleningradski",
             "chat_id": -1001686995397,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/perviyleningradskiy",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkbuninskiekvartali",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/buninskie_kvartaly_a101",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/buninskiye_kvartaly_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/arhitektorlife",
             "chat_id": -1001490837189,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/matveypark",
             "chat_id": -1001320577667,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gk_mtvpark",
             "chat_id": -1001611003022,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/matveevpark_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/pro_prokshino_chat",
             "chat_id": -1001636399735,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/prokshino101",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/barkla6",
             "chat_id": -1001371772044,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/barklaya6_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhkbarclay6",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/citimix",
             "chat_id": -1001369367956,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ZhKCitimixsitimikschats",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/citimix_new",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/skandinavia1",
             "chat_id": -1001381298042,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/michurpark",
             "chat_id": -1001403414954,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/michurinskiypark_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/mitinskiy_les",
             "chat_id": -1001421038614,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/mitinskiyles_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/mitinskiylec",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/juzhns",
             "chat_id": -1001157650599,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/uzhniesadi",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/yujnie_sadi",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/bolshaya_akademicheskaya_85",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_bolshaya_akademicheskaya85",
             "chat_id": -1001617314110,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/New_Star_7k1_7k2",
             "chat_id": -1001971001470,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ap_pik",
             "chat_id": -1001447489461,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/amurskiypark_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kolskaya8_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kolskaya82524",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Kolskaya8_PIK",
             "chat_id": -1002242122236,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_kolskaya8",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/nagatinskiy_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/nagatinsky2",
             "chat_id": -1001194100316,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/salarpark",
             "chat_id": -1001475498130,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/SalParkSosed",
             "chat_id": -1001623926614,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/signalnyy16",
             "chat_id": -1001290477673,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/signalniy16_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kronshtadskiy_9",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kron9chat",
             "chat_id": -1001686725638,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/hollandpark1",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/hollandpark_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/volgskiypark",
             "chat_id": -1002021924536,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Businovpark",
             "chat_id": -1001531752670,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/businovskypark",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gk_zelpark",
             "chat_id": -1001765448362,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zeleniypark_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/LosinPark_GK",
             "chat_id": -1001309576421,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/losostrovpark",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/altufevskoe_53_pik",
             "chat_id": -1001681036387,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/altufevskoe53_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kavkaz_br51",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/JKKavkazskiyBulvar51Chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/clementine_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/clementine_klementin",
             "chat_id": -1001934739837,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/nikolskie_luga",
             "chat_id": -1001615179467,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/nikolskieluga_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/molzhaninovoo",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/molzganinovo",
             "chat_id": -1001218919628,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/chat_molzhaninovo",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/terletskiy_park",
             "chat_id": -1001665246873,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhklevelnagatinskaya",
             "chat_id": -1001546678010,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/novoe_ochakovo_zhk",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/TrueOchakovo",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/novoeochakovo_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/self_msk",
             "chat_id": -1001734033713,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Akadem_PaIas",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Polyarnaya25",
             "chat_id": -1001295667132,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ogni_jk",
             "chat_id": -1001318219078,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_triniti",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/wellton_gold_zhk",
             "chat_id": -1001965406872,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/sheremetievski",
             "chat_id": -1001378339656,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/koroleva13onlyowners",
             "chat_id": -1002142258768,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gkalkhimovo",
             "chat_id": -1001174500296,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/moscowheart",
             "chat_id": -1001265130975,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_bolshaya_ochakovskaya_2",
             "chat_id": -1001723289754,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/VERESK_INSIDE_chatgroup",
             "chat_id": -1001429928165,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/preobrazhenie",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ZhKVnukovoParkChats",
             "chat_id": -1002823412491,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/yujnoe_bunino",
             "chat_id": -1001153406971,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/uno_starokoptevsky",
             "chat_id": -1002145524333,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/bairesopen",
             "chat_id": -1001740990973,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_aviator",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/akvilon_beside_zhk",
             "chat_id": -1001798565694,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/akvilon_beside_jk",
             "chat_id": -1001472982690,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Navetroletchikov",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kvartal2119rbs",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Sosedi2119MoscowFirstEntrance",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/inf_BG",
             "chat_id": -1001202663324,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/krasnokaz15",
             "chat_id": -1001215532722,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gk_mainstreet",
             "chat_id": -1001349467787,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/akademika_pavlova_free",
             "chat_id": -1001372300382,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/edelveiskomfort",
             "chat_id": -1001446588496,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dmpik",
             "chat_id": -1001313185049,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/mesles",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kus12_1",
             "chat_id": -1002084083278,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/City_Stories",
             "chat_id": -1001333780250,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Ispanskie2",
             "chat_id": -1001250686994,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gkaviatika",
             "chat_id": -1001401160688,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/akvilonkommunarka",
             "chat_id": -1001232450270,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/nekrasovka_kvartal",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/sadovye_kvartaly",
             "chat_id": -1001953673420,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Hide_MR",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/perovskoe20",
             "chat_id": -1001764925053,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ZapadniyPort",
             "chat_id": -1001317017652,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/vstremleniiksvety",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/nakhimov_profsoyuznaya",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zk_wow",
             "chat_id": -1002143623305,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rc_profit2025",
             "chat_id": -1001438450201,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Nagatino_i_Land",
             "chat_id": -1001161666401,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rimkor11",
             "chat_id": -1001194973813,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dinastiya_sosedi",
             "chat_id": -1001434167003,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Green_Park_pik",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gk_izmailovsky_park",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ramenki_real",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_new_ochakovo",
             "chat_id": -1001548383229,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/pik_nvh15",
             "chat_id": -1001876786301,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/cvetpol",
             "chat_id": -1001451695815,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Tushino_2018",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/filatovlug_sosedi",
             "chat_id": -1001295224440,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/union_park_krost",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jazzpremium",
             "chat_id": -1001905541482,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kvartal_jazz",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Prizma_free",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/luchi_zao",
             "chat_id": -1002102402434,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Luchi_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zkMDAll",
-            "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "chat_id": -1001125582055,
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/DelovoyBNL",
             "chat_id": -1001217863001,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/bezdedovo_chat",
             "chat_id": -1001672845787,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zkzilart",
             "chat_id": -1001095066066,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/sber_city_chat",
             "chat_id": -1001954940854,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_mod_owners",
             "chat_id": -1001733545756,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/symphony34_chat",
             "chat_id": -1002195689803,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/skyhouse_chat",
             "chat_id": -1002259335453,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ever_msk",
             "chat_id": -1001822324890,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_trikolor",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/sosedyilove",
             "chat_id": -1001780588782,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/capital_towers_chat",
             "chat_id": -1002161060588,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gkvesterdam",
             "chat_id": -1001126753407,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ogni_2",
             "chat_id": -1001102242321,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/now_kvartal",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/vitalitychat",
             "chat_id": -1001467932502,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/s_les",
             "chat_id": -1001432749248,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/serebpark",
             "chat_id": -1001258569599,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/prichalny",
             "chat_id": -1001317181377,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/headliner_cao",
             "chat_id": -1002344153362,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/westgardenremont",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/west_garden",
             "chat_id": -1001433216405,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/slava_sao",
             "chat_id": -1002148749337,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rezidencii_arhitektorov",
             "chat_id": -1001251787564,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_Dream_Towers",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/nevatowers_chat",
             "chat_id": -1001693030175,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/bch25",
             "chat_id": -1001222541445,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/tessensky1",
             "chat_id": -1001925485152,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rozhdestvenka8",
             "chat_id": -1002845317746,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/sidneycity",
             "chat_id": -1001181933314,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Sidneyrem",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/sidneycitylife",
             "chat_id": -1001484872753,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/teatralnyy_kvartal",
             "chat_id": -1001443305610,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/praympark_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/mix_park",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/mihajlovskij_park",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/izmlespik",
             "chat_id": -1001270149799,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/pav_city",
             "chat_id": -1001286988678,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/westtowwer",
             "chat_id": -1002829824599,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/crystal_szao",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/KDTurgenevChatSobstvennikov",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/novaya_zvezda_2",
             "chat_id": -1001611303268,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/citybay1",
             "chat_id": -1001976085717,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/vishnevyy_sad_zhk",
             "chat_id": -1001800584091,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/balance_uvao",
             "chat_id": -1001990635423,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/top_hills_ingrad",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gkriversky",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Lime_residential_complex",
             "chat_id": -1002625311940,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/b4_life",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/MYPBC",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/pb_service_pb",
             "chat_id": -1001244667532,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Rustaveli14_Chat",
             "chat_id": -1001327932056,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rustaveli14_svao",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk1dubrovskii",
             "chat_id": -1001542511150,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_highway",
             "chat_id": -1001612487023,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_Portlend",
             "chat_id": -1001822696002,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkportland",
             "chat_id": -1001872159821,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/level_yuzhnoportovaya",
             "chat_id": -1001650272608,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rotteerdam1i2ochered",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/aistresidence_monarx",
             "chat_id": -1001687510193,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/nametkintower_chat",
             "chat_id": -1002528791346,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/legacydom",
             "chat_id": -1001901153973,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/JKVereiskaya41",
             "chat_id": -1002007843646,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Vereyskaya_41_chat",
             "chat_id": -1002631434311,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zarechye_park",
             "chat_id": -1001709414402,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zarechniy_fsk",
             "chat_id": -1001188194044,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/strana_ozernaya",
             "chat_id": -1001676229377,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_Strana_Ozernaya",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/obrucheva_30_lsr",
             "chat_id": -1001903805047,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rezidentsii_skolkovo",
             "chat_id": -1001824332652,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rezidencia_skolkovo",
             "chat_id": -1002185096352,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/skolkovo13",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/podslushanodedovskchat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ekobunino_chat",
             "chat_id": -1002313126998,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/buninskiekvartali_chat",
             "chat_id": -1002569909355,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/barvikhachatt",
             "chat_id": -1003007553450,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/chat_barvikha_life",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/novaya_riga_sosedi",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/novayarigagroup",
             "chat_id": -1002100683253,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_novayariga_chat",
             "chat_id": -1002337032308,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/S_Sosedi",
             "chat_id": -1001949763872,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/new_odintsovo_chat",
             "chat_id": -1002093279228,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zarechye_chat",
             "chat_id": -1001535335919,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/odingrad_chat",
             "chat_id": -1001522821164,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/laykovo_chat",
             "chat_id": -1001647197895,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kommunarka_tinao",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/chataprelevkaTU",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/krasnogorsk_24_chat",
             "chat_id": -1001201235904,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/semparkzhk",
             "chat_id": -1001246849578,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/semenovskijpark2",
             "chat_id": -1001644254253,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/semenovskiypark2",
             "chat_id": -1001681919959,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_preobrazhenskaya_ploshchad",
             "chat_id": -1002173296284,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_volzhskiy_park",
             "chat_id": -1001567327951,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/District_39",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ZhKPROSPEKT39Sosedi1",
             "chat_id": -1002284632775,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Levelnizhegorodskaya",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_intelligent",
             "chat_id": -1001580324596,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/bolshaya_semerka",
             "chat_id": -1001964693941,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_bolshaya_semerka",
             "chat_id": -1002202915608,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/nedsimvol",
             "chat_id": -1001453953057,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/levelbaumanskay",
             "chat_id": -1001832605635,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/skazochnyy_les",
             "chat_id": -1001213970554,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/TheLakeChat",
             "chat_id": -1001965246619,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/S16_General",
             "chat_id": -1001172045755,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dostigenie_public",
             "chat_id": -1001432360772,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rastunovo_izhs",
             "chat_id": -1001965276254,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kpminaevo",
             "chat_id": -1001694885905,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ijsREPINO",
             "chat_id": -1001838234556,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kedrizaIJS",
             "chat_id": -1002296499494,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/favorit_poselok",
             "chat_id": -1001139570579,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zemlydomodedovo",
             "chat_id": -1001847931347,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kp_dinastia",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/vesna_aprelevka",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/V0skresenskoE",
             "chat_id": -1001187827364,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk1yasenevskij",
             "chat_id": -1001796830784,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhkforeville",
             "chat_id": -1002060106717,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/smartgardenn",
             "chat_id": -1002188301072,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rodinaparkmsk",
             "chat_id": -1002023339657,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/veer_chattt",
             "chat_id": -1003164029675,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/uno_osnova",
             "chat_id": -1001745121834,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_uno_gorbunova",
             "chat_id": -1002526935732,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kvartal_rumyantsevo",
             "chat_id": -1001958066937,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/melisad_zhk",
             "chat_id": -1001564941355,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_troparevo_park",
             "chat_id": -1001889227567,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dmitrovskoe169",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/DNsosedi",
             "chat_id": -1001635645196,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkdmitrovskoenebo",
             "chat_id": -1001753357049,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/nurupino",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/marushkino_zhk",
             "chat_id": -1001736324194,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/akinshino_chat",
             "chat_id": -1001169602881,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkssburovoclab",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kpNewEurope",
             "chat_id": -1001371548213,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dom7danilovskiy_zhk",
             "chat_id": -1002233190003,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/domsemdanilovski",
             "chat_id": -1002702475631,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_titul",
             "chat_id": -1001228929030,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/vesperkutuzovskiy",
             "chat_id": -1002793294565,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/solehillsgk",
             "chat_id": -1002012769255,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/vl_chkalova20",
             "chat_id": -1002481667869,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_narvin_chat",
             "chat_id": -1002427692566,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kavbul_51",
             "chat_id": -1001416480349,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/losinopark",
             "chat_id": -1001176172222,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/losinoostrovskyapark",
             "chat_id": -1001853874313,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/perviysheremetevskij",
             "chat_id": -1001813227876,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhkmangazeyanarechnom",
             "chat_id": -1002053917673,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk2irtyshskiy",
             "chat_id": -1002051539128,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/irtishskiikvartal",
             "chat_id": -1002041386732,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/sredanalobachevskogoo",
             "chat_id": -1002192254684,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/sredanalobachevskogo_chat",
             "chat_id": -1002191424690,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/FizTehS0bstvenniki",
-            "chat_id": -1001705553647,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Indy_Towers",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_indy_towers",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/JKDiusS",
             "chat_id": -1002361152595,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ultimacitymsk",
             "chat_id": -1002097688847,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/accenty_gk",
             "chat_id": -1002411307247,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kvartalmeet",
             "chat_id": -1002745595217,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/stone_sokolniki_chat",
             "chat_id": -1002848607855,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/emotion_szao",
             "chat_id": -1001990346417,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/unosokolinayagora",
             "chat_id": -1002498853517,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/unosokolinayagora_chat",
             "chat_id": -1002332943682,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_soloss",
             "chat_id": -1002393755637,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kollektsiya_nahabino",
             "chat_id": -1002525808862,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rakurs_chat",
             "chat_id": -1001505492318,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_insiderr",
             "chat_id": -1002426202718,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhksredanakutuzovskom",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_sreda_na_kytyzovskom",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/sredanakutuzovskomm",
             "chat_id": -1002169941966,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/buninskaya_naberejnaya",
             "chat_id": -1001978168808,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/buninskayanaberezhnaya",
             "chat_id": -1002629026061,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ogoronii20",
             "chat_id": -1001722186932,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ms_pik",
             "chat_id": -1002188800405,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/moskvorechyechat",
             "chat_id": -1001879085022,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/MoskvorechyeSaburovoPIK",
             "chat_id": -1002233437671,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Kronshtadskiyyy9",
             "chat_id": -1002035127194,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkmoments",
             "chat_id": -1001702664480,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/SohoZorge9",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zorge_9_St_Michael",
             "chat_id": -1001580535074,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/soul_forma_pik",
             "chat_id": -1001778878412,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/mangazeyavbogorodskom",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/emotion_szao/6",
             "chat_id": -1001990346417,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rasskazovochat",
             "chat_id": -1001472589350,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/sezar_city_chat",
             "chat_id": -1002523762323,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/simvol_21",
             "chat_id": -1001281190335,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/insider_chattt",
             "chat_id": -1003125997897,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/stanislavskiy_chattt",
             "chat_id": -1002903246599,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/nametkintower_chat",
-            "chat_id": -1002528791346,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/unogolovinskie",
             "chat_id": -1002050310620,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/paveletskaya_siti",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/paveleckayacity_chat/479",
             "chat_id": -1002031121788,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ilovekvartal",
             "chat_id": -1001394121213,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkEvoPark",
             "chat_id": -1001894739522,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/fiztehcity_chat",
             "chat_id": -1001523743123,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhkmirapolis",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/injoy_chat",
             "chat_id": -1001923900530,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/LevelMich",
             "chat_id": -1001640029502,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/levelvojkovskaya",
             "chat_id": -1001319444697,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_metropolia2",
             "chat_id": -1001757335537,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkpetrovskii2",
             "chat_id": -1001796510598,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gksobytie",
             "chat_id": -1001574287075,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/cityzenmrgroup",
             "chat_id": -1002088795614,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/foriver_zhk",
             "chat_id": -1001289987959,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kit_2mo",
             "chat_id": -1001934392328,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_om",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ZhKDomMalevichSosedi",
             "chat_id": -1002312063714,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/parkside_zhk",
             "chat_id": -1001687363396,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/Kronshtadskiyyy9",
-            "chat_id": -1002035127194,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/jkmoments",
-            "chat_id": -1001702664480,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/SohoZorge9",
-            "chat_id": null,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/zorge_9_St_Michael",
-            "chat_id": -1001580535074,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/soul_forma_pik",
-            "chat_id": -1001778878412,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/mangazeyavbogorodskom",
-            "chat_id": null,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/emotion_szao/6",
-            "chat_id": -1001990346417,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/rasskazovochat",
-            "chat_id": -1001472589350,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/sezar_city_chat",
-            "chat_id": -1002523762323,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/simvol_21",
-            "chat_id": null,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/insider_chattt",
-            "chat_id": -1003125997897,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/stanislavskiy_chattt",
-            "chat_id": -1002903246599,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/nametkintower_chat",
-            "chat_id": -1002528791346,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/unogolovinskie",
-            "chat_id": -1002050310620,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/paveletskaya_siti",
-            "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/paveleckayacity_chat",
             "chat_id": -1002031121788,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/ilovekvartal",
-            "chat_id": -1001394121213,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/jkEvoPark",
-            "chat_id": -1001894739522,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/fiztehcity_chat",
-            "chat_id": -1001523743123,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/zhkmirapolis",
-            "chat_id": null,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/injoy_chat",
-            "chat_id": -1001923900530,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/LevelMich",
-            "chat_id": -1001640029502,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/levelvojkovskaya",
-            "chat_id": -1001319444697,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/zhk_metropolia2",
-            "chat_id": -1001757335537,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/jkpetrovskii2",
-            "chat_id": -1001796510598,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/gksobytie",
-            "chat_id": -1001574287075,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/cityzenmrgroup",
-            "chat_id": -1002088795614,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/foriver_zhk",
-            "chat_id": -1001289987959,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/kit_2mo",
-            "chat_id": -1001934392328,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/zhk_om",
-            "chat_id": null,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/ZhKDomMalevichSosedi",
-            "chat_id": -1002312063714,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/parkside_zhk",
-            "chat_id": -1001687363396,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rzori_chat",
             "chat_id": -1001863428220,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/+4vPhgKpjirUzNzhi",
             "chat_id": -1002032663919,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/artemovo_izhs",
             "chat_id": -1002076605718,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kp_river_park",
             "chat_id": -1002321495711,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/+eyvTz-mCV5xiN2Uy",
             "chat_id": -1001919343834,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/NovoeRastunovoMO",
             "chat_id": -1003022145265,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dachnaya_practika",
             "chat_id": -1001983570712,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/brusnikino_life",
             "chat_id": -1002273273416,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Beregovoi74",
             "chat_id": -1002425635595,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/stepygino",
             "chat_id": -1001410448879,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/fwd_2018",
             "chat_id": -1002582217158,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kuzminskiyleslife",
             "chat_id": -1001480748996,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Skurygino",
             "chat_id": -1001407654868,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/abbakumovoru",
             "chat_id": -1001663759740,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/KP_Volodarsky_Park",
             "chat_id": -1001836460356,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/KP_BA",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/pb_service_pb",
-            "chat_id": -1001244667532,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/novogorskklab",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/pevchee_chat",
             "chat_id": -1001238077836,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/+yWR5CYHSw4JiMzli",
             "chat_id": -1002075853982,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/novoe_vnukovo",
             "chat_id": -1001380589884,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/il_sloboda",
             "chat_id": -1001923570930,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_club_cult",
             "chat_id": -1002141526217,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/chat_lavrushinskiy",
             "chat_id": -1001973765549,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/shome_house_group",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Leningradka_58",
             "chat_id": -1001183039643,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkmyprioritypaveletskaya",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zkmyprioritypaveletskaya",
             "chat_id": -1001812039527,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dostoyanie_chat",
             "chat_id": -1001519451876,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/akademikapavlova_chat",
             "chat_id": -1002085490211,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/levelakademicheskaya",
             "chat_id": -1001765063008,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/mirrorsdanie",
             "chat_id": -1001663317518,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dmitrovnebo",
             "chat_id": -1002130611449,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Voxhall_etalon",
             "chat_id": -1001719760722,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/poklonnaya_9_zhk",
             "chat_id": -1001512976995,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ZhKPetrovskiyparkiiChat",
             "chat_id": -1002793926460,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Kvartal_Life_Time",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dostizhenie_chat",
             "chat_id": -1001929162908,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/lefortovoparkpetr1",
             "chat_id": -1001231108565,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/lefortovopark_chat",
             "chat_id": -1002063884987,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gkprof",
             "chat_id": -1001281382439,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dailygorod",
             "chat_id": -1001822990459,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_triniti2",
             "chat_id": -1001450782534,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gk_trinity_2",
             "chat_id": -1002340799587,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/HighLifeMoscow",
             "chat_id": -1001271481427,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/PIK_Kronshtadtskiy_14",
             "chat_id": -1002442955903,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/klremont",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/VICTORYPARKResidences",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/molodogvardeiskaya36",
             "chat_id": -1001367698493,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kk15k5",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gknastoyashee",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ К1. ЖК Настоящее (Игорь)",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Ремонт Дизайн в ЖК Настоящее (Игорь)",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_Prostornaya_7",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/level_baumanskaya",
             "chat_id": -1001618008568,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ZhKLeDomeSosedi",
             "chat_id": -1002382734998,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ZhKChampineSosedi",
             "chat_id": -1002471931711,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gkaquatoria",
             "chat_id": -1001492689429,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/RiverParkChat",
             "chat_id": -1001625120612,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/mayakpeople",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Sholohovo_gk_sosedi",
             "chat_id": -1001691532283,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/harmony_park",
             "chat_id": -1001209765622,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ChatZKZarechniyKvartal",
             "chat_id": -1001939331983,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kvartal_ivakino_samolet",
             "chat_id": -1001767663433,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kvartal_ivakinoo",
             "chat_id": -1001986358556,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/filifamous",
             "chat_id": -1002094841905,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/sosedimod",
             "chat_id": -1001304296755,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zkmodmrgroup",
             "chat_id": -1001618509127,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/moifilatovlug",
             "chat_id": -1001593789956,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_high_life",
             "chat_id": -1002104516808,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dom_ravnovesie",
             "chat_id": -1002198385267,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zkravnovesie",
             "chat_id": -1001194691540,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ilpik",
             "chat_id": -1001483119743,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/yauzapark_pik",
             "chat_id": -1001987382826,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ba85pik",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_geroev",
             "chat_id": -1001174804169,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dmitrovskoe_nebo_zhk",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/lucky_jk",
             "chat_id": -1001463233007,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Tetris_2",
             "chat_id": -1001490721626,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zk_beregovoy",
             "chat_id": -1002093153993,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/apart_kompleks_m1_skolkovo",
             "chat_id": -1001735853547,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gloraxcity",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/geroev_chat",
             "chat_id": -1002029857892,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/loverasskazovo",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/FestivalPark",
             "chat_id": -1001362480176,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rafinad_new",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_Lavrushinskiy",
             "chat_id": -1002042800985,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/prigorod_lesnoe_jk",
             "chat_id": -1001675331281,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Чаты домов ЖК Мытищи Парк",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kpb_flud",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/pavlino_jk",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/molokovo_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Donskoy_Kolomna",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/skandinavskiy_fsk",
             "chat_id": -1001593937781,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/level_prichalnyy",
             "chat_id": -1001892908409,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/perviyuzniy",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/pervyy_yuzhnyy",
             "chat_id": -1001741760410,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dom_edelveys",
             "chat_id": -1002152176977,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/pirogovskayariviera",
             "chat_id": -1001259511616,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/pirogovoriviera",
             "chat_id": -1001481955338,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/melissad_mic",
             "chat_id": -1001673318157,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/DomodedovoOptima",
             "chat_id": -1002383790228,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/bestconbig7",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gkvangarden",
             "chat_id": -1001553494339,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/pehra_bez_spama",
             "chat_id": -1001553491458,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/pehra_sosedi",
             "chat_id": -1001407463272,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gkmilovidnoe",
             "chat_id": -1001510625778,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/milovidnoya",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dinastiya_SAO",
             "chat_id": -1002123784810,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/nash_shagal",
             "chat_id": -1001930203243,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_green_park",
             "chat_id": -1001674042994,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kashtanovayaroscha",
             "chat_id": -1001593474511,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kashtanovaya_roshcha_jk",
             "chat_id": -1001706060590,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/vidnyjbereg2",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ideal_forum",
             "chat_id": -1002213429210,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/NKV_II",
             "chat_id": -1001499624204,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ZhKKhamovniki12Sosedi",
             "chat_id": -1002364799909,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkperviirazanskii",
             "chat_id": -1001879270971,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/mypriority_basmanny_zhk",
             "chat_id": -1001791048469,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/openparkgk",
             "chat_id": -1001672719745,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_open_park",
             "chat_id": -1002170024558,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/pervi_donskoy",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/solnechnyj_park",
             "chat_id": -1002802342688,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/alh_chat",
             "chat_id": -1001371285437,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkkosmos",
             "chat_id": -1001679556998,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/julebino_park",
             "chat_id": -1001480312923,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/teatralniypark_chat",
             "chat_id": -1002032736175,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/akvilonmitino_online",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/cvetochniigorod",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/stolichnyy_jk",
             "chat_id": -1001477500910,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/beregoviekvartali",
             "chat_id": -1001950765356,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Skai_House",
             "chat_id": -1001536954168,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Frunzenskij",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dvestolitsy",
             "chat_id": -1001129976518,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/andreevkalife1",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/andreevka_life",
             "chat_id": -1001881676081,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/strogino_360",
             "chat_id": -1002163119806,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/polarpik",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/SkySputnik_16_17_18",
             "chat_id": -1002494136509,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkgrafikanavode",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/ZKAFIChat",
             "chat_id": -1002468840539,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkdzenkvartali",
             "chat_id": -1001847739584,
-            "locations": [{"city": "moscow"}]
-        },
-        {
-            "identifier": "t.me/NKV_II",
-            "chat_id": -1001499624204,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/welltongoldmsc",
             "chat_id": -1001527010501,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/mytischi_city",
             "chat_id": -1002066043074,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gkbgorog",
             "chat_id": -1002285043101,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_doro_mille",
             "chat_id": -1002424615410,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkpublicist",
             "chat_id": -1002120555238,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jksouz",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_Pride_sosedi",
             "chat_id": -1001853336929,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/bd_park",
             "chat_id": -1001372915332,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkdom56",
             "chat_id": -1001819983730,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/opus_home",
             "chat_id": -1002474094217,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/novoe_pushkino_zhk",
             "chat_id": -1001749477986,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/pervyy_dubrovskiy",
             "chat_id": -1001746015299,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Foreville_jk",
             "chat_id": -1001335285229,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/otradanasinichke",
             "chat_id": -1002743948035,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/JkBrigantina",
             "chat_id": -1001161059693,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/gogol_park_osnova",
             "chat_id": -1001889590791,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_station_l",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/biopolis_sevensuns",
             "chat_id": -1001576645843,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/lastochkino_vrn",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkrimskiychatsobstvennikov",
             "chat_id": -1001878639753,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jkrodniekvartali",
             "chat_id": -1001646035166,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/utanovo_pik",
             "chat_id": -1001785820890,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/utanovochat",
             "chat_id": -1001992737923,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kvartal14",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/edelwiess1",
             "chat_id": -1001562380157,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/jk_7nebo",
             "chat_id": -1002084543207,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/lobnya_city_chat",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dvestol181",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/zhk_losinoostrovskiypark",
             "chat_id": -1002027197844,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/bysinovskijpark",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/symphony34_mrgroup",
             "chat_id": -1001583741449,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/nashe_eko_bunino",
             "chat_id": -1001300776677,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/yuzhnoe_bunino",
             "chat_id": -1001771914283,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/maryinagora_p",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/pitimnik_sadki",
             "chat_id": -1001647834246,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/rastunovolive",
             "chat_id": -1001941150000,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/My_Derevnja",
             "chat_id": -1001509361259,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/Mytishi_Chat",
             "chat_id": -1001965539458,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/lisichkin_ochag",
             "chat_id": -1002237957205,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/KuzyaevoVillage",
             "chat_id": -1002237533876,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/velikie_ozera",
             "chat_id": -1002357239439,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/tsnsb_g",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/kpnovoekosino",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/novoseltsevo",
             "chat_id": null,
-            "locations": [{"city": "moscow"}]
+            "locations": [
+                {
+                    "city": "moscow"
+                }
+            ]
         },
         {
             "identifier": "t.me/dubai_chat_russia",
             "chat_id": -1001686273730,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/chat_dubai_group",
             "chat_id": -1001708076550,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/znakomstva_dxb",
             "chat_id": -1001292640514,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/BusinessBayD",
             "chat_id": null,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/UAEDubai_official",
             "chat_id": null,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/UAE_chat",
             "chat_id": null,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/uaechatt",
             "chat_id": -1001663871206,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/dubai_uae_chat",
             "chat_id": -1001514091674,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/DubaiMarinaD",
             "chat_id": null,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/dubailanguage",
             "chat_id": null,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/pdr_dubai_vb",
             "chat_id": null,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/PalmJumeirahD",
             "chat_id": -1002165534914,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/creekharboar",
             "chat_id": -1001637200105,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/creekharbor",
             "chat_id": -1001628499062,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/dubaicreekharbour",
             "chat_id": -1001719725280,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/damac_hills2",
             "chat_id": -1001807098554,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/damacrus",
             "chat_id": -1001806589105,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/Damachills2sosedi",
             "chat_id": null,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/russiansmumsindubai",
             "chat_id": null,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/teens_dubai",
             "chat_id": -1001649965105,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/Dubayg",
             "chat_id": -1001546639923,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/womensclubdubai",
             "chat_id": -1002122526601,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/DubaiExpertsClub",
             "chat_id": null,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/Flame_club_dubai",
             "chat_id": null,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/terra_dubai",
             "chat_id": -1001819104623,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/netw_dubai",
             "chat_id": -1001632243429,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/rent_in_dubai",
             "chat_id": -1001144748083,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/albarshachat",
             "chat_id": -1002076000997,
-            "locations": [{"city": "dubai"}]
+            "locations": [
+                {
+                    "city": "dubai"
+                }
+            ]
         },
         {
             "identifier": "t.me/kitcar2",
@@ -3606,11 +6003,6 @@
             "locations": []
         },
         {
-            "identifier": "t.me/GeelyGalaxy",
-            "chat_id": -1001630680068,
-            "locations": []
-        },
-        {
             "identifier": "t.me/audisaleschat",
             "chat_id": -1001311721664,
             "locations": []
@@ -3701,11 +6093,6 @@
             "locations": []
         },
         {
-            "identifier": "t.me/kitcar2",
-            "chat_id": -1002612813439,
-            "locations": []
-        },
-        {
             "identifier": "t.me/tiptopavtochat",
             "chat_id": -1002526477512,
             "locations": []
@@ -3714,6 +6101,406 @@
             "identifier": "t.me/svautozakaz",
             "chat_id": -1002793290418,
             "locations": []
+        },
+        {
+            "identifier": "t.me/RamenyeDergaevoKuplyuProdam",
+            "chat_id": -1002468708534
+        },
+        {
+            "identifier": "t.me/riverpark_2_phase_chat",
+            "chat_id": -1001495086260
+        },
+        {
+            "identifier": "t.me/zhk_river_park",
+            "chat_id": -1002338443763
+        },
+        {
+            "identifier": "t.me/davidovo_to",
+            "chat_id": -1001755975974
+        },
+        {
+            "identifier": "t.me/jk_white_dacha_park",
+            "chat_id": -1002202090047
+        },
+        {
+            "identifier": "t.me/bulatovo_res",
+            "chat_id": -1001696114749
+        },
+        {
+            "identifier": "t.me/mybaysideresidence",
+            "chat_id": -1001702106096
+        },
+        {
+            "identifier": "t.me/https://t.me/WUWKINLES",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/istra_dom",
+            "chat_id": -1002071138575
+        },
+        {
+            "identifier": "t.me/ZKforestparking",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/svetlarocha",
+            "chat_id": -1002283984162
+        },
+        {
+            "identifier": "t.me/mironcevo_chat",
+            "chat_id": -1001863259404
+        },
+        {
+            "identifier": "t.me/dmitrovdomsamolet",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/dmitrovdom",
+            "chat_id": -1001546669083
+        },
+        {
+            "identifier": "t.me/pavlovo_lakes",
+            "chat_id": -1001826239470
+        },
+        {
+            "identifier": "t.me/leonovo_2",
+            "chat_id": -1002373156924
+        },
+        {
+            "identifier": "t.me/PPSamolet",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/kpfeninolesnoe",
+            "chat_id": -1003198458199
+        },
+        {
+            "identifier": "t.me/pushkinodomuvody",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/zhkdubroviciclab",
+            "chat_id": -1002271077112
+        },
+        {
+            "identifier": "t.me/kp_svetlaya_polyana",
+            "chat_id": -1002422992814
+        },
+        {
+            "identifier": "t.me/talisman_rokoss",
+            "chat_id": -1001432937917
+        },
+        {
+            "identifier": "t.me/talisman_na_rokossovskogo_zhk",
+            "chat_id": -1001832906856
+        },
+        {
+            "identifier": "t.me/Talisman_na_Rokossovskogo",
+            "chat_id": -1001178078062
+        },
+        {
+            "identifier": "t.me/rokosovs_remont",
+            "chat_id": -1001913787869
+        },
+        {
+            "identifier": "t.me/KPDudnikovo",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/EseninoKP",
+            "chat_id": -1001925457579
+        },
+        {
+            "identifier": "t.me/aprelevka_cedar",
+            "chat_id": -1002664995604
+        },
+        {
+            "identifier": "t.me/KPKedriza",
+            "chat_id": -1003169899027
+        },
+        {
+            "identifier": "t.me/divnoreche",
+            "chat_id": -1002153627294
+        },
+        {
+            "identifier": "t.me/martemyanovo",
+            "chat_id": -1002580747563
+        },
+        {
+            "identifier": "t.me/zhk_martemyanovo_clubb",
+            "chat_id": -1002474265179
+        },
+        {
+            "identifier": "t.me/sabyrovoclub",
+            "chat_id": -1001947718954
+        },
+        {
+            "identifier": "t.me/saburovoclub",
+            "chat_id": -1001289544465
+        },
+        {
+            "identifier": "t.me/KPSaburovoKlabChat",
+            "chat_id": -1001938248138
+        },
+        {
+            "identifier": "t.me/kuzminskuy_les",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/lisichkino",
+            "chat_id": -1001073096108
+        },
+        {
+            "identifier": "t.me/Bratovshina_life",
+            "chat_id": -1003479504089
+        },
+        {
+            "identifier": "t.me/Hikolskoe",
+            "chat_id": -1001941218456
+        },
+        {
+            "identifier": "t.me/catTaschirovoTU",
+            "chat_id": -1002126311667
+        },
+        {
+            "identifier": "t.me/parkfonte",
+            "chat_id": -1001398168193
+        },
+        {
+            "identifier": "t.me/zhk_park_fonte",
+            "chat_id": -1003061259797
+        },
+        {
+            "identifier": "t.me/SNTgreenHills",
+            "chat_id": -1003251114829
+        },
+        {
+            "identifier": "t.me/forumvarezki",
+            "chat_id": -1001870224656
+        },
+        {
+            "identifier": "t.me/uptop_space",
+            "chat_id": -1002166325817
+        },
+        {
+            "identifier": "t.me/spolyany_design",
+            "chat_id": -1001440335276
+        },
+        {
+            "identifier": "t.me/zhk_rechnoyy",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/triumph_palas",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/SHERWOOD15K1",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/greenpark_chat",
+            "chat_id": -1001810909056
+        },
+        {
+            "identifier": "t.me/mkrYantarnybalashihadistrict",
+            "chat_id": -1001194007191
+        },
+        {
+            "identifier": "t.me/vberegovom",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/beregovoy2",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/Gzhelski_les",
+            "chat_id": -1001559981028
+        },
+        {
+            "identifier": "t.me/krekshino_online_chat",
+            "chat_id": -1001487473704
+        },
+        {
+            "identifier": "t.me/ml_chat",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/meshcherskyp",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/Meshchersky2",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/beriozka5",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/berezkaa_snt",
+            "chat_id": -1003566207911
+        },
+        {
+            "identifier": "t.me/shishles",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/minskzelenyylug",
+            "chat_id": -1002360703508
+        },
+        {
+            "identifier": "t.me/zelenylug67",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/elkiparkkirov",
+            "chat_id": -1002842570252
+        },
+        {
+            "identifier": "t.me/elki_park",
+            "chat_id": -1001730928637
+        },
+        {
+            "identifier": "t.me/podushkuno",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/valentinovkapark_chat",
+            "chat_id": -1002125503898
+        },
+        {
+            "identifier": "t.me/ChatValentinovkaTP",
+            "chat_id": -1002555290685
+        },
+        {
+            "identifier": "t.me/MarketValentinovkaTP",
+            "chat_id": -1002840298212
+        },
+        {
+            "identifier": "t.me/zamitinoblog",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/gkbulatnikovo",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/gkvidniygorod",
+            "chat_id": -1001296091456
+        },
+        {
+            "identifier": "t.me/vidniybereg2",
+            "chat_id": -1001391720502
+        },
+        {
+            "identifier": "t.me/kfsosedi",
+            "chat_id": -1001218141117
+        },
+        {
+            "identifier": "t.me/motyakovo_korfort",
+            "chat_id": -1002099160239
+        },
+        {
+            "identifier": "t.me/korenevskiyfort",
+            "chat_id": -1001962858718
+        },
+        {
+            "identifier": "t.me/ThelittlePeacock",
+            "chat_id": -1003228592912
+        },
+        {
+            "identifier": "t.me/rutownmarino",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/TrinityBoltinoChat",
+            "chat_id": -1003364570554
+        },
+        {
+            "identifier": "t.me/boltino2",
+            "chat_id": -1003467156716
+        },
+        {
+            "identifier": "t.me/balladachat",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/gballada",
+            "chat_id": -1001624941350
+        },
+        {
+            "identifier": "t.me/desyatka_microrayon",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/lesnije_poljani",
+            "chat_id": -1001413573611
+        },
+        {
+            "identifier": "t.me/lesniepolyani",
+            "chat_id": -1002036285340
+        },
+        {
+            "identifier": "t.me/laykovojk",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/rublevskiy_chat",
+            "chat_id": -1001561092060
+        },
+        {
+            "identifier": "t.me/rublevo",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/yartsevolife",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/cornerlapinochat",
+            "chat_id": -1002834887078
+        },
+        {
+            "identifier": "t.me/barybino1900",
+            "chat_id": -1001714073273
+        },
+        {
+            "identifier": "t.me/galchino_sity",
+            "chat_id": -1001949428510
+        },
+        {
+            "identifier": "t.me/sonin_lug",
+            "chat_id": -1001660038398
+        },
+        {
+            "identifier": "t.me/novyeizumrudnyechat",
+            "chat_id": -1001383493590
+        },
+        {
+            "identifier": "t.me/istra_snt_frunzenets",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/afineevopark_chat",
+            "chat_id": -1001886960473
+        },
+        {
+            "identifier": "t.me/glebovskiesad",
+            "chat_id": -1002591482289
+        },
+        {
+            "identifier": "t.me/newrigasale",
+            "chat_id": null
+        },
+        {
+            "identifier": "t.me/zhk_pavlovo_park",
+            "chat_id": -1002672937792
+        },
+        {
+            "identifier": "t.me/molzinochat",
+            "chat_id": -1001961348598
         }
     ]
 }

@@ -42,4 +42,8 @@ docker-compose.realtime.generated.yml
 # Cursor/Editor
 .cursor/
 
+# Logs
+logs/
 
+# Data
+data/

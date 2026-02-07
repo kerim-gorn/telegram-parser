@@ -16,7 +16,7 @@ from app.batch_llm_analyzer import analyze_messages_batch
 from app.signal_notifier import notifier as signal_notifier
 from app.prefilter import get_prefilter
 from app.domain_router import get_domain_router
-from app.config_loader import get_chat_locations_from_config
+from app.config_loader import get_chat_locations_from_config, normalize_chat_identifier
 from app.classification import IntentType, DomainInfo
 
 # Batch processing configuration
@@ -449,6 +449,10 @@ async def _persist_batch(results: list[dict[str, Any]], stats: dict[str, Any]) -
             # Get chat_ids for these domains (location-aware if configured)
             source_chat_id = msg_data["chat_id"]
             source_locations = chat_locations_map.get(source_chat_id, [])
+            if not source_locations:
+                identifier_key = normalize_chat_identifier(msg_data.get("chat_username"))
+                if identifier_key:
+                    source_locations = chat_locations_map.get(identifier_key, [])
             target_chat_ids = domain_router.get_chat_ids_for_domains(
                 domain_infos,
                 locations=source_locations,
