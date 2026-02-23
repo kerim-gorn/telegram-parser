@@ -4,10 +4,10 @@
   },
   "domains": {
     "CONSTRUCTION_AND_REPAIR": {
-      "default": -1003203343510,
+      "default": -1003841433101,
       "subcategories": {
-        "REPAIR_SERVICES": null,
-        "MAJOR_RENOVATION": null,
+        "REPAIR_SERVICES":  -1003203343510,
+        "MAJOR_RENOVATION":  -1003203343510,
         "SMALL_TOOLS_AND_MATERIALS": "muted"
       }
     },
