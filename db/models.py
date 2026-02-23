@@ -18,6 +18,7 @@ class Message(Base):
     # Telegram identifiers
     chat_id: Mapped[int] = mapped_column(BigInteger, nullable=False, index=True)
     message_id: Mapped[int] = mapped_column(Integer, nullable=False)
+    message_thread_id: Mapped[int | None] = mapped_column(BigInteger, nullable=True, index=True)
     sender_id: Mapped[int | None] = mapped_column(BigInteger, nullable=True)
     sender_username: Mapped[str | None] = mapped_column(String(64), nullable=True)
     chat_username: Mapped[str | None] = mapped_column(String(64), nullable=True, index=True)

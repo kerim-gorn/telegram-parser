@@ -107,6 +107,22 @@ def _extract_message_data(payload: dict[str, Any]) -> dict[str, Any] | None:
     
     date_raw = message.get("date")
     message_date = _parse_datetime(date_raw)
+
+    # Best-effort extraction of thread/topic identifier (message_thread_id)
+    # for messages that belong to forum topics.
+    message_thread_id: int | None = None
+    try:
+        reply_to = message.get("reply_to") or {}
+        if isinstance(reply_to, dict):
+            raw_thread_id = (
+                reply_to.get("reply_to_top_id")
+                or reply_to.get("top_msg_id")
+                or reply_to.get("topic_id")
+            )
+            if isinstance(raw_thread_id, int):
+                message_thread_id = int(raw_thread_id)
+    except Exception:
+        message_thread_id = None
     
     if chat_id is None:
         # Try to infer from peer_id
@@ -128,6 +144,7 @@ def _extract_message_data(payload: dict[str, Any]) -> dict[str, Any] | None:
         "chat_username": chat_username,
         "text": text,
         "message_date": message_date,
+        "message_thread_id": message_thread_id,
         "original_payload": payload,  # Keep for notification
     }
 
@@ -417,6 +434,7 @@ async def _persist_batch(results: list[dict[str, Any]], stats: dict[str, Any]) -
             "openrouter_response": result.get("openrouter_response"),
             "message_date": msg_data["message_date"],
             "indexed_at": datetime.now(tz=timezone.utc),
+            "message_thread_id": msg_data.get("message_thread_id"),
         }
         rows.append(row)
         
@@ -469,6 +487,7 @@ async def _persist_batch(results: list[dict[str, Any]], stats: dict[str, Any]) -
                     "chat_username": msg_data.get("chat_username"),
                     "message_date": msg_data["message_date"],
                     "target_chat_id": target_chat_id,
+                    "source_message_thread_id": msg_data.get("message_thread_id"),
                 })
         
         # Update statistics

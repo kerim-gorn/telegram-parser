@@ -35,10 +35,38 @@ def _format_dt_utc(dt: Optional[datetime]) -> Optional[str]:
         return None
 
 
-def _build_link(chat_username: Optional[str], message_id: Optional[int]) -> str:
+def _build_link(
+    chat_id: Optional[int],
+    chat_username: Optional[str],
+    message_id: Optional[int],
+    message_thread_id: Optional[int] = None,
+) -> str:
+    """
+    Build a deep link to the original Telegram message.
+    - For public groups/channels with a username:
+        - topic message: https://t.me/{username}/{thread_id}/{message_id}
+        - regular message: https://t.me/{username}/{message_id}
+    - For private groups/channels (no username but numeric chat_id):
+        - topic message: https://t.me/c/{abs(chat_id)}/{thread_id}/{message_id}
+        - regular message: https://t.me/c/{abs(chat_id)}/{message_id}
+    """
     try:
-        if isinstance(chat_username, str) and chat_username.startswith("@") and message_id:
-            return f'\n<a href="https://t.me/{chat_username[1:]}/{int(message_id)}">Открыть оригинал</a>'
+        if not message_id:
+            return ""
+
+        # Prefer human-friendly links when username is available
+        if isinstance(chat_username, str) and chat_username.startswith("@"):
+            uname = chat_username[1:]
+            if message_thread_id:
+                return f'\n<a href="https://t.me/{uname}/{int(message_thread_id)}/{int(message_id)}">Открыть оригинал</a>'
+            return f'\n<a href="https://t.me/{uname}/{int(message_id)}">Открыть оригинал</a>'
+
+        # Fallback to /c/ links when only chat_id is known (e.g. private/special groups)
+        if chat_id:
+            internal_id = abs(int(chat_id))
+            if message_thread_id:
+                return f'\n<a href="https://t.me/c/{internal_id}/{int(message_thread_id)}/{int(message_id)}">Открыть оригинал</a>'
+            return f'\n<a href="https://t.me/c/{internal_id}/{int(message_id)}">Открыть оригинал</a>'
     except Exception:
         return ""
     return ""
@@ -83,6 +111,7 @@ class SignalNotifier:
         chat_username: Optional[str] = None,
         message_date: Optional[datetime] = None,
         target_chat_id: Optional[int] = None,
+        source_message_thread_id: Optional[int] = None,
     ) -> None:
         """
         Send a formatted notification with original text, author, source chat and timestamp.
@@ -93,6 +122,7 @@ class SignalNotifier:
             source_chat_id: Source Telegram chat ID.
             sender_id: Sender user ID.
             source_message_id: Original message ID for deep linking.
+            source_message_thread_id: Optional topic/thread identifier for messages in topics.
             sender_username: Sender username (optional).
             chat_username: Source chat username (optional).
             message_date: Message timestamp (optional).
@@ -106,7 +136,8 @@ class SignalNotifier:
         channel = _normalize_username(chat_username) or "неизвестно"
         when = _format_dt_utc(message_date) or "неизвестно"
         escaped = html.escape(safe_text)
-        link_line = _build_link(_normalize_username(chat_username), source_message_id)
+        normalized_chat_username = _normalize_username(chat_username)
+        link_line = _build_link(source_chat_id, normalized_chat_username, source_message_id, source_message_thread_id)
 
         body = (
             f"<b>📣 Сигнал обнаружен</b>\n"

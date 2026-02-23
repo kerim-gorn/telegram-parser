@@ -50,6 +50,9 @@ async def _save_messages_batch(
         msg_dt = m.date
         if msg_dt.tzinfo is None:
             msg_dt = msg_dt.replace(tzinfo=timezone.utc)
+        # Telethon exposes thread/topic id via reply_to_top_id for messages inside topics
+        raw_thread_id = getattr(m, "reply_to_top_id", None)
+        message_thread_id = int(raw_thread_id) if isinstance(raw_thread_id, int) else None
         rows.append(
             {
                 "chat_id": int(m.chat_id),
@@ -59,6 +62,7 @@ async def _save_messages_batch(
                 "chat_username": norm_chat_username,
                 "text": m.message,
                 "message_date": msg_dt,
+                "message_thread_id": message_thread_id,
             }
         )
     if not rows:
