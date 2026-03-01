@@ -471,13 +471,24 @@ async def _persist_batch(results: list[dict[str, Any]], stats: dict[str, Any]) -
                 identifier_key = normalize_chat_identifier(msg_data.get("chat_username"))
                 if identifier_key:
                     source_locations = chat_locations_map.get(identifier_key, [])
-            target_chat_ids = domain_router.get_chat_ids_for_domains(
+            target_targets = domain_router.get_chat_ids_for_domains(
                 domain_infos,
                 locations=source_locations,
             )
             
-            # Create notification entry for each target chat_id
-            for target_chat_id in target_chat_ids:
+            # Create notification entry for each target (chat_id + optional topic)
+            for target in target_targets:
+                if isinstance(target, dict):
+                    target_chat_id = target.get("chat_id")
+                    target_thread_id = target.get("thread_id")
+                else:
+                    # Backwards compatibility if router returns plain chat_id
+                    target_chat_id = target
+                    target_thread_id = None
+
+                if target_chat_id is None:
+                    continue
+
                 notifications.append({
                     "text": msg_data["text"],
                     "source_chat_id": msg_data["chat_id"],
@@ -486,8 +497,9 @@ async def _persist_batch(results: list[dict[str, Any]], stats: dict[str, Any]) -
                     "sender_username": msg_data.get("sender_username"),
                     "chat_username": msg_data.get("chat_username"),
                     "message_date": msg_data["message_date"],
-                    "target_chat_id": target_chat_id,
+                    "target_chat_id": int(target_chat_id),
                     "source_message_thread_id": msg_data.get("message_thread_id"),
+                    "target_message_thread_id": int(target_thread_id) if isinstance(target_thread_id, int) else None,
                 })
         
         # Update statistics

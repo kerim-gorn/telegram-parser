@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, TypedDict
 
 from app.classification import DomainInfo, DomainType
 from core.config import settings
@@ -16,6 +16,13 @@ from core.config import settings
 class DomainRouterError(Exception):
     """Base exception for domain router errors."""
     pass
+
+
+class RoutedTarget(TypedDict):
+    """Resolved routing target for notifications."""
+
+    chat_id: int
+    thread_id: int | None
 
 
 class DomainRouter:
@@ -64,7 +71,7 @@ class DomainRouter:
             config_path = settings.domain_routing_config_path
         
         self._config_path = Path(config_path)
-        self._domains_map: dict[str, int | None | dict[str, Any]] = {}
+        self._domains_map: dict[str, int | str | None | dict[str, Any]] = {}
         self._muted_subcategories: set[str] = set()
         self._fallback_chat_id: int | None = None
         
@@ -163,12 +170,13 @@ class DomainRouter:
         else:
             self._muted_subcategories = set()
     
-    def _parse_chat_id_value(self, value: Any) -> int | str | None:
+    def _parse_chat_id_value(self, value: Any) -> int | str | dict[str, Any] | None:
         """
         Parse chat_id value from config.
         
         Returns:
-            int: Valid chat_id
+            int: Valid chat_id (no specific topic)
+            {"chat_id": int, "thread_id": int}: Valid chat_id with topic/thread
             "muted": Domain/subcategory is muted
             None: Use fallback
         """
@@ -176,11 +184,28 @@ class DomainRouter:
             return "muted"
         elif value is None:
             return None
-        else:
+        # Support "chat_id/thread_id" string format for routing into specific topics.
+        # Example: "-5238348109/12" -> {"chat_id": -5238348109, "thread_id": 12}
+        if isinstance(value, str):
+            s = value.strip()
+            if not s:
+                return None
+            if "/" in s:
+                base, thread = s.split("/", 1)
+                try:
+                    chat_id = int(base)
+                    thread_id = int(thread)
+                except (ValueError, TypeError):
+                    return None
+                return {"chat_id": chat_id, "thread_id": thread_id}
             try:
-                return int(value)
+                return int(s)
             except (ValueError, TypeError):
                 return None
+        try:
+            return int(value)
+        except (ValueError, TypeError):
+            return None
 
     def _normalize_location_value(self, value: Any) -> str | None:
         if value is None:
@@ -226,9 +251,15 @@ class DomainRouter:
         self,
         overrides: list[dict[str, Any]],
         locations: list[dict[str, str | None]],
-    ) -> tuple[bool, int | None, bool]:
+    ) -> tuple[bool, int | None, int | None, bool]:
+        """
+        Try to match location overrides and resolve to a specific target.
+
+        Returns:
+            (matched, chat_id, thread_id, should_use_fallback)
+        """
         if not overrides or not locations:
-            return (False, None, False)
+            return (False, None, None, False)
 
         # Prefer the most specific match: city + district
         for loc in locations:
@@ -238,8 +269,8 @@ class DomainRouter:
                 continue
             for rule in overrides:
                 if rule.get("city") == city and rule.get("district") == district:
-                    resolved_chat_id, should_use_fallback = self._resolve_chat_id(rule.get("chat_id"))
-                    return (True, resolved_chat_id, should_use_fallback)
+                    chat_id, thread_id, should_use_fallback = self._resolve_target(rule.get("chat_id"))
+                    return (True, chat_id, thread_id, should_use_fallback)
 
         # Fallback to city-only match
         for loc in locations:
@@ -248,33 +279,55 @@ class DomainRouter:
                 continue
             for rule in overrides:
                 if rule.get("city") == city and not rule.get("district"):
-                    resolved_chat_id, should_use_fallback = self._resolve_chat_id(rule.get("chat_id"))
-                    return (True, resolved_chat_id, should_use_fallback)
+                    chat_id, thread_id, should_use_fallback = self._resolve_target(rule.get("chat_id"))
+                    return (True, chat_id, thread_id, should_use_fallback)
 
-        return (False, None, False)
+        return (False, None, None, False)
     
-    def _resolve_chat_id(self, chat_id_value: int | str | None) -> tuple[int | None, bool]:
+    def _resolve_target(self, chat_id_value: Any) -> tuple[int | None, int | None, bool]:
         """
-        Resolve chat_id value to actual chat_id.
+        Resolve stored chat_id value (possibly with topic) to actual target.
         
         Returns:
-            Tuple of (chat_id, should_use_fallback):
-            - (int, False): Valid chat_id to use
-            - (None, True): Should use fallback
-            - (None, False): Muted - skip, don't use fallback
+            Tuple of (chat_id, thread_id, should_use_fallback):
+            - (int, int | None, False): Valid target to use
+            - (None, None, True): Should use fallback
+            - (None, None, False): Muted - skip, don't use fallback
         """
         if chat_id_value == "muted":
-            return (None, False)  # Muted - skip, don't use fallback
-        elif isinstance(chat_id_value, int):
-            return (chat_id_value, False)
-        else:
-            return (None, True)  # None - use fallback
+            return (None, None, False)  # Muted - skip, don't use fallback
+
+        # Dict format from _parse_chat_id_value: {"chat_id": int, "thread_id": int}
+        if isinstance(chat_id_value, dict):
+            raw_chat_id = chat_id_value.get("chat_id")
+            raw_thread_id = chat_id_value.get("thread_id")
+            try:
+                chat_id = int(raw_chat_id)
+            except (ValueError, TypeError):
+                return (None, None, True)
+            thread_id: int | None
+            try:
+                thread_id = int(raw_thread_id) if raw_thread_id is not None else None
+            except (ValueError, TypeError):
+                thread_id = None
+            return (chat_id, thread_id, False)
+
+        # Simple integer chat_id
+        if isinstance(chat_id_value, int):
+            return (chat_id_value, None, False)
+
+        # Best-effort conversion from other primitive types
+        try:
+            chat_id = int(chat_id_value)
+        except (ValueError, TypeError):
+            return (None, None, True)
+        return (chat_id, None, False)
     
     def get_chat_ids_for_domains(
         self,
         domains: list[DomainInfo],
         locations: list[dict[str, str | None]] | None = None,
-    ) -> list[int]:
+    ) -> list[RoutedTarget]:
         """
         Get list of chat_ids for given domains.
         
@@ -297,14 +350,11 @@ class DomainRouter:
         Args:
             domains: List of DomainInfo from message classification.
         
-        Returns:
-            List of chat_ids (integers) where message should be sent.
-            Empty list if no domains provided or all domains are muted.
         """
         if not domains:
             return []
         
-        chat_ids: list[int] = []
+        targets: list[RoutedTarget] = []
         normalized_locations = self._normalize_locations(locations)
         
         for domain_info in domains:
@@ -326,7 +376,7 @@ class DomainRouter:
                 if domain_value is None:
                     # Use fallback for missing domain
                     if self._fallback_chat_id is not None:
-                        chat_ids.append(self._fallback_chat_id)
+                        targets.append({"chat_id": self._fallback_chat_id, "thread_id": None})
                     continue
                 # Extract domain name from dict
                 if isinstance(domain_value, DomainType):
@@ -340,13 +390,13 @@ class DomainRouter:
             else:
                 # Use fallback for unknown format
                 if self._fallback_chat_id is not None:
-                    chat_ids.append(self._fallback_chat_id)
+                    targets.append({"chat_id": self._fallback_chat_id, "thread_id": None})
                 continue
             
             if not domain_name:
                 # Use fallback for empty domain name
                 if self._fallback_chat_id is not None:
-                    chat_ids.append(self._fallback_chat_id)
+                    targets.append({"chat_id": self._fallback_chat_id, "thread_id": None})
                 continue
             
             # Get domain configuration
@@ -361,7 +411,7 @@ class DomainRouter:
             # Handle domain config with subcategories
             if isinstance(domain_config, dict):
                 # Check subcategories mapping if they exist
-                subcategory_chat_id: int | str | None = None
+                subcategory_chat_id: int | str | dict[str, Any] | None = None
                 subcategory_is_muted = False
                 subcategory_overrides: list[dict[str, Any]] = []
                 if subcategories:
@@ -385,47 +435,47 @@ class DomainRouter:
 
                 # Location overrides for subcategory (most specific)
                 if subcategory_overrides:
-                    matched, resolved_chat_id, should_use_fallback = self._match_location_override(
+                    matched, chat_id, thread_id, should_use_fallback = self._match_location_override(
                         subcategory_overrides,
                         normalized_locations,
                     )
                     if matched:
-                        if resolved_chat_id is not None:
-                            chat_ids.append(resolved_chat_id)
+                        if chat_id is not None:
+                            targets.append({"chat_id": chat_id, "thread_id": thread_id})
                         elif should_use_fallback and self._fallback_chat_id is not None:
-                            chat_ids.append(self._fallback_chat_id)
+                            targets.append({"chat_id": self._fallback_chat_id, "thread_id": None})
                         continue
 
                 # Location overrides for domain (fallback)
                 domain_overrides = domain_config.get("location_overrides", []) or []
                 if domain_overrides:
-                    matched, resolved_chat_id, should_use_fallback = self._match_location_override(
+                    matched, chat_id, thread_id, should_use_fallback = self._match_location_override(
                         domain_overrides,
                         normalized_locations,
                     )
                     if matched:
-                        if resolved_chat_id is not None:
-                            chat_ids.append(resolved_chat_id)
+                        if chat_id is not None:
+                            targets.append({"chat_id": chat_id, "thread_id": thread_id})
                         elif should_use_fallback and self._fallback_chat_id is not None:
-                            chat_ids.append(self._fallback_chat_id)
+                            targets.append({"chat_id": self._fallback_chat_id, "thread_id": None})
                         continue
 
                 # Use subcategory chat_id if found, otherwise use default
                 chat_id_to_use = subcategory_chat_id if subcategory_chat_id is not None else domain_config.get("default")
-                resolved_chat_id, should_use_fallback = self._resolve_chat_id(chat_id_to_use)
-                if resolved_chat_id is not None:
-                    chat_ids.append(resolved_chat_id)
+                chat_id, thread_id, should_use_fallback = self._resolve_target(chat_id_to_use)
+                if chat_id is not None:
+                    targets.append({"chat_id": chat_id, "thread_id": thread_id})
                 elif should_use_fallback and self._fallback_chat_id is not None:
-                    chat_ids.append(self._fallback_chat_id)
+                    targets.append({"chat_id": self._fallback_chat_id, "thread_id": None})
             else:
                 # Simple value format
-                resolved_chat_id, should_use_fallback = self._resolve_chat_id(domain_config)
-                if resolved_chat_id is not None:
-                    chat_ids.append(resolved_chat_id)
+                chat_id, thread_id, should_use_fallback = self._resolve_target(domain_config)
+                if chat_id is not None:
+                    targets.append({"chat_id": chat_id, "thread_id": thread_id})
                 elif should_use_fallback and self._fallback_chat_id is not None:
-                    chat_ids.append(self._fallback_chat_id)
+                    targets.append({"chat_id": self._fallback_chat_id, "thread_id": None})
         
-        return chat_ids
+        return targets
     
     def reload_config(self) -> None:
         """Reload configuration from file (useful for hot-reload scenarios)."""

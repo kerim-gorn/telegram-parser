@@ -96,9 +96,17 @@ class SignalNotifier:
             return self._bot
 
     @handle_flood_wait(max_retries=5)
-    async def _send_html(self, chat_id: Union[int, str], html_text: str) -> None:
+    async def _send_html(
+        self,
+        chat_id: Union[int, str],
+        html_text: str,
+        message_thread_id: Optional[int] = None,
+    ) -> None:
         bot = await self._ensure_bot()
-        await bot.send_message(chat_id, html_text, disable_web_page_preview=True)
+        kwargs: dict[str, object] = {"disable_web_page_preview": True}
+        if isinstance(message_thread_id, int):
+            kwargs["message_thread_id"] = message_thread_id
+        await bot.send_message(chat_id, html_text, **kwargs)
 
     async def send_signal(
         self,
@@ -112,6 +120,7 @@ class SignalNotifier:
         message_date: Optional[datetime] = None,
         target_chat_id: Optional[int] = None,
         source_message_thread_id: Optional[int] = None,
+        target_message_thread_id: Optional[int] = None,
     ) -> None:
         """
         Send a formatted notification with original text, author, source chat and timestamp.
@@ -123,6 +132,7 @@ class SignalNotifier:
             sender_id: Sender user ID.
             source_message_id: Original message ID for deep linking.
             source_message_thread_id: Optional topic/thread identifier for messages in topics.
+            target_message_thread_id: Optional topic/thread identifier for the notification destination.
             sender_username: Sender username (optional).
             chat_username: Source chat username (optional).
             message_date: Message timestamp (optional).
@@ -151,7 +161,7 @@ class SignalNotifier:
         
         # Use provided target_chat_id or fallback to default
         chat_id = target_chat_id if target_chat_id is not None else self._target_chat_id
-        await self._send_html(chat_id, body)
+        await self._send_html(chat_id, body, message_thread_id=target_message_thread_id)
 
     async def close(self) -> None:
         if self._bot is not None:
