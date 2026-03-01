@@ -36,14 +36,14 @@ class DomainRouter:
            {"city": "dubai", "chat_id": -1001234567891}
          ],
          "subcategories": {
-           "REPAIR_SERVICES": -1001234567890,
-           "MAJOR_RENOVATION": {
+           "TURNKEY_RENOVATION_CREWS": -1001234567890,
+           "ELECTRICAL_WORKS": {
              "default": -1001234567891,
              "location_overrides": [
                {"city": "moscow", "district": "szao", "chat_id": -1001234567892}
              ]
            },
-           "SMALL_TOOLS_AND_MATERIALS": "muted"
+           "TOOLS_AND_MATERIALS": "muted"
          }
        }
     

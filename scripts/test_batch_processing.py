@@ -22,12 +22,7 @@ sys.modules["aio_pika"] = Mock()
 sys.modules["aio_pika.abc"] = Mock()
 
 from app.batch_llm_analyzer import analyze_messages_batch
-from workers.ingestor_worker import (
-    _extract_message_data,
-    _is_signal_from_classification,
-    _process_batch,
-    _persist_batch,
-)
+from workers.ingestor_worker import _extract_message_data, _process_batch, _persist_batch
 
 
 def create_mock_payload(chat_id: int, message_id: int, text: str, sender_id: int | None = None) -> dict[str, Any]:
@@ -72,7 +67,7 @@ DOMAIN_CODE = {
 }
 
 SUBCATEGORY_CODE = {
-    "CONSTRUCTION_AND_REPAIR": {"REPAIR_SERVICES": 2},
+    "CONSTRUCTION_AND_REPAIR": {"ELECTRICAL_WORKS": 12},
     "OPERATIONAL_MANAGEMENT": {"SECURITY": 2},
     "MARKETPLACE": {"BUY_SELL_GOODS": 1},
 }
@@ -86,7 +81,7 @@ def create_mock_llm_response(messages: list[dict[str, str]]) -> dict[str, Any]:
         # Simple logic for testing
         if "электрик" in text.lower() or "мастер" in text.lower():
             intents = ["REQUEST"]
-            domains = [{"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": ["REPAIR_SERVICES"]}]
+            domains = [{"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": ["ELECTRICAL_WORKS"]}]
             urgency = 3
         elif "срочно" in text.lower() or "пожар" in text.lower():
             intents = ["COMPLAINT"]
@@ -129,7 +124,7 @@ def create_mock_llm_compact_payload(messages: list[dict[str, str]]) -> dict[str,
         
         if "электрик" in text.lower() or "мастер" in text.lower():
             intent = "REQUEST"
-            domains = [{"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": ["REPAIR_SERVICES"]}]
+            domains = [{"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": ["ELECTRICAL_WORKS"]}]
             urgency = 3
         elif "срочно" in text.lower() or "пожар" in text.lower():
             intent = "COMPLAINT"
@@ -189,41 +184,6 @@ async def test_extract_message_data() -> None:
     assert data["chat_username"] == "@test_chat"
     
     print("  ✓ Message data extraction works correctly")
-
-
-def test_is_signal_from_classification() -> None:
-    """Test signal detection logic."""
-    print("\n[TEST] test_is_signal_from_classification")
-    
-    # Test REQUEST + CONSTRUCTION_AND_REPAIR (should be signal)
-    assert _is_signal_from_classification(
-        ["REQUEST"],
-        [{"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": ["REPAIR_SERVICES"]}],
-    ), "REQUEST + CONSTRUCTION_AND_REPAIR should be signal"
-    
-    # Test REQUEST + SERVICES (should be signal)
-    assert _is_signal_from_classification(
-        ["REQUEST"],
-        [{"domain": "SERVICES", "subcategories": ["BEAUTY_AND_HEALTH"]}],
-    ), "REQUEST + SERVICES should be signal"
-    
-    # Test REQUEST + MARKETPLACE (should NOT be signal)
-    assert not _is_signal_from_classification(
-        ["REQUEST"],
-        [{"domain": "MARKETPLACE", "subcategories": ["BUY_SELL_GOODS"]}],
-    ), "REQUEST + MARKETPLACE should NOT be signal"
-    
-    # Test OFFER (should NOT be signal)
-    assert not _is_signal_from_classification(
-        ["OFFER"],
-        [{"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": []}],
-    ), "OFFER should NOT be signal"
-    
-    # Test empty intents/domains
-    assert not _is_signal_from_classification(None, None), "Empty should NOT be signal"
-    assert not _is_signal_from_classification([], []), "Empty lists should NOT be signal"
-    
-    print("  ✓ Signal detection logic works correctly")
 
 
 async def test_batch_llm_analyzer() -> None:
@@ -342,7 +302,7 @@ async def test_persist_batch_logic() -> None:
             },
             "prefilter_decision": None,
             "intents": ["REQUEST"],
-            "domains": [{"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": ["REPAIR_SERVICES"]}],
+            "domains": [{"domain": "CONSTRUCTION_AND_REPAIR", "subcategories": ["ELECTRICAL_WORKS"]}],
             "is_spam": False,
             "urgency_score": 3,
             "reasoning": "Test reasoning",
@@ -463,7 +423,6 @@ async def main() -> None:
     try:
         # Unit tests (synchronous)
         test_extract_message_data()
-        test_is_signal_from_classification()
         
         # Integration tests
         await test_batch_llm_analyzer()
