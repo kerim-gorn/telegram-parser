@@ -6,21 +6,21 @@
     "CONSTRUCTION_AND_REPAIR": {
       "default": -1003841433101,
       "subcategories": {
-        "TURNKEY_RENOVATION_CREWS":  "-3225244106/2",
-        "DESIGN_AND_PLANNING":  "-3225244106/5",
-        "APARTMENT_HANDOVER_INSPECTION":  "-3225244106/6",
-        "WALL_FINISHING_PLASTER_PAINT":  "-3225244106/10",
-        "BALCONY_AND_LOGGIA_WORKS":  "-3225244106/11",
-        "TILING_WORKS":  "-3225244106/12",
-        "WINDOWS_REPAIR_AND_ADJUSTMENT":  "-3225244106/13",
-        "PLUMBING_SERVICES":  "-3225244106/14",
-        "CUSTOM_FURNITURE":  "-3225244106/15",
-        "AIR_CONDITIONING_SERVICES":  "-3225244106/16",
-        "INTERIOR_DOORS_INSTALLATION":  "-3225244106/17",
-        "ELECTRICAL_WORKS":  "-3225244106/18",
-        "STRETCH_CEILINGS":  "-3225244106/20",
-        "FLOORING_SCREED_AND_LAMINATE":  "-3225244106/21",
-        "COTTAGE_AND_HOUSE_STRUCTURAL_WORKS":  "-3225244106/3",
+        "TURNKEY_RENOVATION_CREWS":  "-1003225244106/2",
+        "DESIGN_AND_PLANNING":  "-1003225244106/5",
+        "APARTMENT_HANDOVER_INSPECTION":  "-1003225244106/6",
+        "WALL_FINISHING_PLASTER_PAINT":  "-1003225244106/10",
+        "BALCONY_AND_LOGGIA_WORKS":  "-1003225244106/11",
+        "TILING_WORKS":  "-1003225244106/12",
+        "WINDOWS_REPAIR_AND_ADJUSTMENT":  "-1003225244106/13",
+        "PLUMBING_SERVICES":  "-1003225244106/14",
+        "CUSTOM_FURNITURE":  "-1003225244106/15",
+        "AIR_CONDITIONING_SERVICES":  "-1003225244106/16",
+        "INTERIOR_DOORS_INSTALLATION":  "-1003225244106/17",
+        "ELECTRICAL_WORKS":  "-1003225244106/18",
+        "STRETCH_CEILINGS":  "-1003225244106/20",
+        "FLOORING_SCREED_AND_LAMINATE":  "-1003225244106/21",
+        "COTTAGE_AND_HOUSE_STRUCTURAL_WORKS":  "-1003225244106/3",
         "TOOLS_AND_MATERIALS":  "muted",
         "IRRELEVANT_WORKS_AND_QUESTIONS":  "muted"
       }
@@ -28,19 +28,19 @@
     "RENTAL_OF_REAL_ESTATE": {
       "default": -1003804045628,
       "location_overrides": [
-        { "city": "dubai", "chat_id": -5238348109 }
+        { "city": "dubai", "chat_id": -1005238348109 }
       ]
     },
     "PURCHASE_OF_REAL_ESTATE": {
       "default": -1003804045628,
       "location_overrides": [
-        { "city": "dubai", "chat_id": -5238348109 }
+        { "city": "dubai", "chat_id": -1005238348109 }
       ]
     },
     "REAL_ESTATE_AGENT": {
       "default": -1003804045628,
       "location_overrides": [
-        { "city": "dubai", "chat_id": -5238348109 }
+        { "city": "dubai", "chat_id": -1005238348109 }
       ]
     },
     "LAW": {
