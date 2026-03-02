@@ -422,8 +422,15 @@ class DomainRouter:
                         if subcat_str in subcategories_config:
                             candidate = subcategories_config[subcat_str]
                             if isinstance(candidate, dict):
-                                subcategory_chat_id = candidate.get("default")
-                                subcategory_overrides = candidate.get("location_overrides", []) or []
+                                # Two possible shapes:
+                                # 1) Legacy object: {"default": ..., "location_overrides": [...]}
+                                # 2) Parsed target from _parse_chat_id_value: {"chat_id": ..., "thread_id": ...}
+                                if "chat_id" in candidate or "thread_id" in candidate:
+                                    subcategory_chat_id = candidate
+                                    subcategory_overrides = []
+                                else:
+                                    subcategory_chat_id = candidate.get("default")
+                                    subcategory_overrides = candidate.get("location_overrides", []) or []
                             else:
                                 subcategory_chat_id = candidate
                             if subcategory_chat_id == "muted":

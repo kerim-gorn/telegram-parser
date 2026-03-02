@@ -261,8 +261,8 @@ async def _process_llm_batch(
     ]
     try:
         payload_preview = json.dumps(llm_messages, ensure_ascii=False)
-        if len(payload_preview) > 2000:
-            payload_preview = payload_preview[:2000] + "...(truncated)"
+        if len(payload_preview) > 200:
+            payload_preview = payload_preview[:200] + "...(truncated)"
         print(f"[Ingestor] LLM payload: {payload_preview}", flush=True)
     except Exception:
         # Never break ingestion because of logging issues
