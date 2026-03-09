@@ -20,7 +20,7 @@ from app.config_loader import get_chat_locations_from_config, normalize_chat_ide
 from app.classification import IntentType, DomainInfo
 
 # Batch processing configuration
-READ_BATCH_SIZE = 70
+READ_BATCH_SIZE = 90
 READ_BATCH_TIMEOUT_SECONDS = 5.0
 LLM_BATCH_SIZE = settings.llm_batch_size
 
