@@ -4,9 +4,16 @@
     { "pattern": "Студенточк", "ignore_case": true, "action": "skip" },
     { "pattern": "парсинг", "ignore_case": true, "action": "skip" },
     { "pattern": "накормлю", "ignore_case": true, "action": "skip" },
-    { "pattern": "нашему администратору", "ignore_case": true, "action": "skip" }
+    { "pattern": "нашему администратору", "ignore_case": true, "action": "skip" },
+    { "pattern": "УДАЛЕНННО💻", "ignore_case": true, "action": "skip" },
+    { "pattern": "#CлyжбaПoКoнтракту", "ignore_case": true, "action": "skip" },
+    { "pattern": "🚀 комaндa pасшиpяется", "ignore_case": true, "action": "skip" },
+    { "pattern": "Прайс-лист👉 @PRICE", "ignore_case": true, "action": "skip" }
   ],
   "regexes": [
+    { "pattern": "^.{0,21}$", "ignore_case": true, "action": "skip" },
+    { "pattern": "Новый\\s+онлайн-проект", "ignore_case": true, "action": "skip" },
+    { "pattern": "открыта\\s+вакансия", "ignore_case": true, "action": "skip" },
     { "pattern": "(по\\s+времени|работа)\\s+(около|примерно)\\s+\\d{1,2}\\s+час(ов|а|)", "ignore_case": true, "action": "skip" },
     { "pattern": "(прикрутить|закрутить|вкрутить|заменить)\\s+(лампочки|лампочку|пару\\s+лампочек)", "ignore_case": true, "action": "skip" },
     { "pattern": "денюжкой\\s+не\\s+обижу", "ignore_case": true, "action": "skip" },
@@ -62,6 +69,11 @@
     { 
       "pattern": "\\b(1[ .]?500|2[ .]?000|2[ .]?500|3[ .]?000|3[ .]?500|4[ .]?000|4[ .]?500|5[ .]?000|5[ .]?500|6[ .]?000|6[ .]?500|7[ .]?000|7[ .]?500|8[ .]?000|8[ .]?500|9[ .]?000|9[ .]?500|10[ .]?000)(?!\\d)",
       "ignore_case": true,
+      "action": "skip"
+    },
+    {
+      "pattern": "(?=(?:.*(?:[\\u2600-\\u27BF]|[\\uD83C-\\uDBFF][\\uDC00-\\uDFFF])){11,}).*",
+      "ignore_case": false,
       "action": "skip"
     }
   ]
