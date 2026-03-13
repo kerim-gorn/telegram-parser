@@ -18,6 +18,8 @@ from app.prefilter import get_prefilter
 from app.domain_router import get_domain_router
 from app.config_loader import get_chat_locations_from_config, normalize_chat_identifier
 from app.classification import IntentType, DomainInfo
+from app.auto_reply_router import get_auto_reply_router
+from app.services import schedule_auto_reply
 
 # Batch processing configuration
 READ_BATCH_SIZE = 90
@@ -402,10 +404,12 @@ async def _persist_batch(results: list[dict[str, Any]], stats: dict[str, Any]) -
     """
     rows: list[dict[str, Any]] = []
     notifications: list[dict[str, Any]] = []
+    auto_reply_jobs: list[dict[str, Any]] = []
     
     # Get domain router instance and chat location map
     domain_router = get_domain_router()
     chat_locations_map = get_chat_locations_from_config()
+    auto_reply_router = get_auto_reply_router()
     
     for result in results:
         if result.get("skipped"):
@@ -463,7 +467,7 @@ async def _persist_batch(results: list[dict[str, Any]], stats: dict[str, Any]) -
                         continue
                 elif isinstance(domain_dict, DomainInfo):
                     domain_infos.append(domain_dict)
-            
+
             # Get chat_ids for these domains (location-aware if configured)
             source_chat_id = msg_data["chat_id"]
             source_locations = chat_locations_map.get(source_chat_id, [])
@@ -475,7 +479,7 @@ async def _persist_batch(results: list[dict[str, Any]], stats: dict[str, Any]) -
                 domain_infos,
                 locations=source_locations,
             )
-            
+
             # Create notification entry for each target (chat_id + optional topic)
             for target in target_targets:
                 if isinstance(target, dict):
@@ -501,6 +505,42 @@ async def _persist_batch(results: list[dict[str, Any]], stats: dict[str, Any]) -
                     "source_message_thread_id": msg_data.get("message_thread_id"),
                     "target_message_thread_id": int(target_thread_id) if isinstance(target_thread_id, int) else None,
                 })
+
+            # Select auto-reply scenario (first match) and enqueue job
+            selected = auto_reply_router.select_scenario(intents=intents, domains_raw=domains_raw, msg_data=msg_data)
+            if selected is not None:
+                # For now we pass only first matched domain/subcategory for extra context
+                domain_value = None
+                subcat_value = None
+                if domain_infos:
+                    d0 = domain_infos[0]
+                    if isinstance(d0.domain, DomainType):
+                        domain_value = d0.domain.value
+                    else:
+                        domain_value = str(d0.domain)
+                    if getattr(d0, "subcategories", None):
+                        subcat_value = d0.subcategories[0] if d0.subcategories else None
+
+                job_payload: dict[str, Any] = {
+                    "scenario_id": selected.scenario_id,
+                    "telegram_account_id": selected.telegram_account_id,
+                    "llm_model": selected.llm_model,
+                    "prompt_template": selected.prompt_template,
+                    "prompt_key": selected.prompt_key,
+                    "delay_seconds": selected.delay_seconds,
+                    "sender_id": msg_data["sender_id"],
+                    "sender_username": msg_data.get("sender_username"),
+                    "chat_id": msg_data["chat_id"],
+                    "chat_username": msg_data.get("chat_username"),
+                    "message_id": msg_data["message_id"],
+                    "message_thread_id": msg_data.get("message_thread_id"),
+                    "text": msg_data["text"],
+                    "message_date": msg_data["message_date"].isoformat() if isinstance(msg_data.get("message_date"), datetime) else None,
+                    "domain": domain_value,
+                    "subcategory": subcat_value,
+                    "intents": intents,
+                }
+                auto_reply_jobs.append(job_payload)
         
         # Update statistics
         prefilter_decision = result.get("prefilter_decision")
@@ -541,6 +581,14 @@ async def _persist_batch(results: list[dict[str, Any]], stats: dict[str, Any]) -
             stats["notifications_sent"] = int(stats.get("notifications_sent", 0)) + 1
         except Exception:
             # Do not fail ingestion on notifier issues
+            pass
+
+    # Enqueue auto-reply jobs via Celery (fire-and-forget)
+    for job in auto_reply_jobs:
+        try:
+            schedule_auto_reply(job)
+        except Exception:
+            # Do not fail ingestion on auto-reply issues
             pass
 
 

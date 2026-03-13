@@ -1,14 +1,14 @@
 from celery import Celery
 
-from core.config import settings
 from celery.schedules import crontab
+from core.config import settings
 
 # Celery configuration
 celery_app = Celery(
     "telegram_parser",
     broker=settings.celery_broker_url,
     backend=settings.celery_result_backend,
-    include=["workers.historical_worker", "workers.beat_tasks"],
+    include=["workers.historical_worker", "workers.beat_tasks", "workers.auto_reply_worker"],
 )
 
 celery_app.conf.update(

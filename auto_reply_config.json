@@ -1,0 +1,24 @@
+{
+  "_doc": {
+    "enabled": "Global flag to enable/disable auto-replies.",
+    "default_model": "Optional default LLM model name for replies.",
+    "scenarios": "Ordered list of auto-reply scenarios. First matching scenario is used."
+  },
+  "enabled": true,
+  "default_model": null,
+  "scenarios": [
+    {
+      "id": "construction_apartment_handover_dm",
+      "enabled": true,
+      "match": {
+        "domains": ["CONSTRUCTION_AND_REPAIR"],
+        "subcategories": ["APARTMENT_HANDOVER_INSPECTION"]
+      },
+      "telegram_account_id": "acc1",
+      "llm_model": null,
+      "prompt_key": "apartment_handover_inspection_dm_v1",
+      "delay_seconds": 0
+    }
+  ]
+}
+

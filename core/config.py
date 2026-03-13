@@ -87,6 +87,12 @@ class Settings(BaseSettings):
     # Path to JSON file with domain-to-chat_id mapping for message routing
     domain_routing_config_path: str = Field("domain_routing.json", alias="DOMAIN_ROUTING_CONFIG_JSON")
 
+    # Auto-reply configuration
+    # Global toggle and paths for auto-reply scenarios and prompts
+    auto_reply_enabled: bool = Field(True, alias="AUTO_REPLY_ENABLED")
+    auto_reply_config_path: str = Field("auto_reply_config.json", alias="AUTO_REPLY_CONFIG_JSON")
+    auto_reply_prompts_path: str = Field("auto_reply_prompts.json", alias="AUTO_REPLY_PROMPTS_JSON")
+
     # Demo / testing
     test_public_chat_id: int | None = Field(default=None, alias="TEST_PUBLIC_CHAT_ID")
 

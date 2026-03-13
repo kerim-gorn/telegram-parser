@@ -167,6 +167,54 @@ Quick smoke test (after setting env and installing requirements):
 python scripts/notify_smoke_test.py --text "Test signal ✅"
 ```
 
+## Auto-replies for Signals (DM from user accounts)
+
+- For selected domains/subcategories you can automatically send **direct messages (DM)** to authors of signal messages from specific Telegram accounts (Telethon StringSession from Redis).
+- Auto-reply is **in addition** to domain-based routing to Telegram groups; both can work together.
+
+Configuration:
+
+- `AUTO_REPLY_ENABLED` — global toggle (default: `true`).
+- `AUTO_REPLY_CONFIG_JSON` — path to `auto_reply_config.json` (default: `auto_reply_config.json`).
+- `AUTO_REPLY_PROMPTS_JSON` — path to `auto_reply_prompts.json` (default: `auto_reply_prompts.json`).
+
+`auto_reply_config.json` structure (simplified):
+
+```json
+{
+  "enabled": true,
+  "default_model": null,
+  "scenarios": [
+    {
+      "id": "construction_apartment_handover_dm",
+      "enabled": true,
+      "match": {
+        "domains": ["CONSTRUCTION_AND_REPAIR"],
+        "subcategories": ["APARTMENT_HANDOVER_INSPECTION"]
+      },
+      "telegram_account_id": "acc1",
+      "llm_model": null,
+      "prompt_key": "apartment_handover_inspection_dm_v1",
+      "delay_seconds": 0
+    }
+  ]
+}
+```
+
+- Scenarios are evaluated **in order**; the first matching scenario is used.
+- `telegram_account_id` must match an account id that has an encrypted `StringSession` in Redis (see `realtime_config.json` and `scripts/onboard_account.py`).
+
+`auto_reply_prompts.json` contains named prompt templates:
+
+```json
+{
+  "apartment_handover_inspection_dm_v1": ".... {user_message} ...."
+}
+```
+
+- Placeholders like `{user_message}`, `{chat_context}`, `{domain}`, `{subcategory}` are substituted before calling LLM.
+- Replies are generated via OpenRouter using the same API key as classification (`OPENROUTER_API_KEY` / `LLM_MODEL_NAME`).
+
 ## Realtime Config (accounts + chats)
 
 Create `realtime_config.json` in the repo root:
