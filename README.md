@@ -88,6 +88,7 @@ The ingestor processes messages in batches (50 messages at a time) and uses an a
   - `SOCIAL_CAPITAL`: `PARENTING`, `HOBBY_AND_SPORT`, `EVENTS`
   - `OPERATIONAL_MANAGEMENT`: `LOST_AND_FOUND`, `SECURITY`, `LIVING_ENVIRONMENT`, `MANAGEMENT_COMPANY_INTERACTION`
   - `REPUTATION`: `PERSONAL_BRAND`, `COMPANIES_REPUTATION`
+  - `IMMIGRATION_AND_VISAS`
   - `NONE`: No suitable domain found
 
 - **urgency_score** (Integer, 1-5, indexed):
