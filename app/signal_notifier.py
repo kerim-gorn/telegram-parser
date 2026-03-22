@@ -6,11 +6,36 @@ from datetime import datetime, timezone
 from typing import Optional, Union
 
 from aiogram import Bot
+from aiogram.client.session.aiohttp import AiohttpSession
 from aiogram.enums import ParseMode
 from aiogram.client.default import DefaultBotProperties
 
 from core.anti_ban import handle_flood_wait
 from core.config import settings
+
+
+def _bot_api_proxy_url() -> Optional[str]:
+    """SOCKS/HTTP для aiogram → api.telegram.org. MTProto (TELEGRAM_MTPROXY_*) сюда не используется."""
+    for raw in (settings.telegram_bot_proxy_url, settings.telegram_proxy_url):
+        if raw is None:
+            continue
+        s = str(raw).strip()
+        if s:
+            return s
+    return None
+
+
+def _proxy_url_for_aiogram(proxy_url: str) -> str:
+    """
+    python_socks (aiohttp_socks) не знает схему socks5h — только socks5/socks4/http.
+    В aiogram для SOCKS rdns в коннекторе уже true, socks5:// достаточно.
+    """
+    lower = proxy_url.lower()
+    if lower.startswith("socks5h://"):
+        return "socks5://" + proxy_url[10:]
+    if lower.startswith("socks4a://"):
+        return "socks4://" + proxy_url[10:]
+    return proxy_url
 
 
 def _normalize_username(value: Optional[str]) -> Optional[str]:
@@ -92,7 +117,19 @@ class SignalNotifier:
         async with self._lock:
             if self._bot is not None:
                 return self._bot
-            self._bot = Bot(token=self._token, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+            proxy_url = _bot_api_proxy_url()
+            if proxy_url:
+                session = AiohttpSession(proxy=_proxy_url_for_aiogram(proxy_url))
+                self._bot = Bot(
+                    token=self._token,
+                    session=session,
+                    default=DefaultBotProperties(parse_mode=ParseMode.HTML),
+                )
+            else:
+                self._bot = Bot(
+                    token=self._token,
+                    default=DefaultBotProperties(parse_mode=ParseMode.HTML),
+                )
             return self._bot
 
     @handle_flood_wait(max_retries=5)

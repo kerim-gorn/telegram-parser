@@ -14,14 +14,23 @@ class Settings(BaseSettings):
     # Telegram
     telegram_api_id: int = Field(..., alias="TELEGRAM_API_ID")
     telegram_api_hash: str = Field(..., alias="TELEGRAM_API_HASH")
+    # SOCKS5/HTTP — тот же тип, что «SOCKS5» в приложении Telegram (см. core/telethon_client.py)
+    telegram_proxy_url: str | None = Field(default=None, alias="TELEGRAM_PROXY")
+    # Простой MTProto (без Fake TLS / ee…); host+port+secret
+    telegram_mtproxy_host: str | None = Field(default=None, alias="TELEGRAM_MTPROXY_HOST")
+    telegram_mtproxy_port: int | None = Field(default=None, alias="TELEGRAM_MTPROXY_PORT")
+    telegram_mtproxy_secret: str | None = Field(default=None, alias="TELEGRAM_MTPROXY_SECRET")
+    telegram_mtproxy_mode: str = Field("randomized", alias="TELEGRAM_MTPROXY_MODE")
     telegram_account_id: str = Field("default", alias="TELEGRAM_ACCOUNT_ID")
     telegram_session_prefix: str = Field("telegram:sessions:", alias="TELEGRAM_SESSION_PREFIX")
     # Notifier (signals)
     signals_channel: str = Field("", alias="SIGNALS_CHANNEL")
     signals_account_id: str | None = Field(default=None, alias="SIGNALS_ACCOUNT_ID")
-    # Bot-based signals (aiogram)
+    # Bot-based signals (aiogram); Bot API = HTTPS, не MTProto
     telegram_bot_token: str = Field(..., alias="TELEGRAM_BOT_TOKEN")
     signals_bot_chat_id: int = Field(..., alias="SIGNALS_BOT_CHAT_ID")
+    # SOCKS/HTTP для бота (ingestor). Пусто → fallback на TELEGRAM_PROXY
+    telegram_bot_proxy_url: str | None = Field(default=None, alias="TELEGRAM_BOT_PROXY")
     # Realtime worker configuration
     realtime_chats_raw: str = Field("", alias="CHATS_TO_LISTEN")
     realtime_exchange_name: str = Field("realtime_fanout", alias="REALTIME_EXCHANGE")

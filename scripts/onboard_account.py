@@ -12,6 +12,8 @@ from telethon import TelegramClient
 from telethon.errors import SessionPasswordNeededError
 from telethon.sessions import StringSession
 
+from core.telethon_client import telegram_client_kwargs_from_env
+
 
 def _read_api_credentials() -> Tuple[int, str]:
     """
@@ -70,7 +72,8 @@ async def _login_and_get_session(
     Interactive login flow using Telethon and StringSession.
     Returns (phone_number, session_string).
     """
-    client = TelegramClient(StringSession(), api_id, api_hash)
+    kwargs = telegram_client_kwargs_from_env()
+    client = TelegramClient(StringSession(), api_id, api_hash, **kwargs)
     await client.connect()
     try:
         await client.send_code_request(phone)

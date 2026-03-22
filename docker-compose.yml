@@ -168,10 +168,29 @@ services:
     networks:
       - telegram_parser_net
 
+  # SSH SOCKS к VPS + autossh (профиль bot-socks). См. docs/bot-socks-ssh-compose.ru.md
+  bot_socks_tunnel:
+    profiles: ["bot-socks"]
+    build: ./docker/bot-socks-tunnel
+    container_name: telegram_parser_bot_socks_tunnel
+    restart: unless-stopped
+    environment:
+      VPS_SSH_HOST: ${VPS_SSH_HOST:-}
+      VPS_SSH_USER: ${VPS_SSH_USER:-}
+      VPS_SSH_PORT: ${VPS_SSH_PORT:-22}
+      AUTOSSH_GATETIME: "0"
+      AUTOSSH_POLL: "60"
+    volumes:
+      - ${BOT_SOCKS_SSH_KEY_FILE:-./secrets/vps_bot_socks_ed25519}:/run/ssh-key:ro
+      - bot_socks_ssh_data:/root/.ssh
+    networks:
+      - telegram_parser_net
+
 volumes:
   postgres_data:
   rabbitmq_data:
   redis_data:
+  bot_socks_ssh_data:
 
 networks:
   telegram_parser_net:

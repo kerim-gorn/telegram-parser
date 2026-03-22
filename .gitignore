@@ -31,6 +31,10 @@ build/
 .env.*
 !.env.example
 
+# SSH key for bot_socks_tunnel (see docs/bot-socks-ssh-compose.ru.md)
+secrets/*
+!secrets/.gitkeep
+
 # Docker
 docker-compose.override.yml
 docker-compose.realtime.generated.yml
