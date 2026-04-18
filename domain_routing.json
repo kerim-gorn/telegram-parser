@@ -53,7 +53,9 @@
         "AUTO_PURCHASE": -1003837853682,
         "AUTO_PREMIUM_DETAILING": "muted",
         "AUTO_REPAIR": "muted",
-        "AUTO_SERVICE_STATION": "muted"
+        "AUTO_SERVICE_STATION": "muted",
+        "AUTO_INFO_QA": "muted",
+        "AUTO_RENTAL": "muted"
       }
     },
     "MARKETPLACE": -1003746282924,
